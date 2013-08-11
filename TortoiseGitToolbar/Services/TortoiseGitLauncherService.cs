@@ -40,8 +40,8 @@ namespace MattDavies.TortoiseGitToolbar.Services
             if (solutionPath == null)
             {
                 MessageBox.Show(
-                    Resources.TortoiseGitLauncherService_SolutionPath_Please_open_a_solution_first,
-                    Resources.TortoiseGitLauncherService_SolutionPath_No_solution_found,
+                    Resources.Resources.TortoiseGitLauncherService_SolutionPath_You_need_to_open_a_solution_first,
+                    Resources.Resources.TortoiseGitLauncherService_SolutionPath_No_solution_found,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation
                 );
@@ -58,7 +58,7 @@ namespace MattDavies.TortoiseGitToolbar.Services
             }
         }
 
-        private void LaunchProcess(string fileName, string arguments)
+        private static void LaunchProcess(string fileName, string arguments)
         {
             var startInfo = new ProcessStartInfo
             {

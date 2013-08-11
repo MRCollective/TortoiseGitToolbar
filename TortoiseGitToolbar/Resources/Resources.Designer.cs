@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MattDavies.TortoiseGitToolbar {
+namespace MattDavies.TortoiseGitToolbar.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace MattDavies.TortoiseGitToolbar {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MattDavies.TortoiseGitToolbar.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MattDavies.TortoiseGitToolbar.Resources.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace MattDavies.TortoiseGitToolbar {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No solution found.
+        ///   Looks up a localized string similar to No solution found..
         /// </summary>
         internal static string TortoiseGitLauncherService_SolutionPath_No_solution_found {
             get {
@@ -70,11 +70,11 @@ namespace MattDavies.TortoiseGitToolbar {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please open a solution first!.
+        ///   Looks up a localized string similar to You need to open a solution first!.
         /// </summary>
-        internal static string TortoiseGitLauncherService_SolutionPath_Please_open_a_solution_first {
+        internal static string TortoiseGitLauncherService_SolutionPath_You_need_to_open_a_solution_first {
             get {
-                return ResourceManager.GetString("TortoiseGitLauncherService_SolutionPath_Please_open_a_solution_first", resourceCulture);
+                return ResourceManager.GetString("TortoiseGitLauncherService_SolutionPath_You_need_to_open_a_solution_first", resourceCulture);
             }
         }
     }

@@ -67,9 +67,13 @@
     </Buttons>
    
     <Bitmaps>
-      <Bitmap guid="guidImages" href="Resources\Images.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows"/>
+      <Bitmap guid="guidImages" href="..\Resources\Images.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows"/>
     </Bitmaps>
   </Commands>
+
+  <VisibilityConstraints>
+    <VisibilityItem guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" context="UICONTEXT_NoSolution" />
+  </VisibilityConstraints>
 
   <Symbols>
     <GuidSymbol name="guidTortoiseGitToolbarPkg" value="{f388ee16-eef2-4ae1-85bd-4cb19151beb0}" />
