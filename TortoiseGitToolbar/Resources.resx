@@ -126,4 +126,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TortoiseGitLauncherService_SolutionPath_Please_open_a_solution_first" xml:space="preserve">
+    <value>Please open a solution first!</value>
+  </data>
+  <data name="TortoiseGitLauncherService_SolutionPath_No_solution_found" xml:space="preserve">
+    <value>No solution found</value>
+  </data>
 </root>

@@ -59,5 +59,23 @@ namespace MattDavies.TortoiseGitToolbar {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No solution found.
+        /// </summary>
+        internal static string TortoiseGitLauncherService_SolutionPath_No_solution_found {
+            get {
+                return ResourceManager.GetString("TortoiseGitLauncherService_SolutionPath_No_solution_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please open a solution first!.
+        /// </summary>
+        internal static string TortoiseGitLauncherService_SolutionPath_Please_open_a_solution_first {
+            get {
+                return ResourceManager.GetString("TortoiseGitLauncherService_SolutionPath_Please_open_a_solution_first", resourceCulture);
+            }
+        }
     }
 }
