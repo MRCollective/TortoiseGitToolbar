@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Design;
 using System.Globalization;
 using MattDavies.TortoiseGitToolbar;
+using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VsSDK.IntegrationTestLibrary;
 
@@ -10,35 +11,15 @@ namespace TortoiseGitToolbar.IntegrationTests
     public class MenuItemTest
     {
         private delegate void ThreadInvoker();
+        public TestContext TestContext { get; set; }
 
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        /// <summary>
-        ///A test for lauching the command and closing the associated dialogbox
-        ///</summary>
-        [TestMethod()]
+        [TestMethod]
         [HostType("VS IDE")]
         public void LaunchCommand()
         {
             UIThreadInvoker.Invoke((ThreadInvoker)delegate()
             {
-                CommandID menuItemCmd = new CommandID(GuidList.guidTortoiseGitToolbarCmdSet, (int)PkgCmdIDList.cmdToolbar);
+                CommandID menuItemCmd = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)CommandIdConstants.CmdCommit);
 
                 // Create the DialogBoxListener Thread.
                 string expectedDialogBoxText = string.Format(CultureInfo.CurrentCulture, "{0}\n\nInside {1}.MenuItemCallback()", "TortoiseGitToolbar", "MattDaviesmdaviesnet.TortoiseGitToolbar.TortoiseGitToolbarPackage");

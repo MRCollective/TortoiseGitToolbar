@@ -3,7 +3,7 @@
 
 namespace MattDavies.TortoiseGitToolbar.Config.Constants
 {
-    static class CommandIdConstants
+    public static class CommandIdConstants
     {
         public const uint CmdCommit = 0x8101;
         public const uint CmdResolve = 0x8102;

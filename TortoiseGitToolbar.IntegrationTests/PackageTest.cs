@@ -1,5 +1,6 @@
 ﻿using System;
 using MattDavies.TortoiseGitToolbar;
+using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,24 +13,7 @@ namespace TortoiseGitToolbar.IntegrationTests
     public class PackageTest
     {
         private delegate void ThreadInvoker();
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         [TestMethod]
         [HostType("VS IDE")]
@@ -44,7 +28,7 @@ namespace TortoiseGitToolbar.IntegrationTests
 
                 //Validate package load
                 IVsPackage package;
-                Guid packageGuid = new Guid(GuidList.guidTortoiseGitToolbarPkgString);
+                Guid packageGuid = new Guid(PackageConstants.guidTortoiseGitToolbarPkgString);
                 Assert.IsTrue(0 == shellService.LoadPackage(ref packageGuid, out package));
                 Assert.IsNotNull(package, "Package failed to load");
 
