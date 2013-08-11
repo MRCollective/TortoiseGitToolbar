@@ -69,12 +69,23 @@
     <Bitmaps>
       <Bitmap guid="guidImages" href="..\Resources\Images.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows"/>
     </Bitmaps>
+  
   </Commands>
-
+  
   <VisibilityConstraints>
-    <VisibilityItem guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" context="UICONTEXT_NoSolution" />
+    <VisibilityItem guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" context="UICONTEXT_SolutionExists" />
   </VisibilityConstraints>
 
+
+  <KeyBindings>
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCommit" key1="G" mod1="Control" key2="C" editor="guidVSStd97"  />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdResolve" key1="G" mod1="Control" key2="R" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdPull" key1="G" mod1="Control" key2="P" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdPush" key1="G" mod1="Control" key2="U" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdLog" key1="G" mod1="Control" key2="L" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdBash" key1="G" mod1="Control" key2="B" editor="guidVSStd97" />
+  </KeyBindings>
+    
   <Symbols>
     <GuidSymbol name="guidTortoiseGitToolbarPkg" value="{f388ee16-eef2-4ae1-85bd-4cb19151beb0}" />
     <GuidSymbol name="guidTortoiseGitToolbarCmdSet" value="{b594f95f-5d4d-4383-be94-e21d105fa58c}">
