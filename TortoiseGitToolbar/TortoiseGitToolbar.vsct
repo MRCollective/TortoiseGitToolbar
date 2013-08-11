@@ -73,16 +73,47 @@
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
 
-      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdToolbar" priority="0x0100" type="Button">
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdCommit" priority="0x0100" type="Button">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
-        <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <ButtonText>TortoiseGit Toolbar</ButtonText>
+          <ButtonText>Commit</ButtonText>
         </Strings>
       </Button>
 
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdResolve" priority="0x0101" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Strings>
+          <ButtonText>Resolve</ButtonText>
+        </Strings>
+      </Button>
 
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdPush" priority="0x0102" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Strings>
+          <ButtonText>Push</ButtonText>
+        </Strings>
+      </Button>
 
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdPull" priority="0x0103" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Strings>
+          <ButtonText>Pull</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdLog" priority="0x0104" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Strings>
+          <ButtonText>Log</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBash" priority="0x0105" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Strings>
+          <ButtonText>Bash</ButtonText>
+        </Strings>
+      </Button>
     </Buttons>
    
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
@@ -110,7 +141,12 @@
     <GuidSymbol name="guidTortoiseGitToolbarCmdSet" value="{b594f95f-5d4d-4383-be94-e21d105fa58c}">
 
       <IDSymbol name="MyMenuGroup" value="0x1020" />
-      <IDSymbol name="cmdToolbar" value="0x0100" />
+      <IDSymbol name="cmdCommit" value="0x8101" />
+      <IDSymbol name="cmdResolve" value="0x8102" />
+      <IDSymbol name="cmdPush" value="0x8103" />
+      <IDSymbol name="cmdPull" value="0x8104" />
+      <IDSymbol name="cmdLog" value="0x8105" />
+      <IDSymbol name="cmdBash" value="0x8106" />
       <IDSymbol name="Toolbar" value="0x1000" />
       <IDSymbol name="ToolbarGroup" value="0x1050" />
     </GuidSymbol>
