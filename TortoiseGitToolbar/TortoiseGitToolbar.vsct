@@ -34,6 +34,15 @@
     group; your package should define its own command set in order to avoid collisions  
     with command ids defined by other packages. -->
 
+    <Menus>
+      <Menu guid="guidTortoiseGitToolbarCmdSet" id="Toolbar" type="Toolbar" >
+        <CommandFlag>DefaultDocked</CommandFlag>
+        <Strings>
+          <ButtonText>TortoiseGit Toolbar</ButtonText>
+          <CommandName>TortoiseGit Toolbar</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
     
     <!-- In this section you can define new menu groups. A menu group is a container for 
          other menus or buttons (commands); from a visual point of view you can see the 
@@ -44,8 +53,11 @@
       <Group guid="guidTortoiseGitToolbarCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
       </Group>
-      
 
+      <Group guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup"
+            priority="0x0000">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="Toolbar"/>
+      </Group>
 
     </Groups>
     
@@ -62,7 +74,7 @@
           If you do not want an image next to your command, remove the Icon node /> -->
 
       <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdToolbar" priority="0x0100" type="Button">
-        <Parent guid="guidTortoiseGitToolbarCmdSet" id="MyMenuGroup" />
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
           <ButtonText>TortoiseGit Toolbar</ButtonText>
@@ -99,6 +111,8 @@
 
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="cmdToolbar" value="0x0100" />
+      <IDSymbol name="Toolbar" value="0x1000" />
+      <IDSymbol name="ToolbarGroup" value="0x1050" />
     </GuidSymbol>
     
     
