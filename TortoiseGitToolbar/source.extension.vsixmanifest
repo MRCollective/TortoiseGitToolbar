@@ -4,6 +4,7 @@
     <Identity Id="f388ee16-eef2-4ae1-85bd-4cb19151beb0" Version="1.0" Language="en-US" Publisher="Matt Davies (@mdaviesnet)" />
     <DisplayName>TortoiseGit Toolbar</DisplayName>
     <Description>Lightweight toolbar for launching commonly used TortoiseGit functionality from within Visual Studio.</Description>
+    <MoreInfo>https://github.com/MattDavies/TortoiseGitToolbar</MoreInfo>
     <License>LICENSE.txt</License>
   </Metadata>
   <Installation InstalledByMsi="false">
