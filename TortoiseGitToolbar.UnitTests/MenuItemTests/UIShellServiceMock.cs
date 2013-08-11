@@ -14,7 +14,7 @@ using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VsSDK.UnitTestLibrary;
 
-namespace TortoiseGitToolbar_UnitTests
+namespace TortoiseGitToolbar.UnitTests.MenuItemTests
 {
     static class UIShellServiceMock
     {

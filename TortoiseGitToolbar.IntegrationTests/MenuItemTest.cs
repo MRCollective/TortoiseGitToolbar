@@ -1,14 +1,10 @@
-﻿using System;
+﻿using System.ComponentModel.Design;
 using System.Globalization;
-using System.ComponentModel.Design;
+using MattDavies.TortoiseGitToolbar;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.VisualStudio.OLE.Interop;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.Shell;
 using Microsoft.VsSDK.IntegrationTestLibrary;
-using Microsoft.VSSDK.Tools.VsIdeTesting;
 
-namespace TortoiseGitToolbar_IntegrationTests
+namespace TortoiseGitToolbar.IntegrationTests
 {
     [TestClass()]
     public class MenuItemTest
@@ -42,7 +38,7 @@ namespace TortoiseGitToolbar_IntegrationTests
         {
             UIThreadInvoker.Invoke((ThreadInvoker)delegate()
             {
-                CommandID menuItemCmd = new CommandID(MattDaviesmdaviesnet.TortoiseGitToolbar.GuidList.guidTortoiseGitToolbarCmdSet, (int)MattDaviesmdaviesnet.TortoiseGitToolbar.PkgCmdIDList.cmdToolbar);
+                CommandID menuItemCmd = new CommandID(GuidList.guidTortoiseGitToolbarCmdSet, (int)PkgCmdIDList.cmdToolbar);
 
                 // Create the DialogBoxListener Thread.
                 string expectedDialogBoxText = string.Format(CultureInfo.CurrentCulture, "{0}\n\nInside {1}.MenuItemCallback()", "TortoiseGitToolbar", "MattDaviesmdaviesnet.TortoiseGitToolbar.TortoiseGitToolbarPackage");

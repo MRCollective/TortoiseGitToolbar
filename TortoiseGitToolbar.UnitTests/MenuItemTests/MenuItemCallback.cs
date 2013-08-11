@@ -9,18 +9,15 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 
 ***************************************************************************/
 
-using System;
-using System.Collections;
-using System.Text;
-using System.Reflection;
 using System.ComponentModel.Design;
-using Microsoft.VsSDK.UnitTestLibrary;
+using System.Reflection;
+using MattDavies.TortoiseGitToolbar;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.VisualStudio.Shell;
-using MattDaviesmdaviesnet.TortoiseGitToolbar;
+using Microsoft.VsSDK.UnitTestLibrary;
 
-namespace TortoiseGitToolbar_UnitTests.MenuItemTests
+namespace TortoiseGitToolbar.UnitTests.MenuItemTests
 {
     [TestClass()]
     public class MenuItemTest
@@ -43,7 +40,7 @@ namespace TortoiseGitToolbar_UnitTests.MenuItemTests
             Assert.AreEqual(0, package.SetSite(serviceProvider), "SetSite did not return S_OK");
 
             //Verify that the menu command can be found
-            CommandID menuCommandID = new CommandID(MattDaviesmdaviesnet.TortoiseGitToolbar.GuidList.guidTortoiseGitToolbarCmdSet, (int)MattDaviesmdaviesnet.TortoiseGitToolbar.PkgCmdIDList.cmdToolbar);
+            CommandID menuCommandID = new CommandID(GuidList.guidTortoiseGitToolbarCmdSet, (int)PkgCmdIDList.cmdToolbar);
             System.Reflection.MethodInfo info = typeof(Package).GetMethod("GetService", BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.IsNotNull(info);
             OleMenuCommandService mcs = info.Invoke(package, new object[] { (typeof(IMenuCommandService)) }) as OleMenuCommandService;

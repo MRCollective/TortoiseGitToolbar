@@ -1,8 +1,7 @@
 ﻿// PkgCmdID.cs
 // MUST match PkgCmdID.h
-using System;
 
-namespace MattDaviesmdaviesnet.TortoiseGitToolbar
+namespace MattDavies.TortoiseGitToolbar
 {
     static class PkgCmdIDList
     {

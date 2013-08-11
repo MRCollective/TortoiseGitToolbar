@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TortoiseGitToolbar")]
+[assembly: AssemblyTitle("MattDavies.TortoiseGitToolbar")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Matt Davies (@mdaviesnet)")]
-[assembly: AssemblyProduct("TortoiseGitToolbar")]
+[assembly: AssemblyProduct("MattDavies.TortoiseGitToolbar")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]   

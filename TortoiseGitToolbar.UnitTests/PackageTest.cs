@@ -9,16 +9,12 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 
 ***************************************************************************/
 
-using System;
-using System.Collections;
-using System.Text;
-using System.Reflection;
-using Microsoft.VsSDK.UnitTestLibrary;
+using MattDavies.TortoiseGitToolbar;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MattDaviesmdaviesnet.TortoiseGitToolbar;
+using Microsoft.VsSDK.UnitTestLibrary;
 
-namespace TortoiseGitToolbar_UnitTests
+namespace TortoiseGitToolbar.UnitTests
 {
     [TestClass()]
     public class PackageTest

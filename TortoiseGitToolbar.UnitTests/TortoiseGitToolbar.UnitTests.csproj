@@ -1,23 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9266F646-2E8D-4DE4-B755-0EA8F5036078}</ProjectGuid>
+    <ProjectGuid>{B6997325-6151-4B1A-A6BC-E47667C3B7F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TortoiseGitToolbar_IntegrationTests</RootNamespace>
-    <AssemblyName>TortoiseGitToolbar_IntegrationTests</AssemblyName>
+    <RootNamespace>TortoiseGitToolbar.UnitTests</RootNamespace>
+    <AssemblyName>TortoiseGitToolbar.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath Condition="'$(OutputPath)'==''">bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath Condition="'$(OutputPath)'==''">bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -37,9 +36,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="envdte" />
-    <Reference Include="envdte80" />
     <Reference Include="Microsoft.VisualStudio.OLE.Interop" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0" />
@@ -48,42 +46,34 @@
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.12.0" />
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0" />
+    <!---->
+    <Reference Include="Microsoft.VSSDK.UnitTestLibrary" />
     <Reference Include="Microsoft.VSSDK.TestHostFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <!--<Compile Include="Properties\AssemblyInfo.cs" />-->
-    <!---->
-    <Compile Include="MenuItemTest.cs" />
-    <!---->
-    <!---->
-    <!---->
     <Compile Include="PackageTest.cs" />
-    <Compile Include="IntegrationTest Library\DialogboxPurger.cs" />
-    <Compile Include="IntegrationTest Library\NativeMethods.cs" />
-    <Compile Include="IntegrationTest Library\Utils.cs" />
-    <Compile Include="SignOff-Tests\CPPProjectTests.cs" />
-    <Compile Include="SignOff-Tests\CSharpProjectTests.cs" />
-    <Compile Include="SignOff-Tests\SolutionTests.cs" />
-    <Compile Include="SignOff-Tests\VBProjectTests.cs" />
+    <!---->
+    <Compile Include="MenuItemTests\MenuItemCallback.cs" />
+    <Compile Include="MenuItemTests\UIShellServiceMock.cs" />
+    <!---->
+    <!---->
+    <!---->
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TortoiseGitToolbar.csproj">
+    <ProjectReference Include="..\TortoiseGitToolbar\TortoiseGitToolbar.csproj">
       <Project>{F1A624CA-04A7-4729-9598-AF0B5C2CF188}</Project>
       <Name>TortoiseGitToolbar</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
