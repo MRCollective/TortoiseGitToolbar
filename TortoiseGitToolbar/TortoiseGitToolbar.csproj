@@ -125,6 +125,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Services\TortoiseGitLauncherService.cs" />
     <Compile Include="TortoiseGitToolbarPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Config\Constants\CommandIdConstants.cs" />
