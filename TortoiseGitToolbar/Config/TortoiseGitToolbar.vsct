@@ -40,16 +40,16 @@
           <ButtonText>Resolve</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdPush" priority="0x0102" type="Button">
-        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
-        <Strings>
-          <ButtonText>Push</ButtonText>
-        </Strings>
-      </Button>
-      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdPull" priority="0x0103" type="Button">
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdPull" priority="0x0102" type="Button">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
         <Strings>
           <ButtonText>Pull</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdPush" priority="0x0103" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Strings>
+          <ButtonText>Push</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdLog" priority="0x0104" type="Button">
