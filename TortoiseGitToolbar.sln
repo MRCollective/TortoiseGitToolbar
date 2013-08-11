@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20617.1 PREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar", "TortoiseGitToolbar\TortoiseGitToolbar.csproj", "{F1A624CA-04A7-4729-9598-AF0B5C2CF188}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar_IntegrationTests", "TortoiseGitToolbar\TortoiseGitToolbar_IntegrationTests\TortoiseGitToolbar_IntegrationTests.csproj", "{9266F646-2E8D-4DE4-B755-0EA8F5036078}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1A0540F-54E9-4C09-8B55-14A5C2A3D34A}"
+	ProjectSection(SolutionItems) = preProject
+		IntegrationTests.testsettings = IntegrationTests.testsettings
+		UnitTests.testsettings = UnitTests.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar_UnitTests", "TortoiseGitToolbar\TortoiseGitToolbar_UnitTests\TortoiseGitToolbar_UnitTests.csproj", "{B6997325-6151-4B1A-A6BC-E47667C3B7F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1A624CA-04A7-4729-9598-AF0B5C2CF188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1A624CA-04A7-4729-9598-AF0B5C2CF188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1A624CA-04A7-4729-9598-AF0B5C2CF188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1A624CA-04A7-4729-9598-AF0B5C2CF188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9266F646-2E8D-4DE4-B755-0EA8F5036078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9266F646-2E8D-4DE4-B755-0EA8F5036078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9266F646-2E8D-4DE4-B755-0EA8F5036078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9266F646-2E8D-4DE4-B755-0EA8F5036078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6997325-6151-4B1A-A6BC-E47667C3B7F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6997325-6151-4B1A-A6BC-E47667C3B7F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6997325-6151-4B1A-A6BC-E47667C3B7F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6997325-6151-4B1A-A6BC-E47667C3B7F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
