@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="PackageTest.cs" />
     <!---->
-    <Compile Include="MenuItemCallback.cs" />
+    <Compile Include="TortoiseGitToolbarPackageTests.cs" />
     <Compile Include="Helpers\UIShellServiceMock.cs" />
     <!---->
     <!---->
