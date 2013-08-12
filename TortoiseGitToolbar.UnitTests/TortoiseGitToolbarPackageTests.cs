@@ -18,7 +18,8 @@ namespace TortoiseGitToolbar.UnitTests
         private IVsPackage _package;
         private MethodInfo _getServiceMethod;
         private OleServiceProvider _serviceProvider;
-
+        private readonly CommandId[] _commands = EnumHelper.GetValues<CommandId>();
+        
         [SetUp]
         public void Setup()
         {
@@ -39,7 +40,6 @@ namespace TortoiseGitToolbar.UnitTests
             Assert.That(_package.SetSite(_serviceProvider), Is.EqualTo(0), "Package SetSite did not return S_OK");
         }
 
-        private readonly CommandId[] _commands = EnumHelper.GetValues<CommandId>();
         [TestCaseSource("_commands")]
         public void Ensure_all_tortoisegit_commands_exist(CommandId commandId)
         {
@@ -48,29 +48,19 @@ namespace TortoiseGitToolbar.UnitTests
             Assert.That(command, Is.Not.Null, string.Format("Couldn't find command for {0}", commandId));
         }
 
-        [TestCase(CommandId.Commit, "Commit")]
-        [TestCase(CommandId.Resolve, "Resolve")]
-        [TestCase(CommandId.Pull, "Pull")]
-        [TestCase(CommandId.Push, "Push")]
-        [TestCase(CommandId.Log, "Log")]
-        [TestCase(CommandId.Bash, "Bash")]
-        public void Ensure_all_tortoisegit_commands_bind_to_correct_event_handlers(CommandId commandId, string handlerName)
+        [TestCaseSource("_commands")]
+        public void Ensure_all_tortoisegit_commands_bind_to_correct_event_handlers(CommandId commandId)
         {
             var command = GetMenuCommand(commandId);
 
             var execHandler = typeof(MenuCommand).GetField("execHandler", BindingFlags.NonPublic | BindingFlags.Instance);
             
             Assert.That(execHandler, Is.Not.Null);
-            Assert.That(((EventHandler) execHandler.GetValue(command)).Method.Name, Is.EqualTo(handlerName));
+            Assert.That(((EventHandler) execHandler.GetValue(command)).Method.Name, Is.EqualTo(commandId.ToString()));
         }
 
-        [TestCase("Commit")]
-        [TestCase("Resolve")]
-        [TestCase("Pull")]
-        [TestCase("Push")]
-        [TestCase("Log")]
-        [TestCase("Bash")]
-        public void Invoke_all_command_handlers_without_exception(string commandHandlerName)
+        [TestCaseSource("_commands")]
+        public void Invoke_all_command_handlers_without_exception(CommandId commandId)
         {
             try
             {
@@ -78,9 +68,9 @@ namespace TortoiseGitToolbar.UnitTests
 
                 var uishellMock = UIShellServiceMock.GetUiShellInstance();
                 _serviceProvider.AddService(typeof (SVsUIShell), uishellMock, true);
-                var commandHandler = _package.GetType().GetMethod(commandHandlerName, BindingFlags.Instance | BindingFlags.NonPublic);
-                
-                Assert.That(commandHandler, Is.Not.Null, string.Format("Failed to get the private method {0}", commandHandlerName));
+                var commandHandler = _package.GetType().GetMethod(commandId.ToString(), BindingFlags.Instance | BindingFlags.NonPublic);
+
+                Assert.That(commandHandler, Is.Not.Null, string.Format("Failed to get the private method {0}", commandId));
                 Assert.DoesNotThrow(() => commandHandler.Invoke(_package, new object[] {null, null}));
             }
             finally
