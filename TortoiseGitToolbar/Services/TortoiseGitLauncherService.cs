@@ -15,8 +15,9 @@ namespace MattDavies.TortoiseGitToolbar.Services
     {
         private readonly Solution _solution;
         private readonly string _tortoiseGitPath;
-        private string _gitBashPath;
+        private readonly string _gitBashPath;
 
+        //todo: can this service be dependency injected and unit tested?
         public TortoiseGitLauncherService(Solution solution)
         {
             _solution = solution;
