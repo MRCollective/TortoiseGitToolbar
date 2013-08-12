@@ -68,7 +68,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PackageTest.cs" />
     <!---->
     <Compile Include="TortoiseGitToolbarPackageTests.cs" />
     <Compile Include="Helpers\UIShellServiceMock.cs" />
