@@ -7,6 +7,7 @@ using System.ComponentModel.Design;
 using Microsoft.VisualStudio.Shell.Interop;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.VSSDK.Tools.VsIdeTesting;
 using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio;

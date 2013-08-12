@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VsSDK.IntegrationTestLibrary;
+using Microsoft.VSSDK.Tools.VsIdeTesting;
 
 namespace TortoiseGitToolbar_IntegrationTests.IntegrationTests
 {

@@ -76,7 +76,7 @@ namespace MattDavies.TortoiseGitToolbar.Services
 
         private string GetSolutionPath()
         {
-            return _solution.IsOpen
+            return _solution != null && _solution.IsOpen
                 ? @"""" + Path.GetDirectoryName(_solution.FullName) + @""""
                 : null;
         }

@@ -3,6 +3,7 @@ using MattDavies.TortoiseGitToolbar;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VSSDK.Tools.VsIdeTesting;
 
 namespace TortoiseGitToolbar.IntegrationTests
 {

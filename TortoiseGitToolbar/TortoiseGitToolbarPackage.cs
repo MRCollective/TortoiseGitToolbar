@@ -4,7 +4,9 @@ using System.Runtime.InteropServices;
 using EnvDTE;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using MattDavies.TortoiseGitToolbar.Services;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace MattDavies.TortoiseGitToolbar
 {
@@ -21,9 +23,11 @@ namespace MattDavies.TortoiseGitToolbar
         protected override void Initialize()
         {
             base.Initialize();
-            _commandService = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            _tortoiseGitLauncherService = new TortoiseGitLauncherService(((DTE) GetService(typeof(DTE))).Solution);
 
+            _commandService = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            var dte = ((DTE)GetService(typeof(DTE)));
+            _tortoiseGitLauncherService = new TortoiseGitLauncherService(dte != null ? dte.Solution : null);
+            
             RegisterCommand(CommandIdConstants.CmdCommit, Commit);
             RegisterCommand(CommandIdConstants.CmdResolve, Resolve);
             RegisterCommand(CommandIdConstants.CmdPush, Push);
