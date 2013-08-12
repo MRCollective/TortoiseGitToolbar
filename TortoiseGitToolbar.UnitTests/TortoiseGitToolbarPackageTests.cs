@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Design;
+﻿using System;
+using System.ComponentModel.Design;
 using System.Reflection;
 using MattDavies.TortoiseGitToolbar;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
@@ -44,14 +45,27 @@ namespace TortoiseGitToolbar.UnitTests
         [TestCase(CommandIdConstants.CmdPush, "cmdPush")]
         [TestCase(CommandIdConstants.CmdLog, "cmdLog")]
         [TestCase(CommandIdConstants.CmdBash, "cmdBash")]
-        public void Ensure_all_tortoisegit_commands_exist(uint commandId, string commandName)
+        public void Ensure_all_tortoisegit_commands_exist(uint commandId, string handlerName)
         {
-            var menuCommandID = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)commandId);
+            var command = GetMenuCommand(commandId);
+            
+            Assert.That(command, Is.Not.Null, string.Format("Couldn't find command for {0}", handlerName));
+        }
 
-            var menuCommandService = _getServiceMethod.Invoke(_package, new object[] { (typeof(IMenuCommandService)) }) as OleMenuCommandService;
+        [TestCase(CommandIdConstants.CmdCommit, "Commit")]
+        [TestCase(CommandIdConstants.CmdResolve, "Resolve")]
+        [TestCase(CommandIdConstants.CmdPull, "Pull")]
+        [TestCase(CommandIdConstants.CmdPush, "Push")]
+        [TestCase(CommandIdConstants.CmdLog, "Log")]
+        [TestCase(CommandIdConstants.CmdBash, "Bash")]
+        public void Ensure_all_tortoisegit_commands_bind_to_correct_event_handlers(uint commandId, string handlerName)
+        {
+            var command = GetMenuCommand(commandId);
 
-            Assert.That(menuCommandService, Is.Not.Null, "Menu command service was null");
-            Assert.That(menuCommandService.FindCommand(menuCommandID), Is.Not.Null, string.Format("Couldn't find command {0}", commandName));
+            var execHandler = typeof(MenuCommand).GetField("execHandler", BindingFlags.NonPublic | BindingFlags.Instance);
+            
+            Assert.That(execHandler, Is.Not.Null);
+            Assert.That(((EventHandler) execHandler.GetValue(command)).Method.Name, Is.EqualTo(handlerName));
         }
 
         [TestCase("Commit")]
@@ -75,6 +89,13 @@ namespace TortoiseGitToolbar.UnitTests
             {
                 _serviceProvider.RemoveService(typeof(SVsUIShell));
             }
+        }
+
+        private MenuCommand GetMenuCommand(uint commandId)
+        {
+            var menuCommandID = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)commandId);
+            var menuCommandService = _getServiceMethod.Invoke(_package, new object[] { (typeof(IMenuCommandService)) }) as OleMenuCommandService;
+            return menuCommandService != null ? menuCommandService.FindCommand(menuCommandID) : null;
         }
     }
 }
