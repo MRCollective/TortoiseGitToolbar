@@ -63,9 +63,9 @@
     <!---->
     <!---->
     <Compile Include="PackageTest.cs" />
-    <Compile Include="IntegrationTest Library\DialogboxPurger.cs" />
-    <Compile Include="IntegrationTest Library\NativeMethods.cs" />
-    <Compile Include="IntegrationTest Library\Utils.cs" />
+    <Compile Include="Helpers\DialogboxPurger.cs" />
+    <Compile Include="Helpers\NativeMethods.cs" />
+    <Compile Include="Helpers\Utils.cs" />
     <Compile Include="CSharpProjectTests.cs" />
     <Compile Include="SolutionTests.cs" />
   </ItemGroup>

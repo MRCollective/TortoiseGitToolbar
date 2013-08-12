@@ -8,29 +8,27 @@ namespace TortoiseGitToolbar_IntegrationTests.IntegrationTests
     public class CSharpProjectTests
     {
         #region fields
+
         private delegate void ThreadInvoker();
-        private TestContext _testContext;
+
         #endregion
 
         #region properties
+
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get { return _testContext; }
-            set { _testContext = value; }
-        }
+        ///     Gets or sets the test context which provides
+        ///     information about and functionality for the current test run.
+        /// </summary>
+        public TestContext TestContext { get; set; }
+
         #endregion
 
         #region ctors
-        public CSharpProjectTests()
-        {
-        }
+
         #endregion
 
         #region Additional test attributes
+
         //
         // You can use the following additional attributes as you write your tests:
         //
@@ -50,18 +48,19 @@ namespace TortoiseGitToolbar_IntegrationTests.IntegrationTests
         // [TestCleanup()]
         // public void MyTestCleanup() { }
         //
+
         #endregion
 
         [TestMethod]
         [HostType("VS IDE")]
         public void WinformsApplication()
         {
-            UIThreadInvoker.Invoke((ThreadInvoker)delegate()
+            UIThreadInvoker.Invoke((ThreadInvoker) delegate
             {
-                TestUtils testUtils = new TestUtils();
+                var testUtils = new TestUtils();
 
                 testUtils.CreateEmptySolution(TestContext.TestDir, "CSWinApp");
-                Assert.AreEqual<int>(0, testUtils.ProjectCount());
+                Assert.AreEqual(0, testUtils.ProjectCount());
 
                 //Create Winforms application project
                 //TestUtils.CreateProjectFromTemplate("MyWindowsApp", "Windows Application", "CSharp", false);
@@ -72,9 +71,7 @@ namespace TortoiseGitToolbar_IntegrationTests.IntegrationTests
                 //TODO Set Break point and verify that will hit
 
                 //TODO Verify Adding new project item to project
-
             });
         }
-
     }
 }

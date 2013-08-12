@@ -8,21 +8,20 @@ namespace TortoiseGitToolbar.IntegrationTests
     [TestClass]
     public class SolutionTests
     {
-        private delegate void ThreadInvoker();
-
         public TestContext TestContext { get; set; }
 
         [TestMethod]
         [HostType("VS IDE")]
         public void CreateEmptySolution()
         {
-            UIThreadInvoker.Invoke((ThreadInvoker)delegate()
+            UIThreadInvoker.Invoke((ThreadInvoker) delegate
             {
-                TestUtils testUtils = new TestUtils();
+                var testUtils = new TestUtils();
                 testUtils.CloseCurrentSolution(__VSSLNSAVEOPTIONS.SLNSAVEOPT_NoSave);
                 testUtils.CreateEmptySolution(TestContext.TestDir, "EmptySolution");
             });
         }
 
+        private delegate void ThreadInvoker();
     }
 }
