@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Design;
 using System.Reflection;
+using FizzWare.NBuilder;
 using MattDavies.TortoiseGitToolbar;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Microsoft.VisualStudio.Shell;
@@ -38,17 +39,13 @@ namespace TortoiseGitToolbar.UnitTests
             Assert.That(_package.SetSite(_serviceProvider), Is.EqualTo(0), "Package SetSite did not return S_OK");
         }
 
-        [TestCase(CommandId.CmdCommit, "cmdCommit")]
-        [TestCase(CommandId.CmdResolve, "cmdResolve")]
-        [TestCase(CommandId.CmdPull, "cmdPull")]
-        [TestCase(CommandId.CmdPush, "cmdPush")]
-        [TestCase(CommandId.CmdLog, "cmdLog")]
-        [TestCase(CommandId.CmdBash, "cmdBash")]
-        public void Ensure_all_tortoisegit_commands_exist(CommandId commandId, string handlerName)
+        private readonly CommandId[] _commands = EnumHelper.GetValues<CommandId>();
+        [TestCaseSource("_commands")]
+        public void Ensure_all_tortoisegit_commands_exist(CommandId commandId)
         {
             var command = GetMenuCommand(commandId);
             
-            Assert.That(command, Is.Not.Null, string.Format("Couldn't find command for {0}", handlerName));
+            Assert.That(command, Is.Not.Null, string.Format("Couldn't find command for {0}", commandId));
         }
 
         [TestCase(CommandId.CmdCommit, "Commit")]
