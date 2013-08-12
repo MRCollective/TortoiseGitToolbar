@@ -25,8 +25,8 @@
     </Groups>
     
     <!-- Todo: Hide these if a solution isn't open -->
-    <!-- Todo: Add default shortcuts -->
     <!-- Todo: Add context text -->
+    <!-- Todo: Icons -->
     <Buttons>
       <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdCommit" priority="0x0100" type="Button">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
