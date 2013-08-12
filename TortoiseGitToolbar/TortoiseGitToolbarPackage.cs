@@ -24,48 +24,16 @@ namespace MattDavies.TortoiseGitToolbar
         {
             base.Initialize();
 
-            _commandService = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            _commandService = (OleMenuCommandService) GetService(typeof(IMenuCommandService));
             var dte = ((DTE)GetService(typeof(DTE)));
             _tortoiseGitLauncherService = new TortoiseGitLauncherService(dte != null ? dte.Solution : null);
-            
-            RegisterCommand(ToolbarCommand.Commit, Commit);
-            RegisterCommand(ToolbarCommand.Resolve, Resolve);
-            RegisterCommand(ToolbarCommand.Push, Push);
-            RegisterCommand(ToolbarCommand.Pull, Pull);
-            RegisterCommand(ToolbarCommand.Log, Log);
-            RegisterCommand(ToolbarCommand.Bash, Bash);
-        }
 
-        private void Commit(object sender, EventArgs e)
-        {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Commit.ToString().ToLower());
+            foreach (ToolbarCommand toolbarCommand in Enum.GetValues(typeof(ToolbarCommand)))
+            {
+                RegisterCommand(toolbarCommand, (s, e) => _tortoiseGitLauncherService.ExecuteTortoiseProc(toolbarCommand));
+            }
         }
-
-        private void Resolve(object sender, EventArgs e)
-        {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Resolve.ToString().ToLower());
-        }
-
-        private void Push(object sender, EventArgs e)
-        {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Push.ToString().ToLower());
-        }
-
-        private void Pull(object sender, EventArgs e)
-        {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Pull.ToString().ToLower());
-        }
-
-        private void Log(object sender, EventArgs e)
-        {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Log.ToString().ToLower());
-        }
-
-        private void Bash(object sender, EventArgs e)
-        {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Bash.ToString().ToLower());
-        }
-
+        
         private void RegisterCommand(ToolbarCommand id, EventHandler callback)
         {
             var menuCommandID = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)id);

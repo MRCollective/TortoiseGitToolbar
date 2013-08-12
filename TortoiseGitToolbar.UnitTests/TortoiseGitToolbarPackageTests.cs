@@ -49,14 +49,14 @@ namespace TortoiseGitToolbar.UnitTests
         }
 
         [TestCaseSource("_toolbarCommands")]
-        public void Ensure_all_tortoisegit_commands_bind_to_correct_event_handlers(ToolbarCommand toolbarCommand)
+        public void Ensure_all_tortoisegit_commands_bind_to_event_handlers(ToolbarCommand toolbarCommand)
         {
             var command = GetMenuCommand(toolbarCommand);
 
             var execHandler = typeof(MenuCommand).GetField("execHandler", BindingFlags.NonPublic | BindingFlags.Instance);
             
             Assert.That(execHandler, Is.Not.Null);
-            Assert.That(((EventHandler) execHandler.GetValue(command)).Method.Name, Is.EqualTo(toolbarCommand.ToString()));
+            Assert.That(execHandler.GetValue(command), Is.Not.Null);
         }
 
         [TestCaseSource("_toolbarCommands")]
@@ -64,14 +64,14 @@ namespace TortoiseGitToolbar.UnitTests
         {
             try
             {
-                _package.SetSite(_serviceProvider);
-
                 var uishellMock = UIShellServiceMock.GetUiShellInstance();
-                _serviceProvider.AddService(typeof (SVsUIShell), uishellMock, true);
-                var commandHandler = _package.GetType().GetMethod(toolbarCommand.ToString(), BindingFlags.Instance | BindingFlags.NonPublic);
+                _serviceProvider.AddService(typeof(SVsUIShell), uishellMock, true);
+                var command = GetMenuCommand(toolbarCommand);
+                var execHandler = (EventHandler) typeof(MenuCommand).GetField("execHandler", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(command);
 
-                Assert.That(commandHandler, Is.Not.Null, string.Format("Failed to get the private method {0}", toolbarCommand));
-                Assert.DoesNotThrow(() => commandHandler.Invoke(_package, new object[] {null, null}));
+                TestDelegate commandHandler = () => execHandler.Invoke(null, null);
+
+                Assert.DoesNotThrow(commandHandler);
             }
             finally
             {

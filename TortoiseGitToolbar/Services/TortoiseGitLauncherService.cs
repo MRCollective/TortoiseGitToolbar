@@ -32,7 +32,7 @@ namespace MattDavies.TortoiseGitToolbar.Services
                 _gitBashPath = TortoiseGitConstants.GitBashx86;
         }
         
-        public void ExecuteTortoiseProc(string command)
+        public void ExecuteTortoiseProc(ToolbarCommand command)
         {
             var solutionPath = GetSolutionPath();
 
@@ -48,7 +48,7 @@ namespace MattDavies.TortoiseGitToolbar.Services
                 return;
             }
 
-            if (command == "bash")
+            if (command == ToolbarCommand.Bash)
             {
                 LaunchProcess(_gitBashPath, "--login -i", false);
             }
