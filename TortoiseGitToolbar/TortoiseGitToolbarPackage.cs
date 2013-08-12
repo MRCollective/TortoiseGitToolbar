@@ -38,32 +38,32 @@ namespace MattDavies.TortoiseGitToolbar
 
         private void Commit(object sender, EventArgs e)
         {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc("commit");
+            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Commit.ToString().ToLower());
         }
 
         private void Resolve(object sender, EventArgs e)
         {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc("resolve");
+            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Resolve.ToString().ToLower());
         }
 
         private void Push(object sender, EventArgs e)
         {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc("push");
+            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Push.ToString().ToLower());
         }
 
         private void Pull(object sender, EventArgs e)
         {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc("pull");
+            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Pull.ToString().ToLower());
         }
 
         private void Log(object sender, EventArgs e)
         {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc("log");
+            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Log.ToString().ToLower());
         }
 
         private void Bash(object sender, EventArgs e)
         {
-            _tortoiseGitLauncherService.ExecuteTortoiseProc("bash");
+            _tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Bash.ToString().ToLower());
         }
 
         private void RegisterCommand(ToolbarCommand id, EventHandler callback)
