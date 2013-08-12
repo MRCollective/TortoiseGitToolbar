@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.20617.1 PREVIEW
+VisualStudioVersion = 12.0.20623.1 VSUPREVIEW
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar", "TortoiseGitToolbar\TortoiseGitToolbar.csproj", "{F1A624CA-04A7-4729-9598-AF0B5C2CF188}"
 EndProject
@@ -10,7 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1A0540F-54E9-4C09-8B55-14A5C2A3D34A}"
 	ProjectSection(SolutionItems) = preProject
 		IntegrationTests.testsettings = IntegrationTests.testsettings
-		UnitTests.testsettings = UnitTests.testsettings
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar.UnitTests", "TortoiseGitToolbar.UnitTests\TortoiseGitToolbar.UnitTests.csproj", "{B6997325-6151-4B1A-A6BC-E47667C3B7F4}"

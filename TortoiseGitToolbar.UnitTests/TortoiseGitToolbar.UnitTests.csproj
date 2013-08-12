@@ -55,6 +55,9 @@
     <!---->
     <Reference Include="Microsoft.VSSDK.UnitTestLibrary" />
     <Reference Include="Microsoft.VSSDK.TestHostFramework" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -75,6 +78,9 @@
       <Project>{F1A624CA-04A7-4729-9598-AF0B5C2CF188}</Project>
       <Name>TortoiseGitToolbar</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

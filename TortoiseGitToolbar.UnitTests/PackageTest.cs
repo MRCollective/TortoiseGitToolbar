@@ -2,26 +2,28 @@
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VsSDK.UnitTestLibrary;
+using NUnit.Framework;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace TortoiseGitToolbar.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class PackageTest
     {
-        [TestMethod]
+        [Test]
         public void CreateInstance()
         {
             var package = new TortoiseGitToolbarPackage();
         }
 
-        [TestMethod]
+        [Test]
         public void IsIVsPackage()
         {
             var package = new TortoiseGitToolbarPackage();
             Assert.IsNotNull(package, "The object does not implement IVsPackage");
         }
 
-        [TestMethod]
+        [Test]
         public void SetSite()
         {
             var package = new TortoiseGitToolbarPackage() as IVsPackage;
