@@ -18,7 +18,7 @@ namespace TortoiseGitToolbar.UnitTests
         private IVsPackage _package;
         private MethodInfo _getServiceMethod;
         private OleServiceProvider _serviceProvider;
-        private readonly CommandId[] _commands = EnumHelper.GetValues<CommandId>();
+        private readonly ToolbarCommand[] _toolbarCommands = EnumHelper.GetValues<ToolbarCommand>();
         
         [SetUp]
         public void Setup()
@@ -40,27 +40,27 @@ namespace TortoiseGitToolbar.UnitTests
             Assert.That(_package.SetSite(_serviceProvider), Is.EqualTo(0), "Package SetSite did not return S_OK");
         }
 
-        [TestCaseSource("_commands")]
-        public void Ensure_all_tortoisegit_commands_exist(CommandId commandId)
+        [TestCaseSource("_toolbarCommands")]
+        public void Ensure_all_tortoisegit_commands_exist(ToolbarCommand toolbarCommand)
         {
-            var command = GetMenuCommand(commandId);
+            var command = GetMenuCommand(toolbarCommand);
             
-            Assert.That(command, Is.Not.Null, string.Format("Couldn't find command for {0}", commandId));
+            Assert.That(command, Is.Not.Null, string.Format("Couldn't find command for {0}", toolbarCommand));
         }
 
-        [TestCaseSource("_commands")]
-        public void Ensure_all_tortoisegit_commands_bind_to_correct_event_handlers(CommandId commandId)
+        [TestCaseSource("_toolbarCommands")]
+        public void Ensure_all_tortoisegit_commands_bind_to_correct_event_handlers(ToolbarCommand toolbarCommand)
         {
-            var command = GetMenuCommand(commandId);
+            var command = GetMenuCommand(toolbarCommand);
 
             var execHandler = typeof(MenuCommand).GetField("execHandler", BindingFlags.NonPublic | BindingFlags.Instance);
             
             Assert.That(execHandler, Is.Not.Null);
-            Assert.That(((EventHandler) execHandler.GetValue(command)).Method.Name, Is.EqualTo(commandId.ToString()));
+            Assert.That(((EventHandler) execHandler.GetValue(command)).Method.Name, Is.EqualTo(toolbarCommand.ToString()));
         }
 
-        [TestCaseSource("_commands")]
-        public void Invoke_all_command_handlers_without_exception(CommandId commandId)
+        [TestCaseSource("_toolbarCommands")]
+        public void Invoke_all_command_handlers_without_exception(ToolbarCommand toolbarCommand)
         {
             try
             {
@@ -68,9 +68,9 @@ namespace TortoiseGitToolbar.UnitTests
 
                 var uishellMock = UIShellServiceMock.GetUiShellInstance();
                 _serviceProvider.AddService(typeof (SVsUIShell), uishellMock, true);
-                var commandHandler = _package.GetType().GetMethod(commandId.ToString(), BindingFlags.Instance | BindingFlags.NonPublic);
+                var commandHandler = _package.GetType().GetMethod(toolbarCommand.ToString(), BindingFlags.Instance | BindingFlags.NonPublic);
 
-                Assert.That(commandHandler, Is.Not.Null, string.Format("Failed to get the private method {0}", commandId));
+                Assert.That(commandHandler, Is.Not.Null, string.Format("Failed to get the private method {0}", toolbarCommand));
                 Assert.DoesNotThrow(() => commandHandler.Invoke(_package, new object[] {null, null}));
             }
             finally
@@ -79,11 +79,11 @@ namespace TortoiseGitToolbar.UnitTests
             }
         }
 
-        private MenuCommand GetMenuCommand(CommandId commandId)
+        private MenuCommand GetMenuCommand(ToolbarCommand toolbarCommand)
         {
             _package.SetSite(_serviceProvider);
 
-            var menuCommandID = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)commandId);
+            var menuCommandID = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)toolbarCommand);
             var menuCommandService = _getServiceMethod.Invoke(_package, new object[] { (typeof(IMenuCommandService)) }) as OleMenuCommandService;
             return menuCommandService != null ? menuCommandService.FindCommand(menuCommandID) : null;
         }

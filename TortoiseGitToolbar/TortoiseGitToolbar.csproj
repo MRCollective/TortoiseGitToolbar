@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\Constants\PackageConstants.cs" />
+    <Compile Include="Config\Constants\ToolbarCommand.cs" />
     <Compile Include="Config\Constants\TortoiseGitConstants.cs" />
     <Compile Include="Resources\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -132,7 +133,6 @@
     <Compile Include="Services\TortoiseGitLauncherService.cs" />
     <Compile Include="TortoiseGitToolbarPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Config\Constants\CommandIdConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Resources.resx">

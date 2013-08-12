@@ -28,12 +28,12 @@ namespace MattDavies.TortoiseGitToolbar
             var dte = ((DTE)GetService(typeof(DTE)));
             _tortoiseGitLauncherService = new TortoiseGitLauncherService(dte != null ? dte.Solution : null);
             
-            RegisterCommand(CommandId.Commit, Commit);
-            RegisterCommand(CommandId.Resolve, Resolve);
-            RegisterCommand(CommandId.Push, Push);
-            RegisterCommand(CommandId.Pull, Pull);
-            RegisterCommand(CommandId.Log, Log);
-            RegisterCommand(CommandId.Bash, Bash);
+            RegisterCommand(ToolbarCommand.Commit, Commit);
+            RegisterCommand(ToolbarCommand.Resolve, Resolve);
+            RegisterCommand(ToolbarCommand.Push, Push);
+            RegisterCommand(ToolbarCommand.Pull, Pull);
+            RegisterCommand(ToolbarCommand.Log, Log);
+            RegisterCommand(ToolbarCommand.Bash, Bash);
         }
 
         private void Commit(object sender, EventArgs e)
@@ -66,7 +66,7 @@ namespace MattDavies.TortoiseGitToolbar
             _tortoiseGitLauncherService.ExecuteTortoiseProc("bash");
         }
 
-        private void RegisterCommand(CommandId id, EventHandler callback)
+        private void RegisterCommand(ToolbarCommand id, EventHandler callback)
         {
             var menuCommandID = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)id);
             var menuItem = new OleMenuCommand(callback, menuCommandID);

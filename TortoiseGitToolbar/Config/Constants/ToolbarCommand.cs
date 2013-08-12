@@ -1,6 +1,6 @@
 ﻿namespace MattDavies.TortoiseGitToolbar.Config.Constants
 {
-    public enum CommandId
+    public enum ToolbarCommand
     {
         Commit = 0x8101,
         Resolve = 0x8102,

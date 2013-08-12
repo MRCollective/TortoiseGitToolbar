@@ -20,7 +20,7 @@ namespace TortoiseGitToolbar.IntegrationTests
         {
             UIThreadInvoker.Invoke((ThreadInvoker)delegate
             {
-                var menuItemCmd = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)CommandId.Commit);
+                var menuItemCmd = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)ToolbarCommand.Commit);
 
                 var testUtils = new TestUtils();
                 testUtils.ExecuteCommand(menuItemCmd);
