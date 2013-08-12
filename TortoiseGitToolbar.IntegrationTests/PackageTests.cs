@@ -6,28 +6,31 @@ using Microsoft.VSSDK.Tools.VsIdeTesting;
 
 namespace TortoiseGitToolbar.IntegrationTests
 {
-    /// <summary>
-    ///     Integration test for package validation
-    /// </summary>
     [TestClass]
-    public class PackageTest
+    public class PackageShould
     {
-        public TestContext TestContext { get; set; }
-
         [TestMethod]
         [HostType("VS IDE")]
-        public void PackageLoadTest()
+        public void Load_shell_service()
+        {
+            var shellService = VsIdeTestHostContext.ServiceProvider.GetService(typeof(SVsShell)) as IVsShell;
+            
+            Assert.IsNotNull(shellService);
+        }
+        
+        [TestMethod]
+        [HostType("VS IDE")]
+        public void Load_into_the_ide()
         {
             UIThreadInvoker.Invoke((ThreadInvoker) delegate
             {
-                //Get the Shell Service
-                var shellService = VsIdeTestHostContext.ServiceProvider.GetService(typeof (SVsShell)) as IVsShell;
-                Assert.IsNotNull(shellService);
-
-                //Validate package load
                 IVsPackage package;
+                var shellService = VsIdeTestHostContext.ServiceProvider.GetService(typeof (SVsShell)) as IVsShell;
                 var packageGuid = new Guid(PackageConstants.guidTortoiseGitToolbarPkgString);
-                Assert.IsTrue(0 == shellService.LoadPackage(ref packageGuid, out package));
+                
+                var packageLoaded = shellService.LoadPackage(ref packageGuid, out package);
+                
+                Assert.IsTrue(packageLoaded == 0);
                 Assert.IsNotNull(package, "Package failed to load");
             });
         }
