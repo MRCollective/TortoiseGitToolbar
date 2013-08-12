@@ -6,10 +6,10 @@
   <Commands package="guidTortoiseGitToolbarPkg">
     <Menus>
       <Menu guid="guidTortoiseGitToolbarCmdSet" id="Toolbar" type="Toolbar" >
-        <CommandFlag>DefaultDocked</CommandFlag>
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
         <Strings>
-          <ButtonText>TortoiseGit Toolbar</ButtonText>
-          <CommandName>TortoiseGit Toolbar</CommandName>
+          <ButtonText>TortoiseGit</ButtonText>
+          <CommandName>TortoiseGit</CommandName>
         </Strings>
       </Menu>
     </Menus>
