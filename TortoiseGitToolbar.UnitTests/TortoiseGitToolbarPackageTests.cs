@@ -48,12 +48,12 @@ namespace TortoiseGitToolbar.UnitTests
             Assert.That(command, Is.Not.Null, string.Format("Couldn't find command for {0}", commandId));
         }
 
-        [TestCase(CommandId.CmdCommit, "Commit")]
-        [TestCase(CommandId.CmdResolve, "Resolve")]
-        [TestCase(CommandId.CmdPull, "Pull")]
-        [TestCase(CommandId.CmdPush, "Push")]
-        [TestCase(CommandId.CmdLog, "Log")]
-        [TestCase(CommandId.CmdBash, "Bash")]
+        [TestCase(CommandId.Commit, "Commit")]
+        [TestCase(CommandId.Resolve, "Resolve")]
+        [TestCase(CommandId.Pull, "Pull")]
+        [TestCase(CommandId.Push, "Push")]
+        [TestCase(CommandId.Log, "Log")]
+        [TestCase(CommandId.Bash, "Bash")]
         public void Ensure_all_tortoisegit_commands_bind_to_correct_event_handlers(CommandId commandId, string handlerName)
         {
             var command = GetMenuCommand(commandId);

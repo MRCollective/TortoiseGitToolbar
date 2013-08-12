@@ -28,12 +28,12 @@ namespace MattDavies.TortoiseGitToolbar
             var dte = ((DTE)GetService(typeof(DTE)));
             _tortoiseGitLauncherService = new TortoiseGitLauncherService(dte != null ? dte.Solution : null);
             
-            RegisterCommand(CommandId.CmdCommit, Commit);
-            RegisterCommand(CommandId.CmdResolve, Resolve);
-            RegisterCommand(CommandId.CmdPush, Push);
-            RegisterCommand(CommandId.CmdPull, Pull);
-            RegisterCommand(CommandId.CmdLog, Log);
-            RegisterCommand(CommandId.CmdBash, Bash);
+            RegisterCommand(CommandId.Commit, Commit);
+            RegisterCommand(CommandId.Resolve, Resolve);
+            RegisterCommand(CommandId.Push, Push);
+            RegisterCommand(CommandId.Pull, Pull);
+            RegisterCommand(CommandId.Log, Log);
+            RegisterCommand(CommandId.Bash, Bash);
         }
 
         private void Commit(object sender, EventArgs e)
