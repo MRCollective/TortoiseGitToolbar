@@ -25,6 +25,7 @@ namespace TortoiseGitToolbar.IntegrationTests
             {
                 var menuItemCmd = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int) toolbarCommand);
 
+                //Todo: block dialog (asserting which dialog was invoked if possible)
                 ExecuteCommand(menuItemCmd);
             });
         }

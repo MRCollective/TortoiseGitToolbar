@@ -71,6 +71,7 @@ namespace TortoiseGitToolbar.UnitTests
 
                 TestDelegate commandHandler = () => execHandler.Invoke(null, null);
 
+                //Todo: block dialog (asserting which dialog was invoked if possible)
                 Assert.DoesNotThrow(commandHandler);
             }
             finally
