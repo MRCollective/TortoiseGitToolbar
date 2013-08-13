@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using EnvDTE;
+using EnvDTE80;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Process = System.Diagnostics.Process;
 
@@ -16,12 +17,12 @@ namespace MattDavies.TortoiseGitToolbar.Services
 
     public class TortoiseGitLauncherService : ITortoiseGitLauncherService
     {
-        private readonly Solution _solution;
+        private readonly Solution2 _solution;
         private readonly string _tortoiseGitPath;
         private readonly string _gitBashPath;
 
         //todo: can this service be dependency injected and unit tested?
-        public TortoiseGitLauncherService(Solution solution)
+        public TortoiseGitLauncherService(Solution2 solution)
         {
             _solution = solution;
 
@@ -30,10 +31,7 @@ namespace MattDavies.TortoiseGitToolbar.Services
             else if (File.Exists(TortoiseGitConstants.TortoiseGitx86))
                 _tortoiseGitPath = TortoiseGitConstants.TortoiseGitx86;
             
-            if (File.Exists(TortoiseGitConstants.GitBashx64))
-                _gitBashPath = TortoiseGitConstants.GitBashx64;
-            else if (File.Exists(TortoiseGitConstants.GitBashx86))
-                _gitBashPath = TortoiseGitConstants.GitBashx86;
+            _gitBashPath = TortoiseGitConstants.GitBash;
         }
         
         public void ExecuteTortoiseProc(ToolbarCommand command)
@@ -58,11 +56,11 @@ namespace MattDavies.TortoiseGitToolbar.Services
             }
             else
             {
-                LaunchProcess(_tortoiseGitPath, string.Format("/command:{0} /path:{1}", command, solutionPath));
+                LaunchProcess(_tortoiseGitPath, string.Format("/command:{0} /path:{1}", command.ToString().ToLower(), solutionPath));
             }
         }
 
-        private void LaunchProcess(string fileName, string arguments, bool waitForInputIdle = true)
+        public virtual void LaunchProcess(string fileName, string arguments, bool waitForInputIdle = true)
         {
             var startInfo = new ProcessStartInfo
             {

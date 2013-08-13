@@ -2,6 +2,7 @@
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using EnvDTE;
+using EnvDTE80;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using MattDavies.TortoiseGitToolbar.Services;
 using Microsoft.VisualStudio;
@@ -29,7 +30,7 @@ namespace MattDavies.TortoiseGitToolbar
             if (_tortoiseGitLauncherService == null)
             {
                 var dte = ((DTE)GetService(typeof(DTE)));
-                _tortoiseGitLauncherService = new TortoiseGitLauncherService(dte != null ? dte.Solution : null);
+                _tortoiseGitLauncherService = new TortoiseGitLauncherService(dte != null ? (Solution2)dte.Solution : null);
             }
 
             foreach (ToolbarCommand toolbarCommand in Enum.GetValues(typeof(ToolbarCommand)))
