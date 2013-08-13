@@ -1,17 +1,20 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using EnvDTE;
-using EnvDTE80;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Process = System.Diagnostics.Process;
 
 namespace MattDavies.TortoiseGitToolbar.Services
 {
-    public class TortoiseGitLauncherService
+    public interface ITortoiseGitLauncherService
+    {
+        void ExecuteTortoiseProc(ToolbarCommand command);
+    }
+
+    public class TortoiseGitLauncherService : ITortoiseGitLauncherService
     {
         private readonly Solution _solution;
         private readonly string _tortoiseGitPath;
@@ -59,13 +62,15 @@ namespace MattDavies.TortoiseGitToolbar.Services
             }
         }
 
-        private static void LaunchProcess(string fileName, string arguments, bool waitForInputIdle = true)
+        private void LaunchProcess(string fileName, string arguments, bool waitForInputIdle = true)
         {
             var startInfo = new ProcessStartInfo
             {
                 FileName = fileName,
-                Arguments = arguments
+                Arguments = arguments,
+                UseShellExecute = false
             };
+            startInfo.EnvironmentVariables.Add("HOME", GetSolutionPath());
             var p = Process.Start(startInfo);
             if (waitForInputIdle)
                 p.WaitForInputIdle();

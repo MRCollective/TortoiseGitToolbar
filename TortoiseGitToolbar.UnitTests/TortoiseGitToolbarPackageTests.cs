@@ -4,9 +4,11 @@ using System.Reflection;
 using FizzWare.NBuilder;
 using MattDavies.TortoiseGitToolbar;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
+using MattDavies.TortoiseGitToolbar.Services;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VsSDK.UnitTestLibrary;
+using NSubstitute;
 using NUnit.Framework;
 using TortoiseGitToolbar.UnitTests.Helpers;
 
@@ -16,7 +18,6 @@ namespace TortoiseGitToolbar.UnitTests
     public class TortoiseGitToolbarPackageShould
     {
         private IVsPackage _package;
-        private MethodInfo _getServiceMethod;
         private OleServiceProvider _serviceProvider;
         private readonly ToolbarCommand[] _toolbarCommands = EnumHelper.GetValues<ToolbarCommand>();
         
@@ -25,7 +26,6 @@ namespace TortoiseGitToolbar.UnitTests
         {
             _package = new TortoiseGitToolbarPackage();
             _serviceProvider = OleServiceProvider.CreateOleServiceProviderWithBasicServices();
-            _getServiceMethod = typeof(Package).GetMethod("GetService", BindingFlags.Instance | BindingFlags.NonPublic);
         }
 
         [Test]
@@ -66,13 +66,15 @@ namespace TortoiseGitToolbar.UnitTests
             {
                 var uishellMock = UIShellServiceMock.GetUiShellInstance();
                 _serviceProvider.AddService(typeof(SVsUIShell), uishellMock, true);
+                var tortoiseGitLauncherService = Substitute.For<ITortoiseGitLauncherService>();
+                _serviceProvider.AddService(typeof(TortoiseGitLauncherService), tortoiseGitLauncherService, true);
                 var command = GetMenuCommand(toolbarCommand);
                 var execHandler = (EventHandler) typeof(MenuCommand).GetField("execHandler", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(command);
-
+                
                 TestDelegate commandHandler = () => execHandler.Invoke(null, null);
 
-                //Todo: block dialog (asserting which dialog was invoked if possible)
                 Assert.DoesNotThrow(commandHandler);
+                tortoiseGitLauncherService.Received().ExecuteTortoiseProc(toolbarCommand);
             }
             finally
             {
@@ -84,8 +86,9 @@ namespace TortoiseGitToolbar.UnitTests
         {
             _package.SetSite(_serviceProvider);
 
+            var getServiceMethod = typeof(Package).GetMethod("GetService", BindingFlags.Instance | BindingFlags.NonPublic);
             var menuCommandID = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)toolbarCommand);
-            var menuCommandService = _getServiceMethod.Invoke(_package, new object[] { (typeof(IMenuCommandService)) }) as OleMenuCommandService;
+            var menuCommandService = getServiceMethod.Invoke(_package, new object[] { (typeof(IMenuCommandService)) }) as OleMenuCommandService;
             return menuCommandService != null ? menuCommandService.FindCommand(menuCommandID) : null;
         }
     }

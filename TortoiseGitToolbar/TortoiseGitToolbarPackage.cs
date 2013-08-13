@@ -18,15 +18,19 @@ namespace MattDavies.TortoiseGitToolbar
     public sealed class TortoiseGitToolbarPackage : Package
     {
         private OleMenuCommandService _commandService;
-        private TortoiseGitLauncherService _tortoiseGitLauncherService;
-
+        private ITortoiseGitLauncherService _tortoiseGitLauncherService;
+        
         protected override void Initialize()
         {
             base.Initialize();
-
+            
             _commandService = (OleMenuCommandService) GetService(typeof(IMenuCommandService));
-            var dte = ((DTE)GetService(typeof(DTE)));
-            _tortoiseGitLauncherService = new TortoiseGitLauncherService(dte != null ? dte.Solution : null);
+            _tortoiseGitLauncherService = (ITortoiseGitLauncherService) GetService(typeof (TortoiseGitLauncherService));
+            if (_tortoiseGitLauncherService == null)
+            {
+                var dte = ((DTE)GetService(typeof(DTE)));
+                _tortoiseGitLauncherService = new TortoiseGitLauncherService(dte != null ? dte.Solution : null);
+            }
 
             foreach (ToolbarCommand toolbarCommand in Enum.GetValues(typeof(ToolbarCommand)))
             {
