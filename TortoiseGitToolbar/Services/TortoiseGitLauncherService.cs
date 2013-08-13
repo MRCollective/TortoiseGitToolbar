@@ -52,20 +52,21 @@ namespace MattDavies.TortoiseGitToolbar.Services
 
             if (command == ToolbarCommand.Bash)
             {
-                LaunchProcess(_gitBashPath, "--login -i", false);
+                LaunchProcess(_gitBashPath, "--login -i", false, false);
             }
             else
             {
-                LaunchProcess(_tortoiseGitPath, string.Format("/command:{0} /path:{1}", command.ToString().ToLower(), solutionPath));
+                LaunchProcess(_tortoiseGitPath, string.Format(@"/command:{0} /path:""{1}""", command.ToString().ToLower(), solutionPath));
             }
         }
 
-        public virtual void LaunchProcess(string fileName, string arguments, bool waitForInputIdle = true)
+        public virtual void LaunchProcess(string fileName, string arguments, bool waitForInputIdle = true, bool useShellExecute = true)
         {
             var startInfo = new ProcessStartInfo
             {
                 FileName = fileName,
                 Arguments = arguments,
+                UseShellExecute = useShellExecute,
                 WorkingDirectory = GetSolutionPath()
             };
 
@@ -82,7 +83,7 @@ namespace MattDavies.TortoiseGitToolbar.Services
         private string GetSolutionPath()
         {
             return _solution != null && _solution.IsOpen
-                ? @"""" + Path.GetDirectoryName(_solution.FullName) + @""""
+                ? Path.GetDirectoryName(_solution.FullName)
                 : null;
         }
     }
