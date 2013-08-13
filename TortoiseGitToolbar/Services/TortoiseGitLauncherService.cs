@@ -52,7 +52,7 @@ namespace MattDavies.TortoiseGitToolbar.Services
 
             if (command == ToolbarCommand.Bash)
             {
-                LaunchProcess(_gitBashPath, "--login -i", false);
+                LaunchProcess(_gitBashPath, "--login -i", false, false);
             }
             else
             {
@@ -60,16 +60,19 @@ namespace MattDavies.TortoiseGitToolbar.Services
             }
         }
 
-        public virtual void LaunchProcess(string fileName, string arguments, bool waitForInputIdle = true)
+        public virtual void LaunchProcess(string fileName, string arguments, bool waitForInputIdle = true, bool useShellExecute = true)
         {
             var startInfo = new ProcessStartInfo
             {
                 FileName = fileName,
                 Arguments = arguments,
-                UseShellExecute = false
+                UseShellExecute = useShellExecute
             };
-            startInfo.EnvironmentVariables.Add("HOME", GetSolutionPath());
+            if (!useShellExecute)
+                startInfo.EnvironmentVariables.Add("HOME", GetSolutionPath());
+            
             var p = Process.Start(startInfo);
+            
             if (waitForInputIdle)
                 p.WaitForInputIdle();
             MoveWindow(p.MainWindowHandle, 0, 0, 0, 0, false);
