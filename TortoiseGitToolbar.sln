@@ -7,11 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar", "Torto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar.IntegrationTests", "TortoiseGitToolbar.IntegrationTests\TortoiseGitToolbar.IntegrationTests.csproj", "{9266F646-2E8D-4DE4-B755-0EA8F5036078}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1A0540F-54E9-4C09-8B55-14A5C2A3D34A}"
-	ProjectSection(SolutionItems) = preProject
-		IntegrationTests.testsettings = IntegrationTests.testsettings
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar.UnitTests", "TortoiseGitToolbar.UnitTests\TortoiseGitToolbar.UnitTests.csproj", "{B6997325-6151-4B1A-A6BC-E47667C3B7F4}"
 EndProject
 Global
