@@ -132,4 +132,16 @@
   <data name="TortoiseGitLauncherService_SolutionPath_No_solution_found" xml:space="preserve">
     <value>No solution found.</value>
   </data>
+  <data name="TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_Git_Bash_in_the_standard_install_path_" xml:space="preserve">
+    <value>Could not find Git Bash in the standard install path.</value>
+  </data>
+  <data name="TortoiseGitLauncherService_ExecuteTortoiseProc_Git_Bash_not_found" xml:space="preserve">
+    <value>Git Bash not found</value>
+  </data>
+  <data name="TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_TortoiseGit_in_the_standard_install_path_" xml:space="preserve">
+    <value>Could not find TortoiseGit in the standard install path.</value>
+  </data>
+  <data name="TortoiseGitLauncherService_ExecuteTortoiseProc_TortoiseGit_not_found" xml:space="preserve">
+    <value>TortoiseGit not found</value>
+  </data>
 </root>

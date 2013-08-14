@@ -61,6 +61,44 @@ namespace MattDavies.TortoiseGitToolbar.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not find Git Bash in the standard install path..
+        /// </summary>
+        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_Git_Bash_in_the_standard_install_path_ {
+            get {
+                return ResourceManager.GetString("TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_Git_Bash_in_the_sta" +
+                        "ndard_install_path_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find TortoiseGit in the standard install path..
+        /// </summary>
+        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_TortoiseGit_in_the_standard_install_path_ {
+            get {
+                return ResourceManager.GetString("TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_TortoiseGit_in_the_" +
+                        "standard_install_path_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Git Bash not found.
+        /// </summary>
+        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_Git_Bash_not_found {
+            get {
+                return ResourceManager.GetString("TortoiseGitLauncherService_ExecuteTortoiseProc_Git_Bash_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TortoiseGit not found.
+        /// </summary>
+        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_TortoiseGit_not_found {
+            get {
+                return ResourceManager.GetString("TortoiseGitLauncherService_ExecuteTortoiseProc_TortoiseGit_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No solution found..
         /// </summary>
         internal static string TortoiseGitLauncherService_SolutionPath_No_solution_found {

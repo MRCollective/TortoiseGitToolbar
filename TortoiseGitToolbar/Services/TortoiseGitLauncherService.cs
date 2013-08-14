@@ -1,9 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using EnvDTE;
+﻿using System.Windows.Forms;
 using EnvDTE80;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Process = System.Diagnostics.Process;
@@ -34,6 +29,27 @@ namespace MattDavies.TortoiseGitToolbar.Services
                 MessageBox.Show(
                     Resources.Resources.TortoiseGitLauncherService_SolutionPath_You_need_to_open_a_solution_first,
                     Resources.Resources.TortoiseGitLauncherService_SolutionPath_No_solution_found,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation
+                );
+                return;
+            }
+            // todo: make the bash/tortoise paths configurable
+            if (command == ToolbarCommand.Bash && PathConfiguration.GetGitBashPath() == null)
+            {
+                MessageBox.Show(
+                    Resources.Resources.TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_Git_Bash_in_the_standard_install_path_,
+                    Resources.Resources.TortoiseGitLauncherService_ExecuteTortoiseProc_Git_Bash_not_found,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation
+                );
+                return;
+            }
+            if (command != ToolbarCommand.Bash && PathConfiguration.GetTortoiseGitPath() == null)
+            {
+                MessageBox.Show(
+                    Resources.Resources.TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_TortoiseGit_in_the_standard_install_path_,
+                    Resources.Resources.TortoiseGitLauncherService_ExecuteTortoiseProc_TortoiseGit_not_found,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation
                 );
