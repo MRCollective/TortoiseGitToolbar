@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <!---->
+    <Compile Include="Services\ProcessManagerServiceTests.cs" />
     <Compile Include="Services\TortoiseGitLauncherServiceTests.cs" />
     <Compile Include="TortoiseGitToolbarPackageTests.cs" />
     <Compile Include="Helpers\UIShellServiceMock.cs" />

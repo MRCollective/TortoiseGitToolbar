@@ -14,26 +14,31 @@ namespace TortoiseGitToolbar.UnitTests.Services
     public class TortoiseGitLauncherServiceShould
     {
         private readonly ToolbarCommand[] _toolbarCommands = EnumHelper.GetValues<ToolbarCommand>();
-        private TortoiseGitLauncherService _service;
+        private TortoiseGitLauncherService _tortoiseGitLauncherService;
+        private IProcessManagerService _processManagerService;
+        private Solution2 _solution;
 
         [SetUp]
         public void Setup()
         {
-            var solution = Substitute.For<Solution2>();
-            solution.IsOpen.Returns(true);
-            solution.FullName.Returns(Environment.CurrentDirectory + "\\file.sln");
-            _service = Substitute.For<TortoiseGitLauncherService>(solution);
+            _solution = Substitute.For<Solution2>();
+            _solution.IsOpen.Returns(true);
+            _solution.FullName.Returns(Environment.CurrentDirectory + "\\file.sln");
+            _processManagerService = Substitute.For<IProcessManagerService>();
+            _tortoiseGitLauncherService = Substitute.For<TortoiseGitLauncherService>(_processManagerService, _solution);
         }
 
         [TestCaseSource("_toolbarCommands")]
         public void Launch_command_with_correct_parameters(ToolbarCommand toolbarCommand)
         {
-            _service.ExecuteTortoiseProc(toolbarCommand);
+            var solutionPath = PathConfiguration.GetSolutionPath(_solution);
 
-            _service.Received().LaunchProcess(
+            _tortoiseGitLauncherService.ExecuteTortoiseProc(toolbarCommand);
+
+            _processManagerService.Received().GetProcess(
                 GetExpectedCommand(toolbarCommand),
                 GetExpectedParameters(toolbarCommand),
-                toolbarCommand != ToolbarCommand.Bash
+                toolbarCommand == ToolbarCommand.Bash ? solutionPath : null
             );
         }
 
@@ -46,9 +51,9 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 case ToolbarCommand.Pull:
                 case ToolbarCommand.Push:
                 case ToolbarCommand.Resolve:
-                    return TortoiseGitConstants.TortoiseGitx64;
+                    return PathConfiguration.GetTortoiseGitPath();
                 case ToolbarCommand.Bash:
-                    return TortoiseGitConstants.GitBash;
+                    return PathConfiguration.GetGitBashPath();
             }
 
             throw new InvalidOperationException(string.Format("You need to define an expected test process command result for {0}.", toolbarCommand));

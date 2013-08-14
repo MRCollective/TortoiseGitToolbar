@@ -124,12 +124,13 @@
   <ItemGroup>
     <Compile Include="Config\Constants\PackageConstants.cs" />
     <Compile Include="Config\Constants\ToolbarCommand.cs" />
-    <Compile Include="Config\Constants\TortoiseGitConstants.cs" />
+    <Compile Include="Config\Constants\PathConfiguration.cs" />
     <Compile Include="Resources\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\ProcessManagerService.cs" />
     <Compile Include="Services\TortoiseGitLauncherService.cs" />
     <Compile Include="TortoiseGitToolbarPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

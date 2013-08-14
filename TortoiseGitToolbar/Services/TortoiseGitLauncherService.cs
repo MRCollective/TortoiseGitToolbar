@@ -17,28 +17,18 @@ namespace MattDavies.TortoiseGitToolbar.Services
 
     public class TortoiseGitLauncherService : ITortoiseGitLauncherService
     {
+        private readonly IProcessManagerService _processManagerService;
         private readonly Solution2 _solution;
-        private readonly string _tortoiseGitPath;
-        private readonly string _gitBashPath;
 
-        //todo: can this service be dependency injected and unit tested?
-        public TortoiseGitLauncherService(Solution2 solution)
+        public TortoiseGitLauncherService(IProcessManagerService processManagerService, Solution2 solution)
         {
+            _processManagerService = processManagerService;
             _solution = solution;
-
-            if (File.Exists(TortoiseGitConstants.TortoiseGitx64))
-                _tortoiseGitPath = TortoiseGitConstants.TortoiseGitx64;
-            else if (File.Exists(TortoiseGitConstants.TortoiseGitx86))
-                _tortoiseGitPath = TortoiseGitConstants.TortoiseGitx86;
-            
-            _gitBashPath = TortoiseGitConstants.GitBash;
         }
-        
+
         public void ExecuteTortoiseProc(ToolbarCommand command)
         {
-            var solutionPath = GetSolutionPath();
-
-            //Todo: hide the buttons if not in an active solution (+ potentially in a git solution if we can detect that)
+            var solutionPath = PathConfiguration.GetSolutionPath(_solution);
             if (solutionPath == null)
             {
                 MessageBox.Show(
@@ -50,41 +40,12 @@ namespace MattDavies.TortoiseGitToolbar.Services
                 return;
             }
 
-            if (command == ToolbarCommand.Bash)
-            {
-                LaunchProcess(_gitBashPath, "--login -i", false, false);
-            }
-            else
-            {
-                LaunchProcess(_tortoiseGitPath, string.Format(@"/command:{0} /path:""{1}""", command.ToString().ToLower(), solutionPath));
-            }
-        }
+            var process = command == ToolbarCommand.Bash
+                ? _processManagerService.GetProcess(PathConfiguration.GetGitBashPath(), "--login -i", solutionPath)
+                : _processManagerService.GetProcess(PathConfiguration.GetTortoiseGitPath(), string.Format(@"/command:{0} /path:""{1}""", command.ToString().ToLower(), solutionPath));
 
-        public virtual void LaunchProcess(string fileName, string arguments, bool waitForInputIdle = true, bool useShellExecute = true)
-        {
-            var startInfo = new ProcessStartInfo
-            {
-                FileName = fileName,
-                Arguments = arguments,
-                UseShellExecute = useShellExecute,
-                WorkingDirectory = GetSolutionPath()
-            };
-
-            var p = Process.Start(startInfo);
-            
-            if (waitForInputIdle)
-                p.WaitForInputIdle();
-            MoveWindow(p.MainWindowHandle, 0, 0, 0, 0, false);
-        }
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern bool MoveWindow(IntPtr hWnd, int x, int y, int width, int height, bool repaint);
-
-        private string GetSolutionPath()
-        {
-            return _solution != null && _solution.IsOpen
-                ? Path.GetDirectoryName(_solution.FullName)
-                : null;
+            if (process != null)
+                Process.Start(process);
         }
     }
 }
