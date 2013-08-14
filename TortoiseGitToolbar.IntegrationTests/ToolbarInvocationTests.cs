@@ -23,7 +23,7 @@ namespace TortoiseGitToolbar.IntegrationTests
         {
             UIThreadInvoker.Invoke((ThreadInvoker) delegate
             {
-                var menuItemCmd = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int) toolbarCommand);
+                var menuItemCmd = new CommandID(PackageConstants.GuidTortoiseGitToolbarCmdSet, (int) toolbarCommand);
 
                 //Todo: block dialog (asserting which dialog was invoked if possible)
                 ExecuteCommand(menuItemCmd);

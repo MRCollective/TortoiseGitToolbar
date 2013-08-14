@@ -1,5 +1,4 @@
-﻿using System;
-using MattDavies.TortoiseGitToolbar.Config.Constants;
+﻿using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VSSDK.Tools.VsIdeTesting;
@@ -25,8 +24,8 @@ namespace TortoiseGitToolbar.IntegrationTests
             UIThreadInvoker.Invoke((ThreadInvoker) delegate
             {
                 IVsPackage package;
-                var shellService = VsIdeTestHostContext.ServiceProvider.GetService(typeof (SVsShell)) as IVsShell;
-                var packageGuid = new Guid(PackageConstants.guidTortoiseGitToolbarPkgString);
+                var shellService = (IVsShell) VsIdeTestHostContext.ServiceProvider.GetService(typeof (SVsShell));
+                var packageGuid = PackageConstants.GuidTortoiseGitToolbarPkg;
                 
                 var packageLoaded = shellService.LoadPackage(ref packageGuid, out package);
                 

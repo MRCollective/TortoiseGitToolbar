@@ -87,7 +87,7 @@ namespace TortoiseGitToolbar.UnitTests
             _package.SetSite(_serviceProvider);
 
             var getServiceMethod = typeof(Package).GetMethod("GetService", BindingFlags.Instance | BindingFlags.NonPublic);
-            var menuCommandID = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)toolbarCommand);
+            var menuCommandID = new CommandID(PackageConstants.GuidTortoiseGitToolbarCmdSet, (int)toolbarCommand);
             var menuCommandService = getServiceMethod.Invoke(_package, new object[] { (typeof(IMenuCommandService)) }) as OleMenuCommandService;
             return menuCommandService != null ? menuCommandService.FindCommand(menuCommandID) : null;
         }

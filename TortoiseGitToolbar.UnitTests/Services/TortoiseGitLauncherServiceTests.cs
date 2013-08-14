@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Reflection;
-using EnvDTE;
 using EnvDTE80;
 using FizzWare.NBuilder;
 using MattDavies.TortoiseGitToolbar.Config.Constants;

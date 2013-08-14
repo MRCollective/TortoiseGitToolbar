@@ -12,8 +12,8 @@ namespace MattDavies.TortoiseGitToolbar
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [Guid(PackageConstants.guidTortoiseGitToolbarPkgString)]
-    [ProvideKeyBindingTable(PackageConstants.guidTortoiseGitToolbarPkgString, 110)]
+    [Guid(PackageConstants.GuidTortoiseGitToolbarPkgString)]
+    [ProvideKeyBindingTable(PackageConstants.GuidTortoiseGitToolbarPkgString, 110)]
     public sealed class TortoiseGitToolbarPackage : Package
     {
         private OleMenuCommandService _commandService;
@@ -43,7 +43,7 @@ namespace MattDavies.TortoiseGitToolbar
 
         private void RegisterCommand(ToolbarCommand id, EventHandler callback)
         {
-            var menuCommandID = new CommandID(PackageConstants.guidTortoiseGitToolbarCmdSet, (int)id);
+            var menuCommandID = new CommandID(PackageConstants.GuidTortoiseGitToolbarCmdSet, (int)id);
             var menuItem = new OleMenuCommand(callback, menuCommandID);
             _commandService.AddCommand(menuItem);
         }

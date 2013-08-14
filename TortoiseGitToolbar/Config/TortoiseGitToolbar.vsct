@@ -66,10 +66,6 @@
       </Button>
     </Buttons>
    
-    <Bitmaps>
-      <Bitmap guid="guidImages" href="..\Resources\Images.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows"/>
-    </Bitmaps>
-  
   </Commands>
   
   <VisibilityConstraints>
