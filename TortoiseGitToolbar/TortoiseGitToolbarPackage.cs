@@ -45,6 +45,7 @@ namespace MattDavies.TortoiseGitToolbar
         {
             var menuCommandID = new CommandID(PackageConstants.GuidTortoiseGitToolbarCmdSet, (int)id);
             var menuItem = new OleMenuCommand(callback, menuCommandID);
+            menuItem.Visible = false;
             _commandService.AddCommand(menuItem);
         }
     }

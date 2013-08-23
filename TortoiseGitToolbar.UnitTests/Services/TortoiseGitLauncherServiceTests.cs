@@ -49,6 +49,15 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 case ToolbarCommand.Pull:
                 case ToolbarCommand.Push:
                 case ToolbarCommand.Resolve:
+                case ToolbarCommand.Switch:
+                case ToolbarCommand.Cleanup:
+                case ToolbarCommand.Fetch:
+                case ToolbarCommand.Revert:
+                case ToolbarCommand.Sync:
+                case ToolbarCommand.Merge:
+                case ToolbarCommand.StashSave:
+                case ToolbarCommand.StashPop:
+                case ToolbarCommand.Rebase:
                     return PathConfiguration.GetTortoiseGitPath();
                 case ToolbarCommand.Bash:
                     return PathConfiguration.GetGitBashPath();
@@ -71,8 +80,26 @@ namespace TortoiseGitToolbar.UnitTests.Services
                     return string.Format(@"/command:pull /path:""{0}""", Environment.CurrentDirectory);
                 case ToolbarCommand.Push:
                     return string.Format(@"/command:push /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.Switch:
+                    return string.Format(@"/command:switch /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.Cleanup:
+                    return string.Format(@"/command:cleanup /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.Fetch:
+                    return string.Format(@"/command:fetch /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.Revert:
+                    return string.Format(@"/command:revert /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.Sync:
+                    return string.Format(@"/command:sync /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.Merge:
+                    return string.Format(@"/command:merge /path:""{0}""", Environment.CurrentDirectory);
                 case ToolbarCommand.Resolve:
                     return string.Format(@"/command:resolve /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.StashSave:
+                    return string.Format(@"/command:stashsave /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.StashPop:
+                    return string.Format(@"/command:stashpop /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.Rebase:
+                    return string.Format(@"/command:rebase /path:""{0}""", Environment.CurrentDirectory);
             }
 
             throw new InvalidOperationException(string.Format("You need to define an expected test process parameters result for {0}.", toolbarCommand));
