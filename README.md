@@ -16,11 +16,22 @@ Installation instructions
 Default shortcuts
 ------------------
 
-* (G)it (C)ommit - CTRL+G, C or CTRL+G, CTRL+C
-* (G)it (R)esolve - CTRL+G, R or CTRL+G, CTRL+R
-* (G)it (P)ull - CTRL+G, P or CTRL+G, CTRL+P
-* (G)it P(u)sh - CTRL+G, U or CTRL+G, CTRL+U
-* (G)it (L)og - CTRL+G, L or CTRL+G, CTRL+L
-* (G)it (B)ash - CTRL+G, B or CTRL+G, CTRL+B
+You can opt into these default shortcuts by removing the default shortcut for CTRL+G (Go To Line).
 
-Note that these default shortcuts will override the default usage of CTRL+G (Go To Line). If you don't want to remap that shortcut to something else, you can easily reset Go To Line to CTRL+G and set different shortcuts for the TortoiseGit commands (Tools -> Options -> Keyboard and show commands containing TortoiseGit).
+To customise these shortcuts open up Tools -> Options -> Keyboard and show commands containing TortoiseGit.
+
+* (G)it (B)ash - CTRL+G, B
+* (G)it (C)leanup - CTRL+G, C
+* (G)it C(o)mmit - CTRL+G, O
+* (G)it (F)etch - CTRL+G, F
+* (G)it (L)og - CTRL+G, L
+* (G)it (M)erge - CTRL+G, M
+* (G)it (P)ull - CTRL+G, P
+* (G)it P(u)sh - CTRL+G, U
+* (G)it (R)ebase - CTRL+G, R
+* (G)it R(e)solve - CTRL+G, E
+* (G)it Re(v)ert - CTRL+G, V
+* (G)it Stash-P(o)p - CTRL+G, O
+* (G)it Stash-S(a)ve - CTRL+G, A
+* (G)it (S)witch - CTRL+G, S
+* (G)it S(y)nc - CTRL+S, Y
