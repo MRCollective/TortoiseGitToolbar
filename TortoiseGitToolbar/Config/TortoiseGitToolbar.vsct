@@ -24,9 +24,6 @@
       </Group>
     </Groups>
     
-    <!-- Todo: Hide these if a solution isn't open -->
-    <!-- Todo: Add context text -->
-    <!-- Todo: Icons -->
     <Buttons>
       <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBash" priority="0x0101" type="Button">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
