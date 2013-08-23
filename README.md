@@ -39,4 +39,4 @@ To customise these shortcuts open up Tools -> Options -> Keyboard and show comma
 Customisation
 --------------
 
-By clicking the dropdown arrow next to the toolbar and selecting `Add/Remove Buttons`, you can check/uncheck different commands to create your own customised list. For example, if you rarely use the TortoiesGit rebase UI, you can easily hide it from the toolbar.
+By clicking the dropdown arrow next to the toolbar and selecting `Add/Remove Buttons`, you can check/uncheck different commands to create your own customised list. For example, if you rarely use the TortoiseGit rebase UI, you can easily hide it from the toolbar.
