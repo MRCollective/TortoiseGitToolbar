@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using EnvDTE80;
 using FizzWare.NBuilder;
+using FizzWare.NBuilder.Implementation;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using MattDavies.TortoiseGitToolbar.Services;
 using NSubstitute;
@@ -11,33 +13,58 @@ namespace TortoiseGitToolbar.UnitTests.Services
     [TestFixture]
     public class TortoiseGitLauncherServiceShould
     {
-        private readonly ToolbarCommand[] _toolbarCommands = EnumHelper.GetValues<ToolbarCommand>();
-        private TortoiseGitLauncherService _tortoiseGitLauncherService;
+        private readonly ToolbarCommand[] _tortoiseCommands = EnumHelper.GetValues<ToolbarCommand>().Where(t => t != ToolbarCommand.Bash).ToArray();
         private IProcessManagerService _processManagerService;
-        private Solution2 _solution;
 
         [SetUp]
         public void Setup()
         {
-            _solution = Substitute.For<Solution2>();
-            _solution.IsOpen.Returns(true);
-            _solution.FullName.Returns(Environment.CurrentDirectory + "\\file.sln");
             _processManagerService = Substitute.For<IProcessManagerService>();
-            _tortoiseGitLauncherService = Substitute.For<TortoiseGitLauncherService>(_processManagerService, _solution);
         }
 
-        [TestCaseSource("_toolbarCommands")]
-        public void Launch_command_with_correct_parameters(ToolbarCommand toolbarCommand)
+        [TestCaseSource("_tortoiseCommands")]
+        public void Launch_tortoise_command_with_correct_parameters(ToolbarCommand toolbarCommand)
         {
-            var solutionPath = PathConfiguration.GetSolutionPath(_solution);
+            var solution = GetOpenSolution();
+            var tortoiseGitLauncherService = Substitute.For<TortoiseGitLauncherService>(_processManagerService, solution);
 
-            _tortoiseGitLauncherService.ExecuteTortoiseProc(toolbarCommand);
+            tortoiseGitLauncherService.ExecuteTortoiseProc(toolbarCommand);
 
             _processManagerService.Received().GetProcess(
                 GetExpectedCommand(toolbarCommand),
-                GetExpectedParameters(toolbarCommand),
-                toolbarCommand == ToolbarCommand.Bash ? solutionPath : null
+                GetExpectedParameters(toolbarCommand)
             );
+        }
+
+        [Test]
+        public void Launch_git_bash([Values(true,false)] bool solutionOpen)
+        {
+            var solution = solutionOpen ? GetOpenSolution() : GetClosedSolution();
+            var tortoiseGitLauncherService = Substitute.For<TortoiseGitLauncherService>(_processManagerService, solution);
+
+            tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Bash);
+
+            _processManagerService.Received().GetProcess(
+                GetExpectedCommand(ToolbarCommand.Bash),
+                GetExpectedParameters(ToolbarCommand.Bash),
+                PathConfiguration.GetSolutionPath(solution)
+            );
+        }
+
+        private static Solution2 GetOpenSolution()
+        {
+            var solution = Substitute.For<Solution2>();
+            solution.IsOpen.Returns(true);
+            solution.FullName.Returns(Environment.CurrentDirectory + "\\file.sln");
+            return solution;
+        }
+
+        private static Solution2 GetClosedSolution()
+        {
+            var solution = Substitute.For<Solution2>();
+            solution.IsOpen.Returns(false);
+            solution.FullName.Returns(string.Empty);
+            return solution;
         }
 
         private static string GetExpectedCommand(ToolbarCommand toolbarCommand)

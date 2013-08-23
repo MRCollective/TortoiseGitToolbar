@@ -24,22 +24,22 @@ namespace MattDavies.TortoiseGitToolbar.Services
         public void ExecuteTortoiseProc(ToolbarCommand command)
         {
             var solutionPath = PathConfiguration.GetSolutionPath(_solution);
-            if (solutionPath == null)
-            {
-                MessageBox.Show(
-                    Resources.Resources.TortoiseGitLauncherService_SolutionPath_You_need_to_open_a_solution_first,
-                    Resources.Resources.TortoiseGitLauncherService_SolutionPath_No_solution_found,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation
-                );
-                return;
-            }
             // todo: make the bash/tortoise paths configurable
             if (command == ToolbarCommand.Bash && PathConfiguration.GetGitBashPath() == null)
             {
                 MessageBox.Show(
                     Resources.Resources.TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_Git_Bash_in_the_standard_install_path_,
                     Resources.Resources.TortoiseGitLauncherService_ExecuteTortoiseProc_Git_Bash_not_found,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation
+                );
+                return;
+            }
+            if (command != ToolbarCommand.Bash && solutionPath == null)
+            {
+                MessageBox.Show(
+                    Resources.Resources.TortoiseGitLauncherService_SolutionPath_You_need_to_open_a_solution_first,
+                    Resources.Resources.TortoiseGitLauncherService_SolutionPath_No_solution_found,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation
                 );
