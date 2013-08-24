@@ -148,11 +148,11 @@
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdBash" key1="G" mod1="Control" key2="B" mod2="Control" editor="guidVSStd97" />
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdBash" key1="G" mod1="Control" key2="B" editor="guidVSStd97" />
 
-    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCleanup" key1="G" mod1="Control" key2="C" mod2="Control" editor="guidVSStd97" />
-    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCleanup" key1="G" mod1="Control" key2="C" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCleanup" key1="G" mod1="Control" key2="N" mod2="Control" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCleanup" key1="G" mod1="Control" key2="N" editor="guidVSStd97" />
     
-    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCommit" key1="G" mod1="Control" key2="O" mod2="Control" editor="guidVSStd97"  />
-    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCommit" key1="G" mod1="Control" key2="O" editor="guidVSStd97"  />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCommit" key1="G" mod1="Control" key2="C" mod2="Control" editor="guidVSStd97"  />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCommit" key1="G" mod1="Control" key2="C" editor="guidVSStd97"  />
   
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFetch" key1="G" mod1="Control" key2="F" mod2="Control" editor="guidVSStd97" />
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFetch" key1="G" mod1="Control" key2="F" editor="guidVSStd97" />
