@@ -21,8 +21,8 @@ You can opt into these default shortcuts by removing the default shortcut for CT
 To customise these shortcuts open up Tools -> Options -> Keyboard and show commands containing TortoiseGit.
 
 * `(G)it (B)ash` - CTRL+G, B
-* `(G)it (C)leanup` - CTRL+G, C
-* `(G)it C(o)mmit` - CTRL+G, O
+* `(G)it Clea(n)up` - CTRL+G, N
+* `(G)it (C)ommit` - CTRL+G, C
 * `(G)it (F)etch` - CTRL+G, F
 * `(G)it (L)og` - CTRL+G, L
 * `(G)it (M)erge` - CTRL+G, M
