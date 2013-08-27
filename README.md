@@ -5,7 +5,7 @@ This toolbar provides a launcher for functionality within TortoiseGit.
 
 Installing the lightweight toolbar will allow access to these common source control functions from anywhere in Visual Studio, allowing you to quickly hit a shortcut or click a button to launch Commit, Push, Pull, Log, Resolve or Bash windows.
 
-The toolbar is provided for free and will be soon updated with additional customisable buttons, as well as icons. Further integration with Git is not planned - for more complex usage scenarios you should take a look at the [Visual Studio Tools for Git](http://visualstudiogallery.msdn.microsoft.com/abafc7d6-dcaa-40f4-8a5e-d6724bdb980c).
+This toolbar simply launches TortoiseGit commands. Further integration with Git is not planned - for more complex usage scenarios you should take a look at the [Visual Studio Tools for Git](http://visualstudiogallery.msdn.microsoft.com/abafc7d6-dcaa-40f4-8a5e-d6724bdb980c).
 
 Installation instructions
 --------------------------
