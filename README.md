@@ -29,6 +29,7 @@ To customise these shortcuts open up Tools -> Options -> Keyboard and show comma
 * `(G)it (P)ull` - CTRL+G, P
 * `(G)it P(u)sh` - CTRL+G, U
 * `(G)it (R)ebase` - CTRL+G, R
+* `(G)it (R)ebase-Con(t)inue` - CTRL+G, T
 * `(G)it R(e)solve` - CTRL+G, E
 * `(G)it Re(v)ert` - CTRL+G, V
 * `(G)it Stash-P(o)p` - CTRL+G, O
