@@ -17,5 +17,6 @@
         StashSave = 0x8113,
         StashPop = 0x8114,
         Rebase = 0x8115,
+        RebaseContinue = 0x8116,
     };
 }

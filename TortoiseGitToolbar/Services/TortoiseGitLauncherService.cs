@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Diagnostics;
+using System.Windows.Forms;
 using EnvDTE80;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Process = System.Diagnostics.Process;
@@ -57,9 +58,30 @@ namespace MattDavies.TortoiseGitToolbar.Services
                 return;
             }
 
-            var process = command == ToolbarCommand.Bash
-                ? _processManagerService.GetProcess(PathConfiguration.GetGitBashPath(), "--login -i", solutionPath)
-                : _processManagerService.GetProcess(PathConfiguration.GetTortoiseGitPath(), string.Format(@"/command:{0} /path:""{1}""", command.ToString().ToLower(), solutionPath));
+            ProcessStartInfo process;
+            switch (command)
+            {
+                case ToolbarCommand.Bash:
+                    process = _processManagerService.GetProcess(
+                        PathConfiguration.GetGitBashPath(),
+                        "--login -i",
+                        solutionPath
+                    );
+                    break;
+                case ToolbarCommand.RebaseContinue:
+                    process = _processManagerService.GetProcess(
+                        PathConfiguration.GetGitBashPath(),
+                        @"--login -i -c 'echo; echo ""Running git rebase --continue""; echo; git rebase --continue; echo; echo ""Please review the output above and press enter to continue.""; read'",
+                        solutionPath
+                    );
+                    break;
+                default:
+                    process = _processManagerService.GetProcess(
+                        PathConfiguration.GetTortoiseGitPath(),
+                        string.Format(@"/command:{0} /path:""{1}""", command.ToString().ToLower(), solutionPath)
+                    );
+                    break;
+            }
 
             if (process != null)
                 Process.Start(process);

@@ -88,42 +88,49 @@
           <ButtonText>Rebase</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdResolve" priority="0x0110" type="Button">
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdRebaseContinue" priority="0x0110" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Icon guid="guidImages" id="iconRebaseContinue" />
+        <Strings>
+          <ButtonText>Rebase Continue</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdResolve" priority="0x0111" type="Button">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
         <Icon guid="guidImages" id="iconResolve" />
         <Strings>
           <ButtonText>Resolve</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdRevert" priority="0x0111" type="Button">
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdRevert" priority="0x0112" type="Button">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
         <Icon guid="guidImages" id="iconRevert" />
         <Strings>
           <ButtonText>Revert</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdStashPop" priority="0x0112" type="Button">
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdStashPop" priority="0x0113" type="Button">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
         <Icon guid="guidImages" id="iconStashPop" />
         <Strings>
           <ButtonText>Stash Pop</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdStashSave" priority="0x0113" type="Button">
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdStashSave" priority="0x0114" type="Button">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
         <Icon guid="guidImages" id="iconStashSave" />
         <Strings>
           <ButtonText>Stash Save</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdSwitch" priority="0x0114" type="Button">
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdSwitch" priority="0x0115" type="Button">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
         <Icon guid="guidImages" id="iconSwitch" />
         <Strings>
           <ButtonText>Switch</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdSync" priority="0x0115" type="Button">
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdSync" priority="0x0116" type="Button">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
         <Icon guid="guidImages" id="iconSync" />
         <Strings>
@@ -134,7 +141,7 @@
     </Buttons>
 
     <Bitmaps>
-      <Bitmap guid="guidImages" href="..\Resources\Toolbar.png" usedList="iconBash, iconCleanup, iconCommit, iconFetch, iconLog, iconMerge, iconPull, iconPush, iconRebase, iconResolve, iconRevert, iconStashPop, iconStashSave, iconSwitch, iconSync"/>
+      <Bitmap guid="guidImages" href="..\Resources\Toolbar.png" usedList="iconBash, iconCleanup, iconCommit, iconFetch, iconLog, iconMerge, iconPull, iconPush, iconRebase, iconResolve, iconRevert, iconStashPop, iconStashSave, iconSwitch, iconSync, iconRebaseContinue"/>
     </Bitmaps>
    
   </Commands>
@@ -171,6 +178,9 @@
 
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdRebase" key1="G" mod1="Control" key2="R" mod2="Control" editor="guidVSStd97" />
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdRebase" key1="G" mod1="Control" key2="R" editor="guidVSStd97" />
+
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdRebaseContinue" key1="G" mod1="Control" key2="T" mod2="Control" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdRebaseContinue" key1="G" mod1="Control" key2="T" editor="guidVSStd97" />
 
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdResolve" key1="G" mod1="Control" key2="E" mod2="Control" editor="guidVSStd97" />
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdResolve" key1="G" mod1="Control" key2="E" editor="guidVSStd97" />
@@ -210,6 +220,7 @@
       <IDSymbol name="cmdStashSave" value="0x8113" />
       <IDSymbol name="cmdStashPop" value="0x8114" />
       <IDSymbol name="cmdRebase" value="0x8115" />
+      <IDSymbol name="cmdRebaseContinue" value="0x8116" />
       <IDSymbol name="Toolbar" value="0x1000" />
       <IDSymbol name="ToolbarGroup" value="0x1050" />
     </GuidSymbol>
@@ -230,6 +241,7 @@
       <IDSymbol name="iconStashSave" value="13" />
       <IDSymbol name="iconSwitch" value="14" />
       <IDSymbol name="iconSync" value="15" />
+      <IDSymbol name="iconRebaseContinue" value="16" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>

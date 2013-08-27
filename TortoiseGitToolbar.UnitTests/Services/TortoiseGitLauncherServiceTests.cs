@@ -13,7 +13,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
     [TestFixture]
     public class TortoiseGitLauncherServiceShould
     {
-        private readonly ToolbarCommand[] _tortoiseCommands = EnumHelper.GetValues<ToolbarCommand>().Where(t => t != ToolbarCommand.Bash).ToArray();
+        private readonly ToolbarCommand[] _tortoiseCommands = EnumHelper.GetValues<ToolbarCommand>().Where(t => t != ToolbarCommand.Bash && t != ToolbarCommand.RebaseContinue).ToArray();
         private IProcessManagerService _processManagerService;
 
         [SetUp]
@@ -41,12 +41,29 @@ namespace TortoiseGitToolbar.UnitTests.Services
         {
             var solution = solutionOpen ? GetOpenSolution() : GetClosedSolution();
             var tortoiseGitLauncherService = Substitute.For<TortoiseGitLauncherService>(_processManagerService, solution);
-
-            tortoiseGitLauncherService.ExecuteTortoiseProc(ToolbarCommand.Bash);
+            const ToolbarCommand command = ToolbarCommand.Bash;
+            
+            tortoiseGitLauncherService.ExecuteTortoiseProc(command);
 
             _processManagerService.Received().GetProcess(
-                GetExpectedCommand(ToolbarCommand.Bash),
-                GetExpectedParameters(ToolbarCommand.Bash),
+                GetExpectedCommand(command),
+                GetExpectedParameters(command),
+                PathConfiguration.GetSolutionPath(solution)
+            );
+        }
+
+        [Test]
+        public void Launch_rebase_continue_in_git_bash()
+        {
+            var solution = GetOpenSolution();
+            var tortoiseGitLauncherService = Substitute.For<TortoiseGitLauncherService>(_processManagerService, solution);
+            const ToolbarCommand command = ToolbarCommand.RebaseContinue;
+            
+            tortoiseGitLauncherService.ExecuteTortoiseProc(command);
+
+            _processManagerService.Received().GetProcess(
+                GetExpectedCommand(command),
+                GetExpectedParameters(command),
                 PathConfiguration.GetSolutionPath(solution)
             );
         }
@@ -87,6 +104,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 case ToolbarCommand.Rebase:
                     return PathConfiguration.GetTortoiseGitPath();
                 case ToolbarCommand.Bash:
+                case ToolbarCommand.RebaseContinue:
                     return PathConfiguration.GetGitBashPath();
             }
 
@@ -99,6 +117,8 @@ namespace TortoiseGitToolbar.UnitTests.Services
             {
                 case ToolbarCommand.Bash:
                     return "--login -i";
+                case ToolbarCommand.RebaseContinue:
+                    return @"--login -i -c 'echo; echo ""Running git rebase --continue""; echo; git rebase --continue; echo; echo ""Please review the output above and press enter to continue.""; read'";
                 case ToolbarCommand.Commit:
                     return string.Format(@"/command:commit /path:""{0}""", Environment.CurrentDirectory);
                 case ToolbarCommand.Log:
