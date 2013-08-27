@@ -3,6 +3,7 @@ using FizzWare.NBuilder;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VSSDK.Tools.VsIdeTesting;
+using TortoiseGitToolbar.IntegrationTests.Helpers;
 
 namespace TortoiseGitToolbar.IntegrationTests
 {
@@ -25,8 +26,12 @@ namespace TortoiseGitToolbar.IntegrationTests
             {
                 var menuItemCmd = new CommandID(PackageConstants.GuidTortoiseGitToolbarCmdSet, (int) toolbarCommand);
 
-                //Todo: block dialog (asserting which dialog was invoked if possible)
-                ExecuteCommand(menuItemCmd);
+                using (var dialogboxPurger = new DialogBoxPurger(NativeMethods.IDOK, 1))
+                {
+                    dialogboxPurger.Start();
+
+                    ExecuteCommand(menuItemCmd);
+                }
             });
         }
 
