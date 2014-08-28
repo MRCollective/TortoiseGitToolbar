@@ -25,7 +25,6 @@ namespace MattDavies.TortoiseGitToolbar.Services
         public void ExecuteTortoiseProc(ToolbarCommand command)
         {
             var solutionPath = PathConfiguration.GetSolutionPath(_solution);
-            // todo: make the bash/tortoise paths configurable
             // todo: detect if the solution is a git solution first
             if (command == ToolbarCommand.Bash && PathConfiguration.GetGitBashPath() == null)
             {
