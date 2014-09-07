@@ -69,6 +69,9 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
 
         private static string ReadConfig(string section, string key)
         {
+            if (!File.Exists(ConfigFile))
+                return null;
+
             const int size = 1024;
             var sb = new StringBuilder(size, size);
             NativeMethods.GetPrivateProfileString(section, key, string.Empty, sb, size, ConfigFile);
