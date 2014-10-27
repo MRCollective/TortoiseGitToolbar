@@ -137,11 +137,32 @@
           <ButtonText>Sync</ButtonText>
         </Strings>
       </Button>
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdFileLog" priority="0x0117" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Icon guid="guidImages" id="iconFileLog" />
+        <Strings>
+          <ButtonText>File Log</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdFileBlame" priority="0x0118" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Icon guid="guidImages" id="iconFileBlame" />
+        <Strings>
+          <ButtonText>File Blame</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" priority="0x0119" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Icon guid="guidImages" id="iconFileDiff" />
+        <Strings>
+          <ButtonText>File Diff</ButtonText>
+        </Strings>
+      </Button>
 
     </Buttons>
 
     <Bitmaps>
-      <Bitmap guid="guidImages" href="..\Resources\Toolbar.png" usedList="iconBash, iconCleanup, iconCommit, iconFetch, iconLog, iconMerge, iconPull, iconPush, iconRebase, iconResolve, iconRevert, iconStashPop, iconStashSave, iconSwitch, iconSync, iconRebaseContinue"/>
+      <Bitmap guid="guidImages" href="..\Resources\Toolbar.png" usedList="iconBash, iconCleanup, iconCommit, iconFetch, iconLog, iconMerge, iconPull, iconPush, iconRebase, iconResolve, iconRevert, iconStashPop, iconStashSave, iconSwitch, iconSync, iconRebaseContinue, iconFileLog, iconFileBlame, iconFileDiff"/>
     </Bitmaps>
    
   </Commands>
@@ -199,6 +220,15 @@
     
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSync" key1="G" mod1="Control" key2="Y" mod2="Control" editor="guidVSStd97" />
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSync" key1="G" mod1="Control" key2="Y" editor="guidVSStd97" />
+
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileLog" key1="G" mod1="Control Shift" key2="L" mod2="Control Shift" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileLog" key1="G" mod1="Control Shift" key2="L" editor="guidVSStd97" />
+
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileBlame" key1="G" mod1="Control Shift" key2="B" mod2="Control Shift" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileBlame" key1="G" mod1="Control Shift" key2="B" editor="guidVSStd97" />
+
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" key1="G" mod1="Control Shift" key2="D" mod2="Control Shift" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" key1="G" mod1="Control Shift" key2="D" editor="guidVSStd97" />
   </KeyBindings>
     
   <Symbols>
@@ -221,6 +251,9 @@
       <IDSymbol name="cmdStashPop" value="0x8114" />
       <IDSymbol name="cmdRebase" value="0x8115" />
       <IDSymbol name="cmdRebaseContinue" value="0x8116" />
+      <IDSymbol name="cmdFileLog" value="0x8117" />
+      <IDSymbol name="cmdFileBlame" value="0x8118" />
+      <IDSymbol name="cmdFileDiff" value="0x8119" />
       <IDSymbol name="Toolbar" value="0x1000" />
       <IDSymbol name="ToolbarGroup" value="0x1050" />
     </GuidSymbol>
@@ -242,6 +275,9 @@
       <IDSymbol name="iconSwitch" value="14" />
       <IDSymbol name="iconSync" value="15" />
       <IDSymbol name="iconRebaseContinue" value="16" />
+      <IDSymbol name="iconFileLog" value="17" />
+      <IDSymbol name="iconFileBlame" value="18" />
+      <IDSymbol name="iconFileDiff" value="19" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>

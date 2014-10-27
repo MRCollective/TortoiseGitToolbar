@@ -68,11 +68,17 @@ namespace TortoiseGitToolbar.UnitTests.Services
             );
         }
 
+        public static readonly string TestFilePath = System.IO.Path.Combine(Environment.CurrentDirectory, "test.txt");
+
         private static Solution2 GetOpenSolution()
         {
             var solution = Substitute.For<Solution2>();
             solution.IsOpen.Returns(true);
             solution.FullName.Returns(Environment.CurrentDirectory + "\\file.sln");
+            // I can't find a way to get working the following:
+            // solution.DTE.ActiveDocument.Selection.CurrentLine.Returns(42);
+            // for dynamic Selection. Hence I created DocumentMock
+            solution.DTE.ActiveDocument.Returns(new DocumentMock());
             return solution;
         }
 
@@ -102,6 +108,9 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 case ToolbarCommand.StashSave:
                 case ToolbarCommand.StashPop:
                 case ToolbarCommand.Rebase:
+                case ToolbarCommand.FileLog:
+                case ToolbarCommand.FileDiff:
+                case ToolbarCommand.FileBlame:
                     return PathConfiguration.GetTortoiseGitPath();
                 case ToolbarCommand.Bash:
                 case ToolbarCommand.RebaseContinue:
@@ -147,6 +156,12 @@ namespace TortoiseGitToolbar.UnitTests.Services
                     return string.Format(@"/command:stashpop /path:""{0}""", Environment.CurrentDirectory);
                 case ToolbarCommand.Rebase:
                     return string.Format(@"/command:rebase /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.FileBlame:
+                    return string.Format(@"/command:blame /path:""{0}"" /line:42", TestFilePath);
+                case ToolbarCommand.FileDiff:
+                    return string.Format(@"/command:diff /path:""{0}""", TestFilePath);
+                case ToolbarCommand.FileLog:
+                    return string.Format(@"/command:log /path:""{0}""", TestFilePath);
             }
 
             throw new InvalidOperationException(string.Format("You need to define an expected test process parameters result for {0}.", toolbarCommand));

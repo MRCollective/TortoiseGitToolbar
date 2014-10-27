@@ -25,6 +25,7 @@ namespace MattDavies.TortoiseGitToolbar.Services
         public void ExecuteTortoiseProc(ToolbarCommand command)
         {
             var solutionPath = PathConfiguration.GetSolutionPath(_solution);
+            var openedFilePath = PathConfiguration.GetOpenedFilePath(_solution);
             // todo: make the bash/tortoise paths configurable
             // todo: detect if the solution is a git solution first
             if (command == ToolbarCommand.Bash && PathConfiguration.GetGitBashPath() == null)
@@ -75,6 +76,21 @@ namespace MattDavies.TortoiseGitToolbar.Services
                         solutionPath
                     );
                     break;
+                case ToolbarCommand.FileLog:
+                case ToolbarCommand.FileDiff:
+                    var commandParam = command.ToString().Replace("File", string.Empty).ToLower();
+                    process = _processManagerService.GetProcess(
+                        PathConfiguration.GetTortoiseGitPath(),
+                        string.Format(@"/command:{0} /path:""{1}""", commandParam, openedFilePath)
+                    );
+                    break;
+                case ToolbarCommand.FileBlame:
+                    var line = GetCurrentLine(_solution);
+                    process = _processManagerService.GetProcess(
+                        PathConfiguration.GetTortoiseGitPath(),
+                        string.Format(@"/command:blame /path:""{0}"" /line:{1}", openedFilePath, line)
+                    );
+                    break;
                 default:
                     process = _processManagerService.GetProcess(
                         PathConfiguration.GetTortoiseGitPath(),
@@ -85,6 +101,17 @@ namespace MattDavies.TortoiseGitToolbar.Services
 
             if (process != null)
                 Process.Start(process);
+        }
+
+        private int GetCurrentLine(Solution2 solution)
+        {
+            if (solution.DTE != null && solution.DTE.ActiveDocument != null
+                && solution.DTE.ActiveDocument.Selection != null)
+            {
+                dynamic selection = solution.DTE.ActiveDocument.Selection;
+                return selection.CurrentLine;
+            }
+            return 0;
         }
     }
 }
