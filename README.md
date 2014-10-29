@@ -1,4 +1,4 @@
-﻿Introduction
+Introduction
 ------------
 
 This toolbar provides a launcher for functionality within TortoiseGit.
@@ -12,6 +12,17 @@ Installation instructions
 
 1.  Install the [VISX File](http://visualstudiogallery.msdn.microsoft.com/6a2ae0fa-bd4e-4712-9170-abe92c63c05c)
 2.  You may need to manually enable the toolbar in Visual Studio: Views -> Toolbars -> TortoiseGit 
+
+Path setup
+-----------
+
+By default the extention finds the executable file of TortoiseGit/GitBash from the standard paths. For TortoiseGit it is 'C:\Program Files\TortoiseGit\bin\TortoiseGitProc.exe' or 'D:\Program Files (x86)\TortoiseGit\bin\TortoiseGitProc.exe'; for GitBash it is 'C:\Program Files\Git\bin\sh.exe'.
+
+If your executable files are not in the standart path, you can specify them in '(Path of My Documents)\Visual Studio 2013\Extensions\TortoiseGitToolbar\config.ini', e.g.
+
+    [path]
+    TortoiseGit=E:\Applications\TortoiseGit\bin\TortoiseGitProc.exe
+    GitBash=E:\Applications\Git\bin\sh.exe
 
 Default shortcuts
 ------------------
