@@ -2,7 +2,6 @@
 using System.Linq;
 using EnvDTE80;
 using FizzWare.NBuilder;
-using FizzWare.NBuilder.Implementation;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using MattDavies.TortoiseGitToolbar.Services;
 using NSubstitute;
@@ -68,7 +67,8 @@ namespace TortoiseGitToolbar.UnitTests.Services
             );
         }
 
-        public static readonly string TestFilePath = System.IO.Path.Combine(Environment.CurrentDirectory, "test.txt");
+        private static readonly string TestFilePath = System.IO.Path.Combine(Environment.CurrentDirectory, "test.txt");
+        private const int CurrentLine = 42;
 
         private static Solution2 GetOpenSolution()
         {
@@ -76,9 +76,9 @@ namespace TortoiseGitToolbar.UnitTests.Services
             solution.IsOpen.Returns(true);
             solution.FullName.Returns(Environment.CurrentDirectory + "\\file.sln");
             // I can't find a way to get working the following:
-            // solution.DTE.ActiveDocument.Selection.CurrentLine.Returns(42);
+            // solution.DTE.ActiveDocument.Selection.CurrentLine.Returns(CurrentLine);
             // for dynamic Selection. Hence I created DocumentMock
-            solution.DTE.ActiveDocument.Returns(new DocumentMock());
+            solution.DTE.ActiveDocument.Returns(new DocumentMock(CurrentLine, TestFilePath));
             return solution;
         }
 
@@ -157,7 +157,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 case ToolbarCommand.Rebase:
                     return string.Format(@"/command:rebase /path:""{0}""", Environment.CurrentDirectory);
                 case ToolbarCommand.FileBlame:
-                    return string.Format(@"/command:blame /path:""{0}"" /line:42", TestFilePath);
+                    return string.Format(@"/command:blame /path:""{0}"" /line:{1}", TestFilePath, CurrentLine);
                 case ToolbarCommand.FileDiff:
                     return string.Format(@"/command:diff /path:""{0}""", TestFilePath);
                 case ToolbarCommand.FileLog:

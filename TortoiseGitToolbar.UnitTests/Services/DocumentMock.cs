@@ -7,6 +7,12 @@ namespace TortoiseGitToolbar.UnitTests.Services
     /// </summary>
     public class DocumentMock : Document
     {
+        public DocumentMock(int currentLine, string fullName)
+        {
+            Selection = new SelectionMock(currentLine);
+            FullName = fullName;
+        }
+
         public void Activate()
         {
             throw new System.NotImplementedException();
@@ -67,10 +73,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
         public Documents Collection { get; private set; }
         public Window ActiveWindow { get; private set; }
 
-        public string FullName
-        {
-            get { return TortoiseGitLauncherServiceShould.TestFilePath; }
-        }
+        public string FullName { get; private set; }
 
         public string Name { get; private set; }
         public string Path { get; private set; }
@@ -79,17 +82,15 @@ namespace TortoiseGitToolbar.UnitTests.Services
         public Windows Windows { get; private set; }
         public ProjectItem ProjectItem { get; private set; }
 
-        public dynamic Selection
-        {
-            get
-            {
-                return new SelectionMock();
-            }
-        }
+        public dynamic Selection { get; private set; }
 
         public class SelectionMock
         {
-            public int CurrentLine { get { return 42; } }
+            public SelectionMock(int currentLine)
+            {
+                CurrentLine = currentLine;
+            }
+            public int CurrentLine { get; private set; }
         }
 
         public object get_Extender(string ExtenderName)
