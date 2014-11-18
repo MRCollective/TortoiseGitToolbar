@@ -18,5 +18,8 @@
         StashPop = 0x8114,
         Rebase = 0x8115,
         RebaseContinue = 0x8116,
+        FileLog = 0x8117,
+        FileBlame = 0x8118,
+        FileDiff = 0x8119,
     };
 }

@@ -29,5 +29,34 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
                 ? Path.GetDirectoryName(solution.FullName)
                 : null;
         }
+
+        public static string GetOpenedFilePath(Solution2 solution)
+        {
+            return solution != null && solution.DTE != null && solution.DTE.ActiveDocument != null
+                // GetExactPathName is needed because visual studio can provide lowercase path, 
+                // but git is case sensitive to file names
+                ? GetExactPathName(solution.DTE.ActiveDocument.FullName)
+                : null;
+        }
+
+        /// <summary>
+        /// Get case sensitive path.
+        /// http://stackoverflow.com/questions/325931/getting-actual-file-name-with-proper-casing-on-windows-with-net
+        /// </summary>
+        public static string GetExactPathName(string pathName)
+        {
+            if (!(File.Exists(pathName) || Directory.Exists(pathName)))
+                return pathName;
+
+            var di = new DirectoryInfo(pathName);
+
+            if (di.Parent != null)
+            {
+                return Path.Combine(
+                    GetExactPathName(di.Parent.FullName),
+                    di.Parent.GetFileSystemInfos(di.Name)[0].Name);
+            }
+            return di.Name.ToUpper();
+        }
     }
 }

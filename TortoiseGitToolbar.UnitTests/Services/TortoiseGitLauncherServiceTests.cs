@@ -2,7 +2,6 @@
 using System.Linq;
 using EnvDTE80;
 using FizzWare.NBuilder;
-using FizzWare.NBuilder.Implementation;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using MattDavies.TortoiseGitToolbar.Services;
 using NSubstitute;
@@ -68,11 +67,18 @@ namespace TortoiseGitToolbar.UnitTests.Services
             );
         }
 
+        private static readonly string TestFilePath = System.IO.Path.Combine(Environment.CurrentDirectory, "test.txt");
+        private const int CurrentLine = 42;
+
         private static Solution2 GetOpenSolution()
         {
             var solution = Substitute.For<Solution2>();
             solution.IsOpen.Returns(true);
             solution.FullName.Returns(Environment.CurrentDirectory + "\\file.sln");
+            // I can't find a way to get working the following:
+            // solution.DTE.ActiveDocument.Selection.CurrentLine.Returns(CurrentLine);
+            // for dynamic Selection. Hence I created DocumentMock
+            solution.DTE.ActiveDocument.Returns(new DocumentMock(CurrentLine, TestFilePath));
             return solution;
         }
 
@@ -102,6 +108,9 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 case ToolbarCommand.StashSave:
                 case ToolbarCommand.StashPop:
                 case ToolbarCommand.Rebase:
+                case ToolbarCommand.FileLog:
+                case ToolbarCommand.FileDiff:
+                case ToolbarCommand.FileBlame:
                     return PathConfiguration.GetTortoiseGitPath();
                 case ToolbarCommand.Bash:
                 case ToolbarCommand.RebaseContinue:
@@ -147,6 +156,12 @@ namespace TortoiseGitToolbar.UnitTests.Services
                     return string.Format(@"/command:stashpop /path:""{0}""", Environment.CurrentDirectory);
                 case ToolbarCommand.Rebase:
                     return string.Format(@"/command:rebase /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.FileBlame:
+                    return string.Format(@"/command:blame /path:""{0}"" /line:{1}", TestFilePath, CurrentLine);
+                case ToolbarCommand.FileDiff:
+                    return string.Format(@"/command:diff /path:""{0}""", TestFilePath);
+                case ToolbarCommand.FileLog:
+                    return string.Format(@"/command:log /path:""{0}""", TestFilePath);
             }
 
             throw new InvalidOperationException(string.Format("You need to define an expected test process parameters result for {0}.", toolbarCommand));
