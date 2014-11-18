@@ -1,4 +1,4 @@
-﻿Introduction
+Introduction
 ------------
 
 This toolbar provides a launcher for functionality within TortoiseGit.
@@ -20,6 +20,8 @@ You can opt into these default shortcuts by removing the default shortcut for CT
 
 To customise these shortcuts open up Tools -> Options -> Keyboard and show commands containing TortoiseGit.
 
+Solution level shortcuts:
+
 * `(G)it (B)ash` - CTRL+G, B
 * `(G)it Clea(n)up` - CTRL+G, N
 * `(G)it (C)ommit` - CTRL+G, C
@@ -36,6 +38,12 @@ To customise these shortcuts open up Tools -> Options -> Keyboard and show comma
 * `(G)it Stash-S(a)ve` - CTRL+G, A
 * `(G)it (S)witch` - CTRL+G, S
 * `(G)it S(y)nc` - CTRL+S, Y
+
+Currently opened file shortcuts:
+
+* `(G)it File (L)og` - CTRL+SHIFT+ALT+G, L
+* `(G)it File (B)lame` - CTRL+SHIFT+ALT+G, B
+* `(G)it File (D)iff` - CTRL+SHIFT+ALT+G, D
 
 Customisation
 --------------
