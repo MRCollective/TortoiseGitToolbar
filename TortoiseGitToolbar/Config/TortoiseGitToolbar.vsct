@@ -221,14 +221,14 @@
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSync" key1="G" mod1="Control" key2="Y" mod2="Control" editor="guidVSStd97" />
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSync" key1="G" mod1="Control" key2="Y" editor="guidVSStd97" />
 
-    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileLog" key1="G" mod1="Control Shift" key2="L" mod2="Control Shift" editor="guidVSStd97" />
-    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileLog" key1="G" mod1="Control Shift" key2="L" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileLog" key1="G" mod1="Control Shift Alt" key2="L" mod2="Control Shift Alt" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileLog" key1="G" mod1="Control Shift Alt" key2="L" editor="guidVSStd97" />
 
-    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileBlame" key1="G" mod1="Control Shift" key2="B" mod2="Control Shift" editor="guidVSStd97" />
-    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileBlame" key1="G" mod1="Control Shift" key2="B" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileBlame" key1="G" mod1="Control Shift Alt" key2="B" mod2="Control Shift Alt" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileBlame" key1="G" mod1="Control Shift Alt" key2="B" editor="guidVSStd97" />
 
-    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" key1="G" mod1="Control Shift" key2="D" mod2="Control Shift" editor="guidVSStd97" />
-    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" key1="G" mod1="Control Shift" key2="D" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" key1="G" mod1="Control Shift Alt" key2="D" mod2="Control Shift Alt" editor="guidVSStd97" />
+    <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" key1="G" mod1="Control Shift Alt" key2="D" editor="guidVSStd97" />
   </KeyBindings>
     
   <Symbols>
