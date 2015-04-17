@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows.Forms;
-using EnvDTE80;
+using EnvDTE;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Process = System.Diagnostics.Process;
 
@@ -14,9 +14,9 @@ namespace MattDavies.TortoiseGitToolbar.Services
     public class TortoiseGitLauncherService : ITortoiseGitLauncherService
     {
         private readonly IProcessManagerService _processManagerService;
-        private readonly Solution2 _solution;
+        private readonly Solution _solution;
 
-        public TortoiseGitLauncherService(IProcessManagerService processManagerService, Solution2 solution)
+        public TortoiseGitLauncherService(IProcessManagerService processManagerService, Solution solution)
         {
             _processManagerService = processManagerService;
             _solution = solution;
@@ -103,7 +103,7 @@ namespace MattDavies.TortoiseGitToolbar.Services
                 Process.Start(process);
         }
 
-        private int GetCurrentLine(Solution2 solution)
+        private int GetCurrentLine(Solution solution)
         {
             if (solution.DTE != null && solution.DTE.ActiveDocument != null
                 && solution.DTE.ActiveDocument.Selection != null)
