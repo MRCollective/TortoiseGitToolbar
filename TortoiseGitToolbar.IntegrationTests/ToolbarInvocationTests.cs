@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.Design;
+﻿using System;
+using System.ComponentModel.Design;
+using System.Linq;
 using FizzWare.NBuilder;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,7 +16,7 @@ namespace TortoiseGitToolbar.IntegrationTests
         [HostType("VS IDE")]
         public void Launch_all_commands()
         {
-            foreach (var toolbarCommand in EnumHelper.GetValues<ToolbarCommand>())
+            foreach (var toolbarCommand in EnumHelper.GetValues<ToolbarCommand>().Where(v => v != ToolbarCommand.Bash && v != ToolbarCommand.FileBlame && v != ToolbarCommand.FileDiff && v != ToolbarCommand.FileLog))
             {
                 InvokeCommand(toolbarCommand);
             }
