@@ -7,7 +7,8 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
     {
         private const string TortoiseGitx64 = @"C:\Program Files\TortoiseGit\bin\TortoiseGitProc.exe";
         private const string TortoiseGitx86 = @"C:\Program Files (x86)\TortoiseGit\bin\TortoiseGitProc.exe";
-        private const string GitBash = @"C:\Program Files (x86)\Git\bin\sh.exe";
+        private const string GitBashx86 = @"C:\Program Files (x86)\Git\bin\sh.exe";
+        private const string GitBashx64 = @"C:\Program Files\Git\bin\sh.exe";
 
         public static string GetTortoiseGitPath()
         {
@@ -20,7 +21,9 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
 
         public static string GetGitBashPath()
         {
-            return GitBash;
+            return File.Exists(GitBashx64) ? GitBashx64 
+                 : File.Exists(GitBashx86) ? GitBashx86
+                 : null;
         }
 
         public static string GetSolutionPath(Solution solution)
