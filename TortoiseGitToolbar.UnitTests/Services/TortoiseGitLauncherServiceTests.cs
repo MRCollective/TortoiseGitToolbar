@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using EnvDTE;
+using EnvDTE80;
 using FizzWare.NBuilder;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using MattDavies.TortoiseGitToolbar.Services;
@@ -70,9 +70,9 @@ namespace TortoiseGitToolbar.UnitTests.Services
         private static readonly string TestFilePath = System.IO.Path.Combine(Environment.CurrentDirectory, "test.txt");
         private const int CurrentLine = 42;
 
-        private static Solution GetOpenSolution()
+        private static Solution2 GetOpenSolution()
         {
-            var solution = Substitute.For<Solution>();
+            var solution = Substitute.For<Solution2>();
             solution.IsOpen.Returns(true);
             solution.FullName.Returns(Environment.CurrentDirectory + "\\file.sln");
             // I can't find a way to get working the following:
@@ -82,9 +82,9 @@ namespace TortoiseGitToolbar.UnitTests.Services
             return solution;
         }
 
-        private static Solution GetClosedSolution()
+        private static Solution2 GetClosedSolution()
         {
-            var solution = Substitute.For<Solution>();
+            var solution = Substitute.For<Solution2>();
             solution.IsOpen.Returns(false);
             solution.FullName.Returns(string.Empty);
             return solution;

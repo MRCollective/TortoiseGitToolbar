@@ -2,6 +2,7 @@
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using EnvDTE;
+using EnvDTE80;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using MattDavies.TortoiseGitToolbar.Services;
 using Microsoft.VisualStudio.Shell;
@@ -33,7 +34,7 @@ namespace MattDavies.TortoiseGitToolbar
         private void SetDependencies()
         {
             var dte = ((DTE)GetService(typeof(DTE)));
-            var solution = dte != null ? dte.Solution : null;
+            var solution = dte != null ? (Solution2)dte.Solution : null;
             
             _commandService = (OleMenuCommandService) GetService(typeof (IMenuCommandService));
             _tortoiseGitLauncherService = (ITortoiseGitLauncherService) GetService(typeof (TortoiseGitLauncherService))

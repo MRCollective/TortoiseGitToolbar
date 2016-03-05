@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using EnvDTE;
+using EnvDTE80;
 
 namespace MattDavies.TortoiseGitToolbar.Config.Constants
 {
@@ -26,14 +26,14 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
                  : null;
         }
 
-        public static string GetSolutionPath(Solution solution)
+        public static string GetSolutionPath(Solution2 solution)
         {
             return solution != null && solution.IsOpen
                 ? Path.GetDirectoryName(solution.FullName)
                 : null;
         }
 
-        public static string GetOpenedFilePath(Solution solution)
+        public static string GetOpenedFilePath(Solution2 solution)
         {
             return solution != null && solution.DTE != null && solution.DTE.ActiveDocument != null
                 // GetExactPathName is needed because visual studio can provide lowercase path, 
