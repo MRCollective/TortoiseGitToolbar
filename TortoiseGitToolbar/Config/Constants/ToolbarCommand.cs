@@ -16,10 +16,11 @@
         Merge = 0x8112,
         StashSave = 0x8113,
         StashPop = 0x8114,
-        Rebase = 0x8115,
-        RebaseContinue = 0x8116,
-        FileLog = 0x8117,
-        FileBlame = 0x8118,
-        FileDiff = 0x8119,
-    };
+        StashList = 0x8115,
+        Rebase = 0x8116,
+        RebaseContinue = 0x8117,
+        FileLog = 0x8118,
+        FileBlame = 0x8119,
+        FileDiff = 0x8120
+    }
 }

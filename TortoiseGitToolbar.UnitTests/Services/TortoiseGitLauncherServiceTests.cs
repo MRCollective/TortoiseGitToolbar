@@ -107,6 +107,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 case ToolbarCommand.Merge:
                 case ToolbarCommand.StashSave:
                 case ToolbarCommand.StashPop:
+                case ToolbarCommand.StashList:
                 case ToolbarCommand.Rebase:
                 case ToolbarCommand.FileLog:
                 case ToolbarCommand.FileDiff:
@@ -154,6 +155,8 @@ namespace TortoiseGitToolbar.UnitTests.Services
                     return string.Format(@"/command:stashsave /path:""{0}""", Environment.CurrentDirectory);
                 case ToolbarCommand.StashPop:
                     return string.Format(@"/command:stashpop /path:""{0}""", Environment.CurrentDirectory);
+                case ToolbarCommand.StashList:
+                    return string.Format(@"/command:reflog /path:""{0}"" /ref:""refs/stash""", Environment.CurrentDirectory);
                 case ToolbarCommand.Rebase:
                     return string.Format(@"/command:rebase /path:""{0}""", Environment.CurrentDirectory);
                 case ToolbarCommand.FileBlame:

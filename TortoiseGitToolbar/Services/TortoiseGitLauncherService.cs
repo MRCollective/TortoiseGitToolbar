@@ -91,6 +91,12 @@ namespace MattDavies.TortoiseGitToolbar.Services
                         string.Format(@"/command:blame /path:""{0}"" /line:{1}", openedFilePath, line)
                     );
                     break;
+                case ToolbarCommand.StashList:
+                    process = _processManagerService.GetProcess(
+                        PathConfiguration.GetTortoiseGitPath(),
+                        string.Format(@"/command:reflog /path:""{0}"" /ref:""refs/stash""", solutionPath)
+                    );
+                    break;
                 default:
                     process = _processManagerService.GetProcess(
                         PathConfiguration.GetTortoiseGitPath(),
