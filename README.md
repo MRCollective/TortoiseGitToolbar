@@ -36,6 +36,7 @@ Solution level shortcuts:
 * `(G)it Re(v)ert` - CTRL+G, V
 * `(G)it Stash-P(o)p` - CTRL+G, O
 * `(G)it Stash-S(a)ve` - CTRL+G, A
+* `(G)it Stash-L(i)st` - CTRL+G, I
 * `(G)it (S)witch` - CTRL+G, S
 * `(G)it S(y)nc` - CTRL+S, Y
 
