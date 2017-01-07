@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using EnvDTE80;
 using FizzWare.NBuilder;
@@ -41,7 +42,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
             var solution = solutionOpen ? GetOpenSolution() : GetClosedSolution();
             var tortoiseGitLauncherService = Substitute.For<TortoiseGitLauncherService>(_processManagerService, solution);
             const ToolbarCommand command = ToolbarCommand.Bash;
-            
+
             tortoiseGitLauncherService.ExecuteTortoiseProc(command);
 
             _processManagerService.Received().GetProcess(
@@ -57,7 +58,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
             var solution = GetOpenSolution();
             var tortoiseGitLauncherService = Substitute.For<TortoiseGitLauncherService>(_processManagerService, solution);
             const ToolbarCommand command = ToolbarCommand.RebaseContinue;
-            
+
             tortoiseGitLauncherService.ExecuteTortoiseProc(command);
 
             _processManagerService.Received().GetProcess(
@@ -65,6 +66,14 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 GetExpectedParameters(command),
                 PathConfiguration.GetSolutionPath(solution)
             );
+        }
+
+        [Test]
+        public void Get_solution_folder_traverses_parents_till_git_folder_found()
+        {
+            var solution = GetOpenSolution();
+            var solutionPath = PathConfiguration.GetSolutionPath(solution);
+            Assert.That(Directory.Exists(Path.Combine(solutionPath, ".git")), "Returned solution path is not the repository root.");
         }
 
         private static readonly string TestFilePath = System.IO.Path.Combine(Environment.CurrentDirectory, "test.txt");

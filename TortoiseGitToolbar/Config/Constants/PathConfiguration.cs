@@ -45,9 +45,31 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
 
         public static string GetSolutionPath(Solution2 solution)
         {
-            return solution != null && solution.IsOpen
-                ? Path.GetDirectoryName(solution.FullName)
-                : null;
+            if (solution != null && solution.IsOpen)
+            {
+                var solutionPathFromSln = Path.GetDirectoryName(solution.FullName);
+
+                var solutionPathInfo = new DirectoryInfo(solutionPathFromSln);
+                Debug.WriteLine("Solution path is: " + solutionPathInfo.FullName);
+
+                // find parent folder that holds the .git folder
+                while (!Directory.Exists(Path.Combine(solutionPathInfo.FullName, ".git")))
+                {
+                    Debug.WriteLine("No .git folder found in solution path.");
+                    if (solutionPathInfo.Parent == null)
+                    {
+                        Debug.WriteLine("No parent folder found. Using original path: " + solutionPathFromSln);
+                        return solutionPathFromSln;
+                    }
+
+                    solutionPathInfo = solutionPathInfo.Parent;
+                }
+
+                Debug.WriteLine("Using solution path: " + solutionPathInfo.FullName);
+                return solutionPathInfo.FullName;
+            }
+
+            return null;
         }
 
         public static string GetOpenedFilePath(Solution2 solution)
