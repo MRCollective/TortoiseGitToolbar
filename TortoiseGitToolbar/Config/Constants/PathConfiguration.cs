@@ -103,7 +103,7 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
 
         public static string GetTortoiseGitPathFromRegistry()
         {
-            var path = GetValeFromRegistry(TortoiseGitProcRegistryRoot, TortoiseGitProcRegistryPath, TortoiseGitProcRegistryKeyName);
+            var path = GetValueFromRegistry(TortoiseGitProcRegistryRoot, TortoiseGitProcRegistryPath, TortoiseGitProcRegistryKeyName);
             Debug.WriteLine("TortoiseGit path from registry: " + (path ?? "(null)"));
 
             if (path != null && File.Exists(path))
@@ -118,7 +118,7 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
 
         public static string GetGitBashPathFromRegistry()
         {
-            var path = GetValeFromRegistry(GitBashRegistryRoot, GitBashRegistryPath, GitBashRegistryKeyName);
+            var path = GetValueFromRegistry(GitBashRegistryRoot, GitBashRegistryPath, GitBashRegistryKeyName);
             Debug.WriteLine("Git bash path from registry: " + (path ?? "(null)"));
 
             if (path != null && Directory.Exists(path))
@@ -128,7 +128,7 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
                 var shPath = Path.Combine(path, "sh.exe");
                 if (File.Exists(shPath))
                 {
-                    Debug.WriteLine("Git bash path comined exists: " + shPath);
+                    Debug.WriteLine("Git bash path sh.exe exists: " + shPath);
                     return shPath;
                 }
             }
@@ -136,18 +136,24 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
             return null;
         }
 
-        private static string GetValeFromRegistry(RegistryKey root, string registryPath, string registryKeyName)
+        private static string GetValueFromRegistry(RegistryKey root, string registryPath, string registryKeyName)
         {
             try
             {
                 using (var key = root.OpenSubKey(registryPath))
                 {
+                    if (key == null)
+                    {
+                        Debug.WriteLine("Registry path not found: " + root + "\\" + registryPath + "\\" + registryKeyName);
+                        return null;
+                    }
+
                     return (string)key.GetValue(registryKeyName);
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error while retrieving registry path: " + root.ToString() + "\\" + registryPath + "\\" + registryKeyName);
+                Debug.WriteLine("Error while retrieving registry path: " + root + "\\" + registryPath + "\\" + registryKeyName);
                 Debug.WriteLine(ex.ToString());
                 return null;
             }
