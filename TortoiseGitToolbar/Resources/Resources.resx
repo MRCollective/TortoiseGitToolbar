@@ -1,13 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!--
-    VS SDK Notes: This resx file contains the resources that will be consumed directly by your package.
-    For example, if you chose to create a tool window, there is a resource with ID 'CanNotCreateWindow'. This
-    is used in VsPkg.cs to determine the string to show the user if there is an error when attempting to create
-    the tool window.
-
-    Resources that are accessed directly from your package *by Visual Studio* are stored in the VSPackage.resx 
-    file.
--->
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -133,13 +124,13 @@
     <value>No solution found.</value>
   </data>
   <data name="TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_Git_Bash_in_the_standard_install_path_" xml:space="preserve">
-    <value>Could not find Git Bash in the standard install path.</value>
+    <value>Could not find Git Bash in the registry or the standard install path.</value>
   </data>
   <data name="TortoiseGitLauncherService_ExecuteTortoiseProc_Git_Bash_not_found" xml:space="preserve">
     <value>Git Bash not found</value>
   </data>
   <data name="TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_TortoiseGit_in_the_standard_install_path_" xml:space="preserve">
-    <value>Could not find TortoiseGit in the standard install path.</value>
+    <value>Could not find TortoiseGit in the registry or the standard install path.</value>
   </data>
   <data name="TortoiseGitLauncherService_ExecuteTortoiseProc_TortoiseGit_not_found" xml:space="preserve">
     <value>TortoiseGit not found</value>
