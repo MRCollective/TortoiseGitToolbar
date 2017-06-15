@@ -74,11 +74,25 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
 
         public static string GetOpenedFilePath(Solution2 solution)
         {
-            return solution != null && solution.DTE != null && solution.DTE.ActiveDocument != null
+            if (solution != null && solution.DTE != null)
+            {
+                try
+                {
+                    if (solution.DTE.ActiveDocument == null) // no active window
+                        return null;
+                }
+                catch (ArgumentException)
+                {
+                    // active window is no file (e.g. the project properties)
+                    return null;
+                }
+
                 // GetExactPathName is needed because visual studio can provide lowercase path,
                 // but git is case sensitive to file names
-                ? GetExactPathName(solution.DTE.ActiveDocument.FullName)
-                : null;
+                return GetExactPathName(solution.DTE.ActiveDocument.FullName);
+            }
+
+            return null;
         }
 
         /// <summary>
