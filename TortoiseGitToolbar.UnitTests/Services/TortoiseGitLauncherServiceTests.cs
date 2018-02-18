@@ -132,6 +132,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
 
         private static string GetExpectedParameters(ToolbarCommand toolbarCommand)
         {
+            var solutionPath = PathConfiguration.GetSolutionPath(GetOpenSolution());
             switch (toolbarCommand)
             {
                 case ToolbarCommand.Bash:
@@ -139,35 +140,35 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 case ToolbarCommand.RebaseContinue:
                     return @"--login -i -c 'echo; echo ""Running git rebase --continue""; echo; git rebase --continue; echo; echo ""Please review the output above and press enter to continue.""; read'";
                 case ToolbarCommand.Commit:
-                    return string.Format(@"/command:commit /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:commit /path:""{0}""", solutionPath);
                 case ToolbarCommand.Log:
-                    return string.Format(@"/command:log /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:log /path:""{0}""", solutionPath);
                 case ToolbarCommand.Pull:
-                    return string.Format(@"/command:pull /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:pull /path:""{0}""", solutionPath);
                 case ToolbarCommand.Push:
-                    return string.Format(@"/command:push /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:push /path:""{0}""", solutionPath);
                 case ToolbarCommand.Switch:
-                    return string.Format(@"/command:switch /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:switch /path:""{0}""", solutionPath);
                 case ToolbarCommand.Cleanup:
-                    return string.Format(@"/command:cleanup /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:cleanup /path:""{0}""", solutionPath);
                 case ToolbarCommand.Fetch:
-                    return string.Format(@"/command:fetch /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:fetch /path:""{0}""", solutionPath);
                 case ToolbarCommand.Revert:
-                    return string.Format(@"/command:revert /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:revert /path:""{0}""", solutionPath);
                 case ToolbarCommand.Sync:
-                    return string.Format(@"/command:sync /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:sync /path:""{0}""", solutionPath);
                 case ToolbarCommand.Merge:
-                    return string.Format(@"/command:merge /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:merge /path:""{0}""", solutionPath);
                 case ToolbarCommand.Resolve:
-                    return string.Format(@"/command:resolve /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:resolve /path:""{0}""", solutionPath);
                 case ToolbarCommand.StashSave:
-                    return string.Format(@"/command:stashsave /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:stashsave /path:""{0}""", solutionPath);
                 case ToolbarCommand.StashPop:
-                    return string.Format(@"/command:stashpop /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:stashpop /path:""{0}""", solutionPath);
                 case ToolbarCommand.StashList:
-                    return string.Format(@"/command:reflog /path:""{0}"" /ref:""refs/stash""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:reflog /path:""{0}"" /ref:""refs/stash""", solutionPath);
                 case ToolbarCommand.Rebase:
-                    return string.Format(@"/command:rebase /path:""{0}""", Environment.CurrentDirectory);
+                    return string.Format(@"/command:rebase /path:""{0}""", solutionPath);
                 case ToolbarCommand.FileBlame:
                     return string.Format(@"/command:blame /path:""{0}"" /line:{1}", TestFilePath, CurrentLine);
                 case ToolbarCommand.FileDiff:
