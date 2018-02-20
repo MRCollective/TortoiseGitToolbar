@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using EnvDTE80;
@@ -6,23 +7,25 @@ using FizzWare.NBuilder;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using MattDavies.TortoiseGitToolbar.Services;
 using NSubstitute;
-using NUnit.Framework;
+using TortoiseGitToolbar.UnitTests.Helpers;
+using Xunit;
 
 namespace TortoiseGitToolbar.UnitTests.Services
 {
-    [TestFixture]
     public class TortoiseGitLauncherServiceShould
     {
-        private readonly ToolbarCommand[] _tortoiseCommands = EnumHelper.GetValues<ToolbarCommand>().Where(t => t != ToolbarCommand.Bash && t != ToolbarCommand.RebaseContinue).ToArray();
-        private IProcessManagerService _processManagerService;
+        public static IEnumerable<object[]> TortoiseCommands = EnumHelper.GetValues<ToolbarCommand>().Where(t => t != ToolbarCommand.Bash && t != ToolbarCommand.RebaseContinue).Select(t => new object[]{t});
+        private readonly IProcessManagerService _processManagerService;
+        private static readonly string TestFilePath = Path.Combine(Environment.CurrentDirectory, "test.txt");
+        private const int CurrentLine = 42;
 
-        [SetUp]
-        public void Setup()
+        public TortoiseGitLauncherServiceShould()
         {
             _processManagerService = Substitute.For<IProcessManagerService>();
         }
 
-        [TestCaseSource("_tortoiseCommands")]
+        [Theory]
+        [MemberData(nameof(TortoiseCommands))]
         public void Launch_tortoise_command_with_correct_parameters(ToolbarCommand toolbarCommand)
         {
             var solution = GetOpenSolution();
@@ -36,8 +39,10 @@ namespace TortoiseGitToolbar.UnitTests.Services
             );
         }
 
-        [Test]
-        public void Launch_git_bash([Values(true,false)] bool solutionOpen)
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void Launch_git_bash(bool solutionOpen)
         {
             var solution = solutionOpen ? GetOpenSolution() : GetClosedSolution();
             var tortoiseGitLauncherService = Substitute.For<TortoiseGitLauncherService>(_processManagerService, solution);
@@ -52,7 +57,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
             );
         }
 
-        [Test]
+        [Fact]
         public void Launch_rebase_continue_in_git_bash()
         {
             var solution = GetOpenSolution();
@@ -68,25 +73,19 @@ namespace TortoiseGitToolbar.UnitTests.Services
             );
         }
 
-        [Test]
+        [Fact]
         public void Get_solution_folder_traverses_parents_till_git_folder_found()
         {
             var solution = GetOpenSolution();
             var solutionPath = PathConfiguration.GetSolutionPath(solution);
-            Assert.That(Directory.Exists(Path.Combine(solutionPath, ".git")), "Returned solution path is not the repository root.");
+            Assert.True(Directory.Exists(Path.Combine(solutionPath, ".git")), "Returned solution path is not the repository root.");
         }
-
-        private static readonly string TestFilePath = System.IO.Path.Combine(Environment.CurrentDirectory, "test.txt");
-        private const int CurrentLine = 42;
 
         private static Solution2 GetOpenSolution()
         {
             var solution = Substitute.For<Solution2>();
             solution.IsOpen.Returns(true);
             solution.FullName.Returns(Environment.CurrentDirectory + "\\file.sln");
-            // I can't find a way to get working the following:
-            // solution.DTE.ActiveDocument.Selection.CurrentLine.Returns(CurrentLine);
-            // for dynamic Selection. Hence I created DocumentMock
             solution.DTE.ActiveDocument.Returns(new DocumentMock(CurrentLine, TestFilePath));
             return solution;
         }
@@ -127,7 +126,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
                     return PathConfiguration.GetGitBashPath();
             }
 
-            throw new InvalidOperationException(string.Format("You need to define an expected test process command result for {0}.", toolbarCommand));
+            throw new InvalidOperationException($"You need to define an expected test process command result for {toolbarCommand}.");
         }
 
         private static string GetExpectedParameters(ToolbarCommand toolbarCommand)
@@ -140,44 +139,44 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 case ToolbarCommand.RebaseContinue:
                     return @"--login -i -c 'echo; echo ""Running git rebase --continue""; echo; git rebase --continue; echo; echo ""Please review the output above and press enter to continue.""; read'";
                 case ToolbarCommand.Commit:
-                    return string.Format(@"/command:commit /path:""{0}""", solutionPath);
+                    return $@"/command:commit /path:""{solutionPath}""";
                 case ToolbarCommand.Log:
-                    return string.Format(@"/command:log /path:""{0}""", solutionPath);
+                    return $@"/command:log /path:""{solutionPath}""";
                 case ToolbarCommand.Pull:
-                    return string.Format(@"/command:pull /path:""{0}""", solutionPath);
+                    return $@"/command:pull /path:""{solutionPath}""";
                 case ToolbarCommand.Push:
-                    return string.Format(@"/command:push /path:""{0}""", solutionPath);
+                    return $@"/command:push /path:""{solutionPath}""";
                 case ToolbarCommand.Switch:
-                    return string.Format(@"/command:switch /path:""{0}""", solutionPath);
+                    return $@"/command:switch /path:""{solutionPath}""";
                 case ToolbarCommand.Cleanup:
-                    return string.Format(@"/command:cleanup /path:""{0}""", solutionPath);
+                    return $@"/command:cleanup /path:""{solutionPath}""";
                 case ToolbarCommand.Fetch:
-                    return string.Format(@"/command:fetch /path:""{0}""", solutionPath);
+                    return $@"/command:fetch /path:""{solutionPath}""";
                 case ToolbarCommand.Revert:
-                    return string.Format(@"/command:revert /path:""{0}""", solutionPath);
+                    return $@"/command:revert /path:""{solutionPath}""";
                 case ToolbarCommand.Sync:
-                    return string.Format(@"/command:sync /path:""{0}""", solutionPath);
+                    return $@"/command:sync /path:""{solutionPath}""";
                 case ToolbarCommand.Merge:
-                    return string.Format(@"/command:merge /path:""{0}""", solutionPath);
+                    return $@"/command:merge /path:""{solutionPath}""";
                 case ToolbarCommand.Resolve:
-                    return string.Format(@"/command:resolve /path:""{0}""", solutionPath);
+                    return $@"/command:resolve /path:""{solutionPath}""";
                 case ToolbarCommand.StashSave:
-                    return string.Format(@"/command:stashsave /path:""{0}""", solutionPath);
+                    return $@"/command:stashsave /path:""{solutionPath}""";
                 case ToolbarCommand.StashPop:
-                    return string.Format(@"/command:stashpop /path:""{0}""", solutionPath);
+                    return $@"/command:stashpop /path:""{solutionPath}""";
                 case ToolbarCommand.StashList:
-                    return string.Format(@"/command:reflog /path:""{0}"" /ref:""refs/stash""", solutionPath);
+                    return $@"/command:reflog /path:""{solutionPath}"" /ref:""refs/stash""";
                 case ToolbarCommand.Rebase:
-                    return string.Format(@"/command:rebase /path:""{0}""", solutionPath);
+                    return $@"/command:rebase /path:""{solutionPath}""";
                 case ToolbarCommand.FileBlame:
-                    return string.Format(@"/command:blame /path:""{0}"" /line:{1}", TestFilePath, CurrentLine);
+                    return $@"/command:blame /path:""{TestFilePath}"" /line:{CurrentLine}";
                 case ToolbarCommand.FileDiff:
-                    return string.Format(@"/command:diff /path:""{0}""", TestFilePath);
+                    return $@"/command:diff /path:""{TestFilePath}""";
                 case ToolbarCommand.FileLog:
-                    return string.Format(@"/command:log /path:""{0}""", TestFilePath);
+                    return $@"/command:log /path:""{TestFilePath}""";
+                default:
+                    throw new InvalidOperationException($"You need to define an expected test process parameters result for {toolbarCommand}.");
             }
-
-            throw new InvalidOperationException(string.Format("You need to define an expected test process parameters result for {0}.", toolbarCommand));
         }
     }
 }

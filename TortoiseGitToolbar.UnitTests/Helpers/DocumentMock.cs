@@ -1,6 +1,6 @@
 using EnvDTE;
 
-namespace TortoiseGitToolbar.UnitTests.Services
+namespace TortoiseGitToolbar.UnitTests.Helpers
 {
     /// <summary>
     /// ActiveDocument implementation for tests.

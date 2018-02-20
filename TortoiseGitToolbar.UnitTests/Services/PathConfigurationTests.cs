@@ -1,25 +1,25 @@
-﻿using MattDavies.TortoiseGitToolbar.Config.Constants;
-using NUnit.Framework;
+﻿using System;
+using MattDavies.TortoiseGitToolbar.Config.Constants;
+using Xunit;
 
 namespace TortoiseGitToolbar.UnitTests.Services
 {
-    [TestFixture]
     public class PathConfigurationTests
     {
-        [Test, Explicit("Works only if TortoiseGit installed.")]
+        [Fact]
         public void CanGetTortoiseProcPathFromRegistry()
         {
             var path = PathConfiguration.GetTortoiseGitPathFromRegistry();
-            Assert.That(path, Is.Not.Null);
-            Assert.That(path, Is.StringEnding("TortoiseGitProc.exe").IgnoreCase);
+            Assert.NotNull(path);
+            Assert.EndsWith("TortoiseGitProc.exe", path, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        [Test, Explicit("Works only if TortoiseGit installed.")]
+        [Fact]
         public void CanGetGitBashPathFromRegistry()
         {
             var path = PathConfiguration.GetGitBashPathFromRegistry();
-            Assert.That(path, Is.Not.Null);
-            Assert.That(path, Is.StringEnding("sh.exe").IgnoreCase);
+            Assert.NotNull(path);
+            Assert.EndsWith("sh.exe", path, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

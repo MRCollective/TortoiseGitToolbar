@@ -1,65 +1,69 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Linq;
 using System.Reflection;
 using FizzWare.NBuilder;
 using MattDavies.TortoiseGitToolbar;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using MattDavies.TortoiseGitToolbar.Services;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VsSDK.UnitTestLibrary;
 using NSubstitute;
-using NUnit.Framework;
 using TortoiseGitToolbar.UnitTests.Helpers;
+using Xunit;
 
 namespace TortoiseGitToolbar.UnitTests
 {
-    [TestFixture]
     public class TortoiseGitToolbarPackageShould
     {
-        private IVsPackage _package;
-        private OleServiceProvider _serviceProvider;
-        private readonly ToolbarCommand[] _toolbarCommands = EnumHelper.GetValues<ToolbarCommand>();
-        
-        [SetUp]
-        public void Setup()
+        private readonly IVsPackage _package;
+        private readonly OleServiceProvider _serviceProvider;
+        public static IEnumerable<object[]> TortoiseCommands = EnumHelper.GetValues<ToolbarCommand>().Select(t => new object[] {t});
+
+        public TortoiseGitToolbarPackageShould()
         {
             _package = new TortoiseGitToolbarPackage();
             _serviceProvider = OleServiceProvider.CreateOleServiceProviderWithBasicServices();
         }
 
-        [Test]
+        [Fact]
         public void Implement_vspackage()
         {
-            Assert.That(_package, Is.Not.Null, "The package does not implement IVsPackage");
+            Assert.NotNull(_package);
         }
 
-        [Test]
+        [Fact]
         public void Correctly_set_site()
         {
-            Assert.That(_package.SetSite(_serviceProvider), Is.EqualTo(0), "Package SetSite did not return S_OK");
+            Assert.Equal(VSConstants.S_OK, _package.SetSite(_serviceProvider));
         }
 
-        [TestCaseSource("_toolbarCommands")]
+        [Theory]
+        [MemberData(nameof(TortoiseCommands))]
         public void Ensure_all_tortoisegit_commands_exist(ToolbarCommand toolbarCommand)
         {
             var command = GetMenuCommand(toolbarCommand);
             
-            Assert.That(command, Is.Not.Null, string.Format("Couldn't find command for {0}", toolbarCommand));
+            Assert.NotNull(command);
         }
 
-        [TestCaseSource("_toolbarCommands")]
+        [Theory]
+        [MemberData(nameof(TortoiseCommands))]
         public void Ensure_all_tortoisegit_commands_bind_to_event_handlers(ToolbarCommand toolbarCommand)
         {
             var command = GetMenuCommand(toolbarCommand);
 
             var execHandler = typeof(MenuCommand).GetField("execHandler", BindingFlags.NonPublic | BindingFlags.Instance);
             
-            Assert.That(execHandler, Is.Not.Null);
-            Assert.That(execHandler.GetValue(command), Is.Not.Null);
+            Assert.NotNull(execHandler);
+            Assert.NotNull(execHandler.GetValue(command));
         }
 
-        [TestCaseSource("_toolbarCommands")]
+        [Theory]
+        [MemberData(nameof(TortoiseCommands))]
         public void Invoke_all_command_handlers_without_exception(ToolbarCommand toolbarCommand)
         {
             try
@@ -70,10 +74,9 @@ namespace TortoiseGitToolbar.UnitTests
                 _serviceProvider.AddService(typeof(TortoiseGitLauncherService), tortoiseGitLauncherService, true);
                 var command = GetMenuCommand(toolbarCommand);
                 var execHandler = (EventHandler) typeof(MenuCommand).GetField("execHandler", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(command);
-                
-                TestDelegate commandHandler = () => execHandler.Invoke(null, null);
 
-                Assert.DoesNotThrow(commandHandler);
+                execHandler.Invoke(null, null);
+                
                 tortoiseGitLauncherService.Received().ExecuteTortoiseProc(toolbarCommand);
             }
             finally
@@ -87,9 +90,9 @@ namespace TortoiseGitToolbar.UnitTests
             _package.SetSite(_serviceProvider);
 
             var getServiceMethod = typeof(Package).GetMethod("GetService", BindingFlags.Instance | BindingFlags.NonPublic);
-            var menuCommandID = new CommandID(PackageConstants.GuidTortoiseGitToolbarCmdSet, (int)toolbarCommand);
-            var menuCommandService = getServiceMethod.Invoke(_package, new object[] { (typeof(IMenuCommandService)) }) as OleMenuCommandService;
-            return menuCommandService != null ? menuCommandService.FindCommand(menuCommandID) : null;
+            var menuCommandId = new CommandID(PackageConstants.GuidTortoiseGitToolbarCmdSet, (int)toolbarCommand);
+            var menuCommandService = getServiceMethod.Invoke(_package, new object[] { typeof(IMenuCommandService) }) as OleMenuCommandService;
+            return menuCommandService?.FindCommand(menuCommandId);
         }
     }
 }
