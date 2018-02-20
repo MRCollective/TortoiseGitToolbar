@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using Xunit;
 
 namespace TortoiseGitToolbar.IntegrationTests.Helpers
 {
@@ -141,7 +142,7 @@ namespace TortoiseGitToolbar.IntegrationTests.Helpers
         internal void Start()
         {
             // We ask for the uishell here since we cannot do that on the therad that we will spawn.
-            var uiShell = Package.GetGlobalService(typeof(SVsUIShell)) as IVsUIShell;
+            var uiShell = GlobalServices.GetService<SVsUIShell>() as IVsUIShell;
 
             if (uiShell == null)
             {
