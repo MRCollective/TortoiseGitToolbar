@@ -1,5 +1,7 @@
-Introduction
-------------
+TortoiseGitToolbar
+===========================================
+
+[![Build status](https://ci.appveyor.com/api/projects/status/dsa94ri2ir4ijqsn?svg=true)](https://ci.appveyor.com/project/MRCollective/tortoisegittoolbar)
 
 This toolbar provides a launcher for functionality within TortoiseGit.
 
