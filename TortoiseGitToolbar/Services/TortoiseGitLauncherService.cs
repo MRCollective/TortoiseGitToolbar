@@ -97,6 +97,36 @@ namespace MattDavies.TortoiseGitToolbar.Services
                         string.Format(@"/command:reflog /path:""{0}"" /ref:""refs/stash""", solutionPath)
                     );
                     break;
+                case ToolbarCommand.BisectStart:
+                    process = _processManagerService.GetProcess(
+                        PathConfiguration.GetTortoiseGitPath(),
+                        string.Format(@"/command:bisect /start /path:""{0}""", solutionPath)
+                    );
+                    break;
+                case ToolbarCommand.BisectGood:
+                    process = _processManagerService.GetProcess(
+                        PathConfiguration.GetTortoiseGitPath(),
+                        string.Format(@"/command:bisect /good /path:""{0}""", solutionPath)
+                    );
+                    break;
+                case ToolbarCommand.BisectBad:
+                    process = _processManagerService.GetProcess(
+                        PathConfiguration.GetTortoiseGitPath(),
+                        string.Format(@"/command:bisect /bad /path:""{0}""", solutionPath)
+                    );
+                    break;
+                case ToolbarCommand.BisectSkip:
+                    process = _processManagerService.GetProcess(
+                        PathConfiguration.GetTortoiseGitPath(),
+                        string.Format(@"/command:bisect /skip /path:""{0}""", solutionPath)
+                    );
+                    break;
+                case ToolbarCommand.BisectReset:
+                    process = _processManagerService.GetProcess(
+                        PathConfiguration.GetTortoiseGitPath(),
+                        string.Format(@"/command:bisect /reset /path:""{0}""", solutionPath)
+                    );
+                    break;
                 default:
                     process = _processManagerService.GetProcess(
                         PathConfiguration.GetTortoiseGitPath(),

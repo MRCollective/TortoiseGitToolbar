@@ -165,11 +165,46 @@
           <ButtonText>File Diff</ButtonText>
         </Strings>
       </Button>
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBisectStart" priority="0x0121" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Icon guid="guidImages" id="iconBisectStart" />
+        <Strings>
+          <ButtonText>Bisect Start</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBisectGood" priority="0x0122" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Icon guid="guidImages" id="iconBisectGood" />
+        <Strings>
+          <ButtonText>Bisect Good</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBisectBad" priority="0x0123" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Icon guid="guidImages" id="iconBisectBad" />
+        <Strings>
+          <ButtonText>Bisect Bad</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBisectSkip" priority="0x0124" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Icon guid="guidImages" id="iconBisectSkip" />
+        <Strings>
+          <ButtonText>Bisect Skip</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBisectReset" priority="0x0125" type="Button">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Icon guid="guidImages" id="iconBisectReset" />
+        <Strings>
+          <ButtonText>Bisect Reset</ButtonText>
+        </Strings>
+      </Button>
 
     </Buttons>
 
     <Bitmaps>
-      <Bitmap guid="guidImages" href="..\Resources\Toolbar.png" usedList="iconBash, iconCleanup, iconCommit, iconFetch, iconLog, iconMerge, iconPull, iconPush, iconRebase, iconResolve, iconRevert, iconStashPop, iconStashSave, iconStashList, iconSwitch, iconSync, iconRebaseContinue, iconFileLog, iconFileBlame, iconFileDiff"/>
+      <Bitmap guid="guidImages" href="..\Resources\Toolbar.png" usedList="iconBash, iconCleanup, iconCommit, iconFetch, iconLog, iconMerge, iconPull, iconPush, iconRebase, iconResolve, iconRevert, iconStashPop, iconStashSave, iconStashList, iconSwitch, iconSync, iconRebaseContinue, iconFileLog, iconFileBlame, iconFileDiff, iconBisectStart, iconBisectGood, iconBisectBad, iconBisectSkip, iconBisectReset"/>
     </Bitmaps>
    
   </Commands>
@@ -265,6 +300,11 @@
       <IDSymbol name="cmdFileLog" value="0x8118" />
       <IDSymbol name="cmdFileBlame" value="0x8119" />
       <IDSymbol name="cmdFileDiff" value="0x8120" />
+      <IDSymbol name="cmdBisectStart" value="0x8121" />
+      <IDSymbol name="cmdBisectGood" value="0x8122" />
+      <IDSymbol name="cmdBisectBad" value="0x8123" />
+      <IDSymbol name="cmdBisectSkip" value="0x8124" />
+      <IDSymbol name="cmdBisectReset" value="0x8125" /> 
       <IDSymbol name="Toolbar" value="0x1000" />
       <IDSymbol name="ToolbarGroup" value="0x1050" />
     </GuidSymbol>
@@ -290,6 +330,11 @@
       <IDSymbol name="iconFileLog" value="18" />
       <IDSymbol name="iconFileBlame" value="19" />
       <IDSymbol name="iconFileDiff" value="20" />
+      <IDSymbol name="iconBisectStart" value="21" />
+      <IDSymbol name="iconBisectGood" value="22" />
+      <IDSymbol name="iconBisectBad" value="23" />
+      <IDSymbol name="iconBisectSkip" value="24" />
+      <IDSymbol name="iconBisectReset" value="25" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>

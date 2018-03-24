@@ -21,6 +21,11 @@
         RebaseContinue = 0x8117,
         FileLog = 0x8118,
         FileBlame = 0x8119,
-        FileDiff = 0x8120
+        FileDiff = 0x8120,
+        BisectStart = 0x8121,
+        BisectGood = 0x8122,
+        BisectBad = 0x8123,
+        BisectSkip = 0x8124,
+        BisectReset = 0x8125
     }
 }

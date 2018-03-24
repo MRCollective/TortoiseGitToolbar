@@ -120,6 +120,11 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 case ToolbarCommand.FileLog:
                 case ToolbarCommand.FileDiff:
                 case ToolbarCommand.FileBlame:
+                case ToolbarCommand.BisectStart:
+                case ToolbarCommand.BisectGood:
+                case ToolbarCommand.BisectBad:
+                case ToolbarCommand.BisectSkip:
+                case ToolbarCommand.BisectReset:
                     return PathConfiguration.GetTortoiseGitPath();
                 case ToolbarCommand.Bash:
                 case ToolbarCommand.RebaseContinue:
@@ -174,6 +179,16 @@ namespace TortoiseGitToolbar.UnitTests.Services
                     return $@"/command:diff /path:""{TestFilePath}""";
                 case ToolbarCommand.FileLog:
                     return $@"/command:log /path:""{TestFilePath}""";
+                case ToolbarCommand.BisectStart:
+                    return $@"/command:bisect /start /path:""{solutionPath}""";
+                case ToolbarCommand.BisectGood:
+                    return $@"/command:bisect /good /path:""{solutionPath}""";
+                case ToolbarCommand.BisectBad:
+                    return $@"/command:bisect /bad /path:""{solutionPath}""";
+                case ToolbarCommand.BisectSkip:
+                    return $@"/command:bisect /skip /path:""{solutionPath}""";
+                case ToolbarCommand.BisectReset:
+                    return $@"/command:bisect /reset /path:""{solutionPath}""";
                 default:
                     throw new InvalidOperationException($"You need to define an expected test process parameters result for {toolbarCommand}.");
             }
