@@ -2,7 +2,7 @@
 <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <Extern href="stdidcmd.h"/>
   <Extern href="vsshlids.h"/>
-  
+
   <Commands package="guidTortoiseGitToolbarPkg">
     <Menus>
       <Menu guid="guidTortoiseGitToolbarCmdSet" id="Toolbar" type="Toolbar">
@@ -20,7 +20,7 @@
         </Strings>
       </Menu>
     </Menus>
-    
+
     <Groups>
       <Group guid="guidTortoiseGitToolbarCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
@@ -28,11 +28,14 @@
       <Group guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" priority="0x0000">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="Toolbar"/>
       </Group>
-      <Group guid="guidTortoiseGitToolbarCmdSet" id="BisectGroup">
+      <Group guid="guidTortoiseGitToolbarCmdSet" id="BisectGroup" priority="0x0000">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="BisectSplitButton"/>
+      </Group>
+      <Group guid="guidTortoiseGitToolbarCmdSet" id="BisectResetGroup" priority="0x0001">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="BisectSplitButton"/>
       </Group>
     </Groups>
-    
+
     <Buttons>
       <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBash" priority="0x0101" type="Button">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
@@ -205,7 +208,7 @@
         </Strings>
       </Button>
       <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBisectReset" priority="0x0125" type="Button">
-        <Parent guid="guidTortoiseGitToolbarCmdSet" id="BisectGroup" />
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="BisectResetGroup" />
         <Icon guid="guidImages" id="iconBisectReset" />
         <Strings>
           <ButtonText>Bisect Reset</ButtonText>
@@ -217,13 +220,12 @@
     <Bitmaps>
       <Bitmap guid="guidImages" href="..\Resources\Toolbar.png" usedList="iconBash, iconCleanup, iconCommit, iconFetch, iconLog, iconMerge, iconPull, iconPush, iconRebase, iconResolve, iconRevert, iconStashPop, iconStashSave, iconStashList, iconSwitch, iconSync, iconRebaseContinue, iconFileLog, iconFileBlame, iconFileDiff, iconBisectStart, iconBisectGood, iconBisectBad, iconBisectSkip, iconBisectReset"/>
     </Bitmaps>
-   
+
   </Commands>
 
   <VisibilityConstraints>
     <VisibilityItem guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" context="UICONTEXT_SolutionExists" />
   </VisibilityConstraints>
-
 
   <KeyBindings>
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdBash" key1="G" mod1="Control" key2="B" mod2="Control" editor="guidVSStd97" />
@@ -273,7 +275,7 @@
 
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSwitch" key1="G" mod1="Control" key2="S" mod2="Control" editor="guidVSStd97" />
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSwitch" key1="G" mod1="Control" key2="S" editor="guidVSStd97" />
-    
+
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSync" key1="G" mod1="Control" key2="Y" mod2="Control" editor="guidVSStd97" />
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSync" key1="G" mod1="Control" key2="Y" editor="guidVSStd97" />
 
@@ -286,7 +288,7 @@
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" key1="G" mod1="Control Shift Alt" key2="D" mod2="Control Shift Alt" editor="guidVSStd97" />
     <KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" key1="G" mod1="Control Shift Alt" key2="D" editor="guidVSStd97" />
   </KeyBindings>
-    
+
   <Symbols>
     <GuidSymbol name="guidTortoiseGitToolbarPkg" value="{f388ee16-eef2-4ae1-85bd-4cb19151beb0}" />
     <GuidSymbol name="guidTortoiseGitToolbarCmdSet" value="{b594f95f-5d4d-4383-be94-e21d105fa58c}">
@@ -320,8 +322,9 @@
       <IDSymbol name="ToolbarGroup" value="0x1050" />
       <IDSymbol name="BisectSplitButton" value="0x1100" />
       <IDSymbol name="BisectGroup" value="0x1150" />
+      <IDSymbol name="BisectResetGroup" value="0x1200" />
     </GuidSymbol>
-    
+
     <GuidSymbol name="guidImages" value="{c8006870-b377-448f-b1e0-7a3ab8830c0e}" >
       <IDSymbol name="iconBash" value="1" />
       <IDSymbol name="iconCleanup" value="2" />
