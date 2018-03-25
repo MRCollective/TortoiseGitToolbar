@@ -5,11 +5,18 @@
   
   <Commands package="guidTortoiseGitToolbarPkg">
     <Menus>
-      <Menu guid="guidTortoiseGitToolbarCmdSet" id="Toolbar" type="Toolbar" >
+      <Menu guid="guidTortoiseGitToolbarCmdSet" id="Toolbar" type="Toolbar">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
         <Strings>
           <ButtonText>TortoiseGit</ButtonText>
           <CommandName>TortoiseGit</CommandName>
+        </Strings>
+      </Menu>
+      <Menu guid="guidTortoiseGitToolbarCmdSet" id="BisectSplitButton" type="MenuController" priority="0x0121">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup"/>
+        <CommandFlag>TextIsAnchorCommand</CommandFlag>
+        <Strings>
+          <ButtonText>Bisect</ButtonText>
         </Strings>
       </Menu>
     </Menus>
@@ -18,9 +25,11 @@
       <Group guid="guidTortoiseGitToolbarCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
       </Group>
-      <Group guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup"
-            priority="0x0000">
+      <Group guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" priority="0x0000">
         <Parent guid="guidTortoiseGitToolbarCmdSet" id="Toolbar"/>
+      </Group>
+      <Group guid="guidTortoiseGitToolbarCmdSet" id="BisectGroup">
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="BisectSplitButton"/>
       </Group>
     </Groups>
     
@@ -166,35 +175,37 @@
         </Strings>
       </Button>
       <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBisectStart" priority="0x0121" type="Button">
-        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="BisectGroup" />
         <Icon guid="guidImages" id="iconBisectStart" />
+        <CommandFlag>FixMenuController</CommandFlag>
+        <CommandFlag>NoShowOnMenuController</CommandFlag>
         <Strings>
           <ButtonText>Bisect Start</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBisectGood" priority="0x0122" type="Button">
-        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="BisectGroup" />
         <Icon guid="guidImages" id="iconBisectGood" />
         <Strings>
           <ButtonText>Bisect Good</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBisectBad" priority="0x0123" type="Button">
-        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="BisectGroup" />
         <Icon guid="guidImages" id="iconBisectBad" />
         <Strings>
           <ButtonText>Bisect Bad</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBisectSkip" priority="0x0124" type="Button">
-        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="BisectGroup" />
         <Icon guid="guidImages" id="iconBisectSkip" />
         <Strings>
           <ButtonText>Bisect Skip</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBisectReset" priority="0x0125" type="Button">
-        <Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+        <Parent guid="guidTortoiseGitToolbarCmdSet" id="BisectGroup" />
         <Icon guid="guidImages" id="iconBisectReset" />
         <Strings>
           <ButtonText>Bisect Reset</ButtonText>
@@ -208,7 +219,7 @@
     </Bitmaps>
    
   </Commands>
-  
+
   <VisibilityConstraints>
     <VisibilityItem guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" context="UICONTEXT_SolutionExists" />
   </VisibilityConstraints>
@@ -307,6 +318,8 @@
       <IDSymbol name="cmdBisectReset" value="0x8125" /> 
       <IDSymbol name="Toolbar" value="0x1000" />
       <IDSymbol name="ToolbarGroup" value="0x1050" />
+      <IDSymbol name="BisectSplitButton" value="0x1100" />
+      <IDSymbol name="BisectGroup" value="0x1150" />
     </GuidSymbol>
     
     <GuidSymbol name="guidImages" value="{c8006870-b377-448f-b1e0-7a3ab8830c0e}" >
