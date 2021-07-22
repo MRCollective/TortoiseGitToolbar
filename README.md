@@ -9,6 +9,8 @@ Installing the lightweight toolbar will allow access to these common source cont
 
 This toolbar simply launches TortoiseGit commands. Further integration with Git is not planned - for more complex usage scenarios you should take a look at the [Visual Studio Tools for Git](http://visualstudiogallery.msdn.microsoft.com/abafc7d6-dcaa-40f4-8a5e-d6724bdb980c).
 
+For VSCode, check out [TortoiseGit Commands for VSCode](https://github.com/mbinic/vscode-tgit) by [@mbinic](https://github.com/mbinic).
+
 Installation instructions
 --------------------------
 
