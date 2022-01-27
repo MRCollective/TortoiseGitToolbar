@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar", "TortoiseGitToolbar\TortoiseGitToolbar.csproj", "{F1A624CA-04A7-4729-9598-AF0B5C2CF188}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar.IntegrationTests", "TortoiseGitToolbar.IntegrationTests\TortoiseGitToolbar.IntegrationTests.csproj", "{9266F646-2E8D-4DE4-B755-0EA8F5036078}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar.UnitTests", "TortoiseGitToolbar.UnitTests\TortoiseGitToolbar.UnitTests.csproj", "{B6997325-6151-4B1A-A6BC-E47667C3B7F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C57C4358-CD31-40A3-ACAE-438FA7FCCB14}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +35,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6448FC76-7BA1-4AC3-895A-52FF0D56E6FB}
 	EndGlobalSection
 EndGlobal
