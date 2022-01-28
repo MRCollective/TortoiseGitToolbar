@@ -79,7 +79,7 @@ namespace TortoiseGitToolbar.UnitTests.Helpers
         public string Path { get; private set; }
         public bool ReadOnly { get; set; }
         public bool Saved { get; set; }
-        public Windows Windows { get; private set; }
+        public EnvDTE.Windows Windows { get; private set; }
         public ProjectItem ProjectItem { get; private set; }
 
         public dynamic Selection { get; private set; }

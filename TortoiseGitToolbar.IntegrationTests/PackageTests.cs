@@ -1,32 +1,29 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Xunit;
 
-[assembly: VsixRunner(TraceLevel = SourceLevels.All)]
 namespace TortoiseGitToolbar.IntegrationTests
 {
     public class PackageShould
     {
-        [VsixFact(VisualStudioVersion.Current, RootSuffix = "Exp")]
-        public void Load_shell_service()
+        [VsTheory(Version = "2017-")]
+        [InlineData(PackageConstants.GuidTortoiseGitToolbarPkgString, true)]
+        [InlineData("11111111-2222-3333-4444-555555555555", false)]
+        public async Task Load_into_the_ide(string guidString, bool expectedSuccess)
         {
-            var shellService = GlobalServices.GetService<SVsShell>() as IVsShell;
-            
-            Assert.NotNull(shellService);
-        }
+            var shell = (IVsShell7)ServiceProvider.GlobalProvider.GetService(typeof(SVsShell));
+            Assert.NotNull(shell);
 
-        [VsixFact(VisualStudioVersion.Current, RootSuffix = "Exp", RunOnUIThread = true)]
-        public void Load_into_the_ide()
-        {
-            IVsPackage package;
-            var shellService = GlobalServices.GetService<SVsShell>() as IVsShell;
-            var packageGuid = PackageConstants.GuidTortoiseGitToolbarPkg;
+            var guid = Guid.Parse(guidString);
 
-            var packageLoaded = shellService.LoadPackage(ref packageGuid, out package);
-
-            Assert.True(packageLoaded == 0);
-            Assert.NotNull(package);
+            if (expectedSuccess)
+                await shell.LoadPackageAsync(ref guid);
+            else
+                await Assert.ThrowsAnyAsync<Exception>(async () => await shell.LoadPackageAsync(ref guid));
         }
     }
 }
