@@ -1,9 +1,11 @@
 ﻿using System;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
+using Microsoft.VisualStudio.Sdk.TestFramework;
 using Xunit;
 
 namespace TortoiseGitToolbar.UnitTests.Services
 {
+    [Collection(MockedVS.Collection)]
     public class PathConfigurationTests
     {
         [Fact]

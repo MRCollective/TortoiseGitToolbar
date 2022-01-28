@@ -1,8 +1,10 @@
 ﻿using MattDavies.TortoiseGitToolbar.Services;
+using Microsoft.VisualStudio.Sdk.TestFramework;
 using Xunit;
 
 namespace TortoiseGitToolbar.UnitTests.Services
 {
+    [Collection(MockedVS.Collection)]
     public class ProcessManagerServiceTests
     {
         private const string TestFileName = "testFileName";

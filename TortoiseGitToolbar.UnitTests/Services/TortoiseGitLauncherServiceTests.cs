@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using EnvDTE80;
-using FizzWare.NBuilder;
 using MattDavies.TortoiseGitToolbar.Config.Constants;
 using MattDavies.TortoiseGitToolbar.Services;
+using Microsoft.VisualStudio.Sdk.TestFramework;
 using NSubstitute;
 using TortoiseGitToolbar.UnitTests.Helpers;
 using Xunit;
 
 namespace TortoiseGitToolbar.UnitTests.Services
 {
+    [Collection(MockedVS.Collection)]
     public class TortoiseGitLauncherServiceShould
     {
-        public static IEnumerable<object[]> TortoiseCommands = EnumHelper.GetValues<ToolbarCommand>().Where(t => t != ToolbarCommand.Bash && t != ToolbarCommand.RebaseContinue).Select(t => new object[]{t});
+        public static IEnumerable<object[]> TortoiseCommands = Enum.GetValues(typeof(ToolbarCommand)).Cast<ToolbarCommand>().Where(t => t != ToolbarCommand.Bash && t != ToolbarCommand.RebaseContinue).Select(t => new object[]{t});
         private readonly IProcessManagerService _processManagerService;
         private static readonly string TestFilePath = Path.Combine(Environment.CurrentDirectory, "test.txt");
         private const int CurrentLine = 42;

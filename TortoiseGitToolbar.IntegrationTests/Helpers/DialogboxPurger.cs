@@ -142,7 +142,7 @@ namespace TortoiseGitToolbar.IntegrationTests.Helpers
         internal void Start()
         {
             // We ask for the uishell here since we cannot do that on the therad that we will spawn.
-            var uiShell = GlobalServices.GetService<SVsUIShell>() as IVsUIShell;
+            var uiShell = Package.GetGlobalService(typeof(SVsUIShell)) as IVsUIShell;
 
             if (uiShell == null)
             {
