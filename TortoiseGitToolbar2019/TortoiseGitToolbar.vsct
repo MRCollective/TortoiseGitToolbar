@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Extern href="stdidcmd.h"/>
+	<Extern href="vsshlids.h"/>
+
+	<Commands package="guidTortoiseGitToolbarPkg">
+		<Menus>
+			<Menu guid="guidTortoiseGitToolbarCmdSet" id="Toolbar" priority="0x0100" type="Toolbar" >
+				<Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
+				<Strings>
+					<ButtonText>TortoiseGit</ButtonText>
+					<CommandName>TortoiseGit</CommandName>
+				</Strings>
+			</Menu>
+		</Menus>
+
+		<Groups>
+			<Group guid="guidTortoiseGitToolbarCmdSet" id="MyMenuGroup" priority="0x0600">
+				<Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
+			</Group>
+			<Group guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup"
+				  priority="0x0000">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="Toolbar"/>
+			</Group>
+		</Groups>
+
+		<Buttons>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdBash" priority="0x0101" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconBash" />
+				<Strings>
+					<ButtonText>Bash</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdCleanup" priority="0x0102" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconCleanup" />
+				<Strings>
+					<ButtonText>Cleanup</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdCommit" priority="0x0103" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconCommit" />
+				<Strings>
+					<ButtonText>Commit</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdFetch" priority="0x0104" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconFetch" />
+				<Strings>
+					<ButtonText>Fetch</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdLog" priority="0x0105" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconLog" />
+				<Strings>
+					<ButtonText>Log</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdMerge" priority="0x0106" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconMerge" />
+				<Strings>
+					<ButtonText>Merge</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdPull" priority="0x0107" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconPull" />
+				<Strings>
+					<ButtonText>Pull</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdPush" priority="0x0108" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconPush" />
+				<Strings>
+					<ButtonText>Push</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdRebase" priority="0x0109" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconRebase" />
+				<Strings>
+					<ButtonText>Rebase</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdRebaseContinue" priority="0x0110" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconRebaseContinue" />
+				<Strings>
+					<ButtonText>Rebase Continue</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdResolve" priority="0x0111" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconResolve" />
+				<Strings>
+					<ButtonText>Resolve</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdRevert" priority="0x0112" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconRevert" />
+				<Strings>
+					<ButtonText>Revert</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdStashPop" priority="0x0113" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconStashPop" />
+				<Strings>
+					<ButtonText>Stash Pop</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdStashSave" priority="0x0114" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconStashSave" />
+				<Strings>
+					<ButtonText>Stash Save</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdStashList" priority="0x0115" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconStashList" />
+				<Strings>
+					<ButtonText>Stash List</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdSwitch" priority="0x0116" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconSwitch" />
+				<Strings>
+					<ButtonText>Switch</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdSync" priority="0x0117" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconSync" />
+				<Strings>
+					<ButtonText>Sync</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdFileLog" priority="0x0118" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconFileLog" />
+				<Strings>
+					<ButtonText>File Log</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdFileBlame" priority="0x0119" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconFileBlame" />
+				<Strings>
+					<ButtonText>File Blame</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" priority="0x0120" type="Button">
+				<Parent guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" />
+				<Icon guid="guidImages" id="iconFileDiff" />
+				<Strings>
+					<ButtonText>File Diff</ButtonText>
+				</Strings>
+			</Button>
+
+		</Buttons>
+
+		<Bitmaps>
+			<Bitmap guid="guidImages" href="..\Toolbar.png" usedList="iconBash, iconCleanup, iconCommit, iconFetch, iconLog, iconMerge, iconPull, iconPush, iconRebase, iconResolve, iconRevert, iconStashPop, iconStashSave, iconStashList, iconSwitch, iconSync, iconRebaseContinue, iconFileLog, iconFileBlame, iconFileDiff"/>
+		</Bitmaps>
+
+	</Commands>
+
+	<VisibilityConstraints>
+		<VisibilityItem guid="guidTortoiseGitToolbarCmdSet" id="ToolbarGroup" context="UICONTEXT_SolutionExists" />
+	</VisibilityConstraints>
+
+
+	<KeyBindings>
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdBash" key1="G" mod1="Control" key2="B" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdBash" key1="G" mod1="Control" key2="B" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCleanup" key1="G" mod1="Control" key2="N" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCleanup" key1="G" mod1="Control" key2="N" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCommit" key1="G" mod1="Control" key2="C" mod2="Control" editor="guidVSStd97"  />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdCommit" key1="G" mod1="Control" key2="C" editor="guidVSStd97"  />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFetch" key1="G" mod1="Control" key2="F" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFetch" key1="G" mod1="Control" key2="F" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdLog" key1="G" mod1="Control" key2="L" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdLog" key1="G" mod1="Control" key2="L" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdMerge" key1="G" mod1="Control" key2="M" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdMerge" key1="G" mod1="Control" key2="M" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdPull" key1="G" mod1="Control" key2="P" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdPull" key1="G" mod1="Control" key2="P" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdPush" key1="G" mod1="Control" key2="U" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdPush" key1="G" mod1="Control" key2="U" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdRebase" key1="G" mod1="Control" key2="R" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdRebase" key1="G" mod1="Control" key2="R" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdRebaseContinue" key1="G" mod1="Control" key2="T" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdRebaseContinue" key1="G" mod1="Control" key2="T" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdResolve" key1="G" mod1="Control" key2="E" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdResolve" key1="G" mod1="Control" key2="E" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdRevert" key1="G" mod1="Control" key2="V" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdRevert" key1="G" mod1="Control" key2="V" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdStashPop" key1="G" mod1="Control" key2="O" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdStashPop" key1="G" mod1="Control" key2="O" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdStashSave" key1="G" mod1="Control" key2="A" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdStashSave" key1="G" mod1="Control" key2="A" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdStashList" key1="G" mod1="Control" key2="I" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdStashList" key1="G" mod1="Control" key2="I" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSwitch" key1="G" mod1="Control" key2="S" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSwitch" key1="G" mod1="Control" key2="S" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSync" key1="G" mod1="Control" key2="Y" mod2="Control" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdSync" key1="G" mod1="Control" key2="Y" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileLog" key1="G" mod1="Control Shift Alt" key2="L" mod2="Control Shift Alt" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileLog" key1="G" mod1="Control Shift Alt" key2="L" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileBlame" key1="G" mod1="Control Shift Alt" key2="B" mod2="Control Shift Alt" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileBlame" key1="G" mod1="Control Shift Alt" key2="B" editor="guidVSStd97" />
+
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" key1="G" mod1="Control Shift Alt" key2="D" mod2="Control Shift Alt" editor="guidVSStd97" />
+		<KeyBinding guid="guidTortoiseGitToolbarCmdSet" id="cmdFileDiff" key1="G" mod1="Control Shift Alt" key2="D" editor="guidVSStd97" />
+	</KeyBindings>
+
+	<Symbols>
+		<GuidSymbol name="guidTortoiseGitToolbarPkg" value="{d09f7b88-0165-4ec2-94da-cdb0c9fc914a}" />
+		<GuidSymbol name="guidTortoiseGitToolbarCmdSet" value="{46533cec-75d7-43bf-bfbb-910b527b9b4a}">
+			<IDSymbol name="MyMenuGroup" value="0x1020" />
+			<IDSymbol name="cmdCommit" value="0x8101" />
+			<IDSymbol name="cmdResolve" value="0x8102" />
+			<IDSymbol name="cmdPush" value="0x8103" />
+			<IDSymbol name="cmdPull" value="0x8104" />
+			<IDSymbol name="cmdLog" value="0x8105" />
+			<IDSymbol name="cmdBash" value="0x8106" />
+			<IDSymbol name="cmdSync" value="0x8107" />
+			<IDSymbol name="cmdCleanup" value="0x8108" />
+			<IDSymbol name="cmdFetch" value="0x8109" />
+			<IDSymbol name="cmdRevert" value="0x8110" />
+			<IDSymbol name="cmdSwitch" value="0x8111" />
+			<IDSymbol name="cmdMerge" value="0x8112" />
+			<IDSymbol name="cmdStashSave" value="0x8113" />
+			<IDSymbol name="cmdStashPop" value="0x8114" />
+			<IDSymbol name="cmdStashList" value="0x8115" />
+			<IDSymbol name="cmdRebase" value="0x8116" />
+			<IDSymbol name="cmdRebaseContinue" value="0x8117" />
+			<IDSymbol name="cmdFileLog" value="0x8118" />
+			<IDSymbol name="cmdFileBlame" value="0x8119" />
+			<IDSymbol name="cmdFileDiff" value="0x8120" />
+			<IDSymbol name="Toolbar" value="0x1000" />
+			<IDSymbol name="ToolbarGroup" value="0x1050" />
+		</GuidSymbol>
+		<GuidSymbol name="guidImages" value="{c8006870-b377-448f-b1e0-7a3ab8830c0e}" >
+			<IDSymbol name="iconBash" value="1" />
+			<IDSymbol name="iconCleanup" value="2" />
+			<IDSymbol name="iconCommit" value="3" />
+			<IDSymbol name="iconFetch" value="4" />
+			<IDSymbol name="iconLog" value="5" />
+			<IDSymbol name="iconMerge" value="6" />
+			<IDSymbol name="iconPull" value="7" />
+			<IDSymbol name="iconPush" value="8" />
+			<IDSymbol name="iconRebase" value="9" />
+			<IDSymbol name="iconResolve" value="10" />
+			<IDSymbol name="iconRevert" value="11" />
+			<IDSymbol name="iconStashPop" value="12" />
+			<IDSymbol name="iconStashSave" value="13" />
+			<IDSymbol name="iconStashList" value="14" />
+			<IDSymbol name="iconSwitch" value="15" />
+			<IDSymbol name="iconSync" value="16" />
+			<IDSymbol name="iconRebaseContinue" value="17" />
+			<IDSymbol name="iconFileLog" value="18" />
+			<IDSymbol name="iconFileBlame" value="19" />
+			<IDSymbol name="iconFileDiff" value="20" />
+		</GuidSymbol>
+	</Symbols>
+</CommandTable>

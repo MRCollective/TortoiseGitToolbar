@@ -131,8 +131,7 @@
       <Link>Toolbar.png</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <VSCTCompile Include="..\TortoiseGitToolbar.vsct">
-      <Link>TortoiseGitToolbar.vsct</Link>
+    <VSCTCompile Include=".\TortoiseGitToolbar.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
       <SubType>Designer</SubType>
     </VSCTCompile>
@@ -141,6 +140,9 @@
       <MergeWithCTO>true</MergeWithCTO>
       <ManifestResourceName>VSPackage</ManifestResourceName>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PackageConstants.cs" />
   </ItemGroup>
   <Import Project="..\TortoiseGitToolbar.Shared\TortoiseGitToolbar.Shared.projitems" Label="Shared" />
   <PropertyGroup>

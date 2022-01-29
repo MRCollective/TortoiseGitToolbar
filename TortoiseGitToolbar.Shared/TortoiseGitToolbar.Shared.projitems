@@ -9,7 +9,6 @@
     <Import_RootNamespace>TortoiseGitToolbar.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Config\Constants\PackageConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Config\Constants\PathConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Config\Constants\ToolbarCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Resources\Resources.Designer.cs">

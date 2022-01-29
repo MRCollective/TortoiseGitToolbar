@@ -17,8 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TortoiseGitToolbar.Shared", "TortoiseGitToolbar.Shared\TortoiseGitToolbar.Shared.shproj", "{B5103660-99F9-4C98-B7C2-62308D20D2BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TortoiseGitToolbar2019", "TortoiseGitToolbar2019\TortoiseGitToolbar2019.csproj", "{43164D47-2976-40C2-A2E8-320098E14318}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		TortoiseGitToolbar.Shared\TortoiseGitToolbar.Shared.projitems*{43164d47-2976-40c2-a2e8-320098e14318}*SharedItemsImports = 4
 		TortoiseGitToolbar.Shared\TortoiseGitToolbar.Shared.projitems*{b5103660-99f9-4c98-b7c2-62308d20d2bd}*SharedItemsImports = 13
 		TortoiseGitToolbar.Shared\TortoiseGitToolbar.Shared.projitems*{f1a624ca-04a7-4729-9598-af0b5c2cf188}*SharedItemsImports = 4
 	EndGlobalSection
@@ -39,6 +42,10 @@ Global
 		{B6997325-6151-4B1A-A6BC-E47667C3B7F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6997325-6151-4B1A-A6BC-E47667C3B7F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6997325-6151-4B1A-A6BC-E47667C3B7F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43164D47-2976-40C2-A2E8-320098E14318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43164D47-2976-40C2-A2E8-320098E14318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43164D47-2976-40C2-A2E8-320098E14318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43164D47-2976-40C2-A2E8-320098E14318}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
