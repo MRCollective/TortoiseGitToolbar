@@ -1,4 +1,4 @@
-choco install -y --no-progress tortoisegit
+choco install -y --no-progress --force tortoisegit
 
 Write-Output "Waiting for all active installations to finish..."
 do {
