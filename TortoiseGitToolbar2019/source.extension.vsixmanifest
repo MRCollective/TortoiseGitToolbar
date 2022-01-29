@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="d09f7b88-0165-4ec2-94da-cdb0c9fc914a" Version="1.0.6" Language="en-US" Publisher="Matt Davies @mdaviesnet" />
+        <Identity Id="d09f7b88-0165-4ec2-94da-cdb0c9fc914a" Version="1.0.6" Language="en-US" Publisher="mdaviesnet" />
         <DisplayName>TortoiseGit Toolbar (VS 2019)</DisplayName>
         <Description xml:space="preserve">Lightweight toolbar for launching commonly used TortoiseGit functionality from within Visual Studio. Backwards compatible version supporting Visual Studio 2019 and earlier.</Description>
         <MoreInfo>https://github.com/MattDavies/TortoiseGitToolbar</MoreInfo>
