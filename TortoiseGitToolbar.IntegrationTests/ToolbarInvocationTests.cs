@@ -11,7 +11,7 @@ namespace TortoiseGitToolbar.IntegrationTests
 {
     public class ToolbarInvocationShould
     {
-        [VsFact(UIThread = true)]
+        [VsFact(UIThread = true, Version = "2022-")]
         public void Launch_all_commands()
         {
             foreach (var toolbarCommand in Enum.GetValues(typeof(ToolbarCommand)).Cast<ToolbarCommand>().Where(v => v != ToolbarCommand.Bash && v != ToolbarCommand.FileBlame && v != ToolbarCommand.FileDiff && v != ToolbarCommand.FileLog))

@@ -10,7 +10,7 @@ namespace TortoiseGitToolbar.IntegrationTests
 {
     public class PackageShould
     {
-        [VsTheory(Version = "2017-")]
+        [VsTheory(Version = "2022-")]
         [InlineData(PackageConstants.GuidTortoiseGitToolbarPkgString, true)]
         [InlineData("11111111-2222-3333-4444-555555555555", false)]
         public async Task Load_into_the_ide(string guidString, bool expectedSuccess)
