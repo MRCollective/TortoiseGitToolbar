@@ -1,8 +1,5 @@
 choco install -y --no-progress tortoisegit
 
-#Registry key for sh.exe isn't created until this runs once (causing a failing test)
-. "C:\Program Files\TortoiseGit\bin\TortoiseGitProc.exe"
-
 Write-Output "Waiting for all active installations to finish..."
 do {
 
@@ -14,3 +11,6 @@ do {
 }
 until (!$msitest)
 Write-Output "Verified all installations have finished."
+
+#Registry key for sh.exe isn't created until this runs once (causing a failing test)
+. "C:\Program Files\TortoiseGit\bin\TortoiseGitProc.exe"
