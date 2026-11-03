@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using EnvDTE;
@@ -14,12 +14,11 @@ namespace MattDavies.TortoiseGitToolbar
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(PackageConstants.GuidTortoiseGitToolbarPkgString)]
     [ProvideKeyBindingTable(PackageConstants.GuidTortoiseGitToolbarPkgString, 110)]
-    [ProvideOptionPage(typeof(Config.SettingsDialog), Config.GlobalConfig.ExtensionName, "General", 0, 0, true)]
     public sealed class TortoiseGitToolbarPackage : Package
     {
         private OleMenuCommandService _commandService;
         private ITortoiseGitLauncherService _tortoiseGitLauncherService;
-        
+
         protected override void Initialize()
         {
             base.Initialize();
@@ -31,15 +30,28 @@ namespace MattDavies.TortoiseGitToolbar
             }
         }
 
-        //Todo: See if this can be refactored with better IoC
         private void SetDependencies()
         {
-            var dte = ((DTE)GetService(typeof(DTE)));
-            var solution = dte != null ? (Solution2)dte.Solution : null;
-            
-            _commandService = (OleMenuCommandService) GetService(typeof (IMenuCommandService));
-            _tortoiseGitLauncherService = (ITortoiseGitLauncherService) GetService(typeof (TortoiseGitLauncherService))
-                ?? new TortoiseGitLauncherService(new ProcessManagerService(), solution);
+            _commandService = (OleMenuCommandService)GetService(typeof(IMenuCommandService));
+
+            // Pass a method that obtains a fresh Solution2 on every call.
+            // Using a method on the Package avoids interop type-identity problems
+            // that appear with lambdas across VS 2022 / VS 2026.
+            _tortoiseGitLauncherService = new TortoiseGitLauncherService(
+                new ProcessManagerService(),
+                GetCurrentSolution);
+        }
+
+        /// <summary>
+        /// Returns the current Solution2. Called on every command so we never
+        /// hold a stale reference (important for .slnx / Open Folder in VS 2026).
+        /// </summary>
+        private Solution2 GetCurrentSolution()
+        {
+            // Prefer the modern service identifier when available, fall back to the classic one.
+            var dte = GetService(typeof(DTE)) as DTE;
+
+            return dte?.Solution as Solution2;
         }
 
         private void RegisterCommand(ToolbarCommand id, EventHandler callback)

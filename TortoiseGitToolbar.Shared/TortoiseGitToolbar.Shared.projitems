@@ -11,7 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Config\Constants\PathConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Config\Constants\ToolbarCommand.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Config\SettingsDialog.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Resources\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

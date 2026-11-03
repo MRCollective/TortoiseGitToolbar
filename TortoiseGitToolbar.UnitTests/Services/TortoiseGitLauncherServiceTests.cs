@@ -15,7 +15,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
     [Collection(MockedVS.Collection)]
     public class TortoiseGitLauncherServiceShould
     {
-        public static IEnumerable<object[]> TortoiseCommands = Enum.GetValues(typeof(ToolbarCommand)).Cast<ToolbarCommand>().Where(t => t != ToolbarCommand.Bash && t != ToolbarCommand.RebaseContinue).Select(t => new object[]{t});
+        public static IEnumerable<object[]> TortoiseCommands = Enum.GetValues(typeof(ToolbarCommand)).Cast<ToolbarCommand>().Where(t => t != ToolbarCommand.Bash && t != ToolbarCommand.RebaseContinue).Select(t => new object[] { t });
         private readonly IProcessManagerService _processManagerService;
         private static readonly string TestFilePath = Path.Combine(Environment.CurrentDirectory, "test.txt");
         private const int CurrentLine = 42;
@@ -54,7 +54,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
             _processManagerService.Received().GetProcess(
                 GetExpectedCommand(command),
                 GetExpectedParameters(command),
-                PathConfiguration.GetSolutionPath(solution)
+                PathConfiguration.GetRepositoryRootPath(solution)
             );
         }
 
@@ -70,7 +70,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
             _processManagerService.Received().GetProcess(
                 GetExpectedCommand(command),
                 GetExpectedParameters(command),
-                PathConfiguration.GetSolutionPath(solution)
+                PathConfiguration.GetRepositoryRootPath(solution)
             );
         }
 
@@ -78,8 +78,9 @@ namespace TortoiseGitToolbar.UnitTests.Services
         public void Get_solution_folder_traverses_parents_till_git_folder_found()
         {
             var solution = GetOpenSolution();
-            var solutionPath = PathConfiguration.GetSolutionPath(solution);
-            Assert.True(Directory.Exists(Path.Combine(solutionPath, ".git")), "Returned solution path is not the repository root.");
+            var gitRepoRoot = PathConfiguration.GetRepositoryRootPath(solution);
+            var dotGitPath = Path.Combine(gitRepoRoot, ".git");
+            Assert.True(Directory.Exists(dotGitPath) || File.Exists(dotGitPath), "Returned path is not the repository root.");
         }
 
         private static Solution2 GetOpenSolution()
@@ -132,7 +133,7 @@ namespace TortoiseGitToolbar.UnitTests.Services
 
         private static string GetExpectedParameters(ToolbarCommand toolbarCommand)
         {
-            var solutionPath = PathConfiguration.GetSolutionPath(GetOpenSolution());
+            var gitRepoRoot = PathConfiguration.GetRepositoryRootPath(GetOpenSolution());
             switch (toolbarCommand)
             {
                 case ToolbarCommand.Bash:
@@ -140,35 +141,35 @@ namespace TortoiseGitToolbar.UnitTests.Services
                 case ToolbarCommand.RebaseContinue:
                     return @"--login -i -c 'echo; echo ""Running git rebase --continue""; echo; git rebase --continue; echo; echo ""Please review the output above and press enter to continue.""; read'";
                 case ToolbarCommand.Commit:
-                    return $@"/command:commit /path:""{solutionPath}""";
+                    return $@"/command:commit /path:""{gitRepoRoot}""";
                 case ToolbarCommand.Log:
-                    return $@"/command:log /path:""{solutionPath}""";
+                    return $@"/command:log /path:""{gitRepoRoot}""";
                 case ToolbarCommand.Pull:
-                    return $@"/command:pull /path:""{solutionPath}""";
+                    return $@"/command:pull /path:""{gitRepoRoot}""";
                 case ToolbarCommand.Push:
-                    return $@"/command:push /path:""{solutionPath}""";
+                    return $@"/command:push /path:""{gitRepoRoot}""";
                 case ToolbarCommand.Switch:
-                    return $@"/command:switch /path:""{solutionPath}""";
+                    return $@"/command:switch /path:""{gitRepoRoot}""";
                 case ToolbarCommand.Cleanup:
-                    return $@"/command:cleanup /path:""{solutionPath}""";
+                    return $@"/command:cleanup /path:""{gitRepoRoot}""";
                 case ToolbarCommand.Fetch:
-                    return $@"/command:fetch /path:""{solutionPath}""";
+                    return $@"/command:fetch /path:""{gitRepoRoot}""";
                 case ToolbarCommand.Revert:
-                    return $@"/command:revert /path:""{solutionPath}""";
+                    return $@"/command:revert /path:""{gitRepoRoot}""";
                 case ToolbarCommand.Sync:
-                    return $@"/command:sync /path:""{solutionPath}""";
+                    return $@"/command:sync /path:""{gitRepoRoot}""";
                 case ToolbarCommand.Merge:
-                    return $@"/command:merge /path:""{solutionPath}""";
+                    return $@"/command:merge /path:""{gitRepoRoot}""";
                 case ToolbarCommand.Resolve:
-                    return $@"/command:resolve /path:""{solutionPath}""";
+                    return $@"/command:resolve /path:""{gitRepoRoot}""";
                 case ToolbarCommand.StashSave:
-                    return $@"/command:stashsave /path:""{solutionPath}""";
+                    return $@"/command:stashsave /path:""{gitRepoRoot}""";
                 case ToolbarCommand.StashPop:
-                    return $@"/command:stashpop /path:""{solutionPath}""";
+                    return $@"/command:stashpop /path:""{gitRepoRoot}""";
                 case ToolbarCommand.StashList:
-                    return $@"/command:reflog /path:""{solutionPath}"" /ref:""refs/stash""";
+                    return $@"/command:reflog /path:""{gitRepoRoot}"" /ref:""refs/stash""";
                 case ToolbarCommand.Rebase:
-                    return $@"/command:rebase /path:""{solutionPath}""";
+                    return $@"/command:rebase /path:""{gitRepoRoot}""";
                 case ToolbarCommand.FileBlame:
                     return $@"/command:blame /path:""{TestFilePath}"" /line:{CurrentLine}";
                 case ToolbarCommand.FileDiff:

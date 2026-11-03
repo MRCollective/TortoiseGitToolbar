@@ -8,10 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MattDavies.TortoiseGitToolbar.Resources {
+namespace MattDavies.TortoiseGitToolbar.Resources
+{
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,97 +23,117 @@ namespace MattDavies.TortoiseGitToolbar.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
-        
+    internal class Resources
+    {
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Resources()
+        {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MattDavies.TortoiseGitToolbar.Resources.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
-            get {
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Could not find Git Bash in the registry or the standard install path..
         /// </summary>
-        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_Git_Bash_in_the_standard_install_path_ {
-            get {
+        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_Git_Bash_in_the_standard_install_path_
+        {
+            get
+            {
                 return ResourceManager.GetString("TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_Git_Bash_in_the_sta" +
                         "ndard_install_path_", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Could not find TortoiseGit in the registry or the standard install path..
         /// </summary>
-        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_TortoiseGit_in_the_standard_install_path_ {
-            get {
+        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_TortoiseGit_in_the_standard_install_path_
+        {
+            get
+            {
                 return ResourceManager.GetString("TortoiseGitLauncherService_ExecuteTortoiseProc_Could_not_find_TortoiseGit_in_the_" +
                         "standard_install_path_", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Git Bash not found.
         /// </summary>
-        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_Git_Bash_not_found {
-            get {
+        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_Git_Bash_not_found
+        {
+            get
+            {
                 return ResourceManager.GetString("TortoiseGitLauncherService_ExecuteTortoiseProc_Git_Bash_not_found", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to TortoiseGit not found.
         /// </summary>
-        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_TortoiseGit_not_found {
-            get {
+        internal static string TortoiseGitLauncherService_ExecuteTortoiseProc_TortoiseGit_not_found
+        {
+            get
+            {
                 return ResourceManager.GetString("TortoiseGitLauncherService_ExecuteTortoiseProc_TortoiseGit_not_found", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to No solution found..
         /// </summary>
-        internal static string TortoiseGitLauncherService_SolutionPath_No_solution_found {
-            get {
-                return ResourceManager.GetString("TortoiseGitLauncherService_SolutionPath_No_solution_found", resourceCulture);
+        internal static string TortoiseGitLauncherService_GitRepositoryNotFoundCaption
+        {
+            get
+            {
+                return ResourceManager.GetString("TortoiseGitLauncherService_GitRepositoryNotFoundCaption", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You need to open a solution first!.
         /// </summary>
-        internal static string TortoiseGitLauncherService_SolutionPath_You_need_to_open_a_solution_first {
-            get {
-                return ResourceManager.GetString("TortoiseGitLauncherService_SolutionPath_You_need_to_open_a_solution_first", resourceCulture);
+        internal static string TortoiseGitLauncherService_GitRepositoryNotFound
+        {
+            get
+            {
+                return ResourceManager.GetString("TortoiseGitLauncherService_GitRepositoryNotFound", resourceCulture);
             }
         }
     }
