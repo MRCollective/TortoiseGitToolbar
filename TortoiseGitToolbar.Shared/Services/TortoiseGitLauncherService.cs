@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -16,20 +16,22 @@ namespace MattDavies.TortoiseGitToolbar.Services
     public class TortoiseGitLauncherService : ITortoiseGitLauncherService
     {
         private readonly IProcessManagerService _processManagerService;
-        private readonly Solution2 _solution;
+        private readonly Func<Solution2> _getSolution;
 
-        public TortoiseGitLauncherService(IProcessManagerService processManagerService, Solution2 solution)
+        public TortoiseGitLauncherService(
+            IProcessManagerService processManagerService,
+            Func<Solution2> getSolution)
         {
             _processManagerService = processManagerService;
-            _solution = solution;
+            _getSolution = getSolution;
         }
 
         public void ExecuteTortoiseProc(ToolbarCommand command)
         {
-            var openedFilePath = PathConfiguration.GetOpenedFilePath(_solution);
-            var gitRepoPath = PathConfiguration.GetRepositoryRootPath(_solution);
-            // todo: make the bash/tortoise paths configurable
-            // todo: detect if the solution is a git solution first
+            var solution = _getSolution();
+            var openedFilePath = PathConfiguration.GetOpenedFilePath(solution);
+            var gitRepoPath = PathConfiguration.GetRepositoryRootPath(solution);
+
             if (command == ToolbarCommand.Bash && PathConfiguration.GetGitBashPath() == null)
             {
                 MessageBox.Show(
@@ -87,7 +89,7 @@ namespace MattDavies.TortoiseGitToolbar.Services
                     );
                     break;
                 case ToolbarCommand.FileBlame:
-                    var line = GetCurrentLine(_solution);
+                    var line = GetCurrentLine(solution);
                     process = _processManagerService.GetProcess(
                         PathConfiguration.GetTortoiseGitPath(),
                         string.Format(@"/command:blame /path:""{0}"" /line:{1}", openedFilePath, line)
@@ -113,7 +115,7 @@ namespace MattDavies.TortoiseGitToolbar.Services
 
         private int GetCurrentLine(Solution2 solution)
         {
-            if (solution.DTE != null && solution.DTE.ActiveDocument != null
+            if (solution?.DTE != null && solution.DTE.ActiveDocument != null
                 && solution.DTE.ActiveDocument.Selection != null)
             {
                 dynamic selection = solution.DTE.ActiveDocument.Selection;

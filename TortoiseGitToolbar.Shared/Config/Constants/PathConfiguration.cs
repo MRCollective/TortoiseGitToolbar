@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using EnvDTE80;
@@ -12,6 +12,8 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
         private const string TortoiseGitx86 = @"C:\Program Files (x86)\TortoiseGit\bin\TortoiseGitProc.exe";
         private const string GitBashx86 = @"C:\Program Files (x86)\Git\bin\sh.exe";
         private const string GitBashx64 = @"C:\Program Files\Git\bin\sh.exe";
+        private const string GitExex86 = @"C:\Program Files (x86)\Git\bin\git.exe";
+        private const string GitExex64 = @"C:\Program Files\Git\bin\git.exe";
 
         private static readonly RegistryKey TortoiseGitProcRegistryRoot = Registry.LocalMachine;
         private const string TortoiseGitProcRegistryPath = @"SOFTWARE\TortoiseGit";
@@ -43,6 +45,16 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
                  : null;
         }
 
+        public static string GetGitExePath()
+        {
+            var path = GetGitExePathFromRegistry();
+            if (path != null)
+                return path;
+            return File.Exists(GitExex64) ? GitExex64
+                 : File.Exists(GitExex86) ? GitExex86
+                 : null;
+        }
+
         public static string GetSolutionFilePath(Solution2 solution)
         {
             if (solution != null)
@@ -54,46 +66,99 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
 
         private static string FindGitRepositoryRootPathFromFilePath(string filePath)
         {
-            if (filePath == null) return null;
+            if (string.IsNullOrWhiteSpace(filePath)) return null;
 
-            FileInfo fileInfo = new FileInfo(filePath);
+            // Prefer the authoritative answer from git itself
+            var fromGit = GetRepositoryRootGit(filePath);
+            if (!string.IsNullOrEmpty(fromGit))
+                return fromGit;
+
+            // Fallback: pure filesystem walk (handles worktrees where .git is a file)
+            FileInfo fileInfo;
+            try { fileInfo = new FileInfo(filePath); }
+            catch { return null; }
+
             DirectoryInfo dirInfo = fileInfo.Directory;
-
             while (dirInfo != null && dirInfo.Exists)
             {
-                string gitPath = dirInfo.FullName + "/.git";
-                // Check for a .git directory
-                if (Directory.Exists(gitPath))
+                var gitPath = Path.Combine(dirInfo.FullName, ".git");
+                if (Directory.Exists(gitPath) || File.Exists(gitPath))
                 {
                     return dirInfo.FullName;
                 }
-                // Check for a .git file (sub-module or work tree)
-                if (File.Exists(gitPath))
-                {
-                    return dirInfo.FullName;
-                }
-                // git repo not found, look at the parent level.
                 dirInfo = dirInfo.Parent;
             }
+            return null;
+        }
 
+        /// <summary>
+        /// Best-effort repository root using "git rev-parse --show-toplevel".
+        /// Working directory can be any path inside the repo (file or directory).
+        /// </summary>
+        private static string GetRepositoryRootGit(string anyPathInsideRepo)
+        {
+            var gitExe = GetGitExePath();
+            if (gitExe == null || string.IsNullOrWhiteSpace(anyPathInsideRepo))
+                return null;
+
+            string workingDir;
+            try
+            {
+                workingDir = File.Exists(anyPathInsideRepo)
+                    ? Path.GetDirectoryName(anyPathInsideRepo)
+                    : anyPathInsideRepo;
+            }
+            catch { return null; }
+
+            if (string.IsNullOrEmpty(workingDir) || !Directory.Exists(workingDir))
+                return null;
+
+            var psi = new ProcessStartInfo
+            {
+                FileName = gitExe,
+                Arguments = "rev-parse --show-toplevel",
+                UseShellExecute = false,
+                WorkingDirectory = workingDir,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true,
+            };
+
+            try
+            {
+                using (var process = Process.Start(psi))
+                {
+                    var stdout = process.StandardOutput.ReadToEnd().Trim();
+                    process.WaitForExit(3000);
+                    if (process.ExitCode == 0 && !string.IsNullOrWhiteSpace(stdout))
+                    {
+                        return Path.GetFullPath(stdout);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("git rev-parse failed: " + ex.Message);
+            }
             return null;
         }
 
         public static string GetRepositoryRootPath(Solution2 solution)
         {
-            string selectedFile = GetOpenedFilePath(solution);
-            if (!String.IsNullOrEmpty(selectedFile))
+            // 1. Prefer the currently active document (most accurate for multi-repo solutions)
+            var selectedFile = GetOpenedFilePath(solution);
+            if (!string.IsNullOrEmpty(selectedFile))
             {
-                var selectedInfo = new FileInfo(selectedFile);
-                string gitPath = FindGitRepositoryRootPathFromFilePath(selectedFile);
-                if (!String.IsNullOrEmpty(gitPath))
+                var root = FindGitRepositoryRootPathFromFilePath(selectedFile);
+                if (!string.IsNullOrEmpty(root))
                 {
-                    return gitPath;
+                    return root;
                 }
             }
 
-            string solutionFile = GetSolutionFilePath(solution);
-            if (!String.IsNullOrEmpty(solutionFile))
+            // 2. Fall back to the solution file / directory
+            var solutionFile = GetSolutionFilePath(solution);
+            if (!string.IsNullOrEmpty(solutionFile))
             {
                 return FindGitRepositoryRootPathFromFilePath(solutionFile);
             }
@@ -159,6 +224,11 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
             return null;
         }
 
+        public static string GetGitExePathFromRegistry()
+        {
+            return GetGitExecutablePathFromRegistry("git.exe");
+        }
+
         public static string GetGitBashPathFromRegistry()
         {
             var path = GetValueFromRegistry(GitBashRegistryRoot, GitBashRegistryPath, GitBashRegistryKeyName);
@@ -166,13 +236,23 @@ namespace MattDavies.TortoiseGitToolbar.Config.Constants
 
             if (path != null && Directory.Exists(path))
             {
-                Debug.WriteLine("Git bash path from registry exists.");
+                return GetGitExecutablePathFromRegistry("sh.exe");
+            }
+            return null;
+        }
 
-                var shPath = Path.Combine(path, "sh.exe");
-                if (File.Exists(shPath))
+        private static string GetGitExecutablePathFromRegistry(string executableName)
+        {
+            var path = GetValueFromRegistry(GitBashRegistryRoot, GitBashRegistryPath, GitBashRegistryKeyName);
+            Debug.WriteLine("Git path from registry: " + (path ?? "(null)"));
+
+            if (path != null && Directory.Exists(path))
+            {
+                var exePath = Path.Combine(path, executableName);
+                if (File.Exists(exePath))
                 {
-                    Debug.WriteLine("Git bash path sh.exe exists: " + shPath);
-                    return shPath;
+                    Debug.WriteLine($"Git {executableName} exists: {exePath}");
+                    return exePath;
                 }
             }
 
